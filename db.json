@@ -6,6 +6,13 @@
       "description": "This is a trial task",
       "status": "pending",
       "dueDate": "2025-06-05"
+    },
+    {
+      "id": 2,
+      "title": "Trial Task",
+      "description": "This is a trial task but unique",
+      "status": "completed",
+      "dueDate": "2025-06-02"
     }
   ],
   "users": [
