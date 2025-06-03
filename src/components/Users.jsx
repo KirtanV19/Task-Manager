@@ -12,32 +12,38 @@ const Users = () => {
     }, [dispatch]);
 
     return (
-        <Container>
-            <h1 className="text-2xl font-semibold mb-6">User List</h1>
+        <>
+            {loading && <Progress size="3" duration="1000" variant="classic" />}
+            <Container>
+                <h1 className="text-2xl font-semibold mb-6">User List</h1>
 
-            {loading && <Progress duration="1000" variant="classic" />}
-
-            <div className="overflow-x-auto rounded-lg shadow border border-gray-200 bg-white">
-                <Table.Root variant="surface" layout="auto" size="3" className="w-full">
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.ColumnHeaderCell>Name</Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell>Email</Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell>Role</Table.ColumnHeaderCell>
-                        </Table.Row>
-                    </Table.Header>
-                    <Table.Body>
-                        {items.map((item) => (
-                            <Table.Row key={item.id}>
-                                <Table.RowHeaderCell>{item.name}</Table.RowHeaderCell>
-                                <Table.Cell>{item.email}</Table.Cell>
-                                <Table.Cell>{item.role}</Table.Cell>
+                <div className="overflow-x-auto rounded-lg shadow border border-gray-200 bg-white">
+                    <Table.Root
+                        variant="surface"
+                        layout="auto"
+                        size="3"
+                        className="w-full"
+                    >
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.ColumnHeaderCell>Name</Table.ColumnHeaderCell>
+                                <Table.ColumnHeaderCell>Email</Table.ColumnHeaderCell>
+                                <Table.ColumnHeaderCell>Role</Table.ColumnHeaderCell>
                             </Table.Row>
-                        ))}
-                    </Table.Body>
-                </Table.Root>
-            </div>
-        </Container>
+                        </Table.Header>
+                        <Table.Body>
+                            {items.map((item) => (
+                                <Table.Row key={item.id}>
+                                    <Table.RowHeaderCell>{item.name}</Table.RowHeaderCell>
+                                    <Table.Cell>{item.email}</Table.Cell>
+                                    <Table.Cell>{item.role}</Table.Cell>
+                                </Table.Row>
+                            ))}
+                        </Table.Body>
+                    </Table.Root>
+                </div>
+            </Container>
+        </>
     );
 };
 
