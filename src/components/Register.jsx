@@ -113,8 +113,8 @@ const Register = () => {
                                 <p
                                     key={index}
                                     className={`flex items-center gap-2 text-sm transform transition-all duration-300 ease-in-out ${check.passed
-                                        ? "text-green-600 opacity-100 translate-y-0"
-                                        : "text-gray-400 opacity-60 -translate-y-1"
+                                            ? "text-green-600 opacity-100 translate-y-0"
+                                            : "text-gray-400 opacity-60 -translate-y-1"
                                         }`}
                                 >
                                     <span>{check.passed ? "✓" : "✗"}</span>

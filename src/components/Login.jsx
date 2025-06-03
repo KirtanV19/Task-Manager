@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
+import { Link } from "react-router-dom";
 
 const Login = () => {
     // const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Login = () => {
 
     return (
         <div className="flex items-center justify-center min-h-[70vh] bg-gray-50 ">
-            <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8 hover:scale-110 hover:shadow-xl transition-all">
+            <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8 hover:scale-105 hover:shadow-xl transition-all">
                 <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">
                     Login
                 </h2>
@@ -66,6 +67,16 @@ const Login = () => {
                     >
                         Login
                     </button>
+
+                    <div className="flex gap-4 items-center place-content-center">
+                        <p>Forgot Password? </p>
+                        <Link
+                            to="/forgot-password"
+                            className="text-blue-600 hover:text-blue-800"
+                        >
+                            Click here
+                        </Link>
+                    </div>
                 </form>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import { EnvelopeClosedIcon } from "@radix-ui/react-icons";
-
+import { Link } from "react-router-dom";
 const ForgotPassword = () => {
     return (
         <div className="flex items-center justify-center min-h-[70vh] bg-gray-50 ">
@@ -8,9 +8,9 @@ const ForgotPassword = () => {
                     Forgot Password
                 </h2>
                 <form className="space-y-5">
-                    <label>Email:</label>
+                    <label htmlFor="email">Email:</label>
                     <div className="border border-gray-300 rounded focus-within:ring-2 focus-within:ring-blue-400 flex items-center px-3 py-2">
-                        <EnvelopeClosedIcon className="text-gray-500 mr-2 w-5 h-5" />
+                        <EnvelopeClosedIcon className="text-gray-500 cursor-pointer mr-2 w-5 h-5" />
 
                         <input
                             type="email"
@@ -28,9 +28,12 @@ const ForgotPassword = () => {
                     >
                         Reset my Password
                     </button>
-                    <p className="w-full text-sm text-center text-blue-600 hover:text-blue-800 hover:cursor-pointer">
+                    <Link
+                        to="/login"
+                        className="block text-sm text-center text-blue-600 hover:text-blue-800 hover:cursor-pointer"
+                    >
                         Back to Login
-                    </p>
+                    </Link>
                 </form>
             </div>
         </div>
