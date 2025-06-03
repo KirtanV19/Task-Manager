@@ -43,6 +43,13 @@
       "email": "steve@example.com",
       "password": "547826",
       "role": "user"
+    },
+    {
+      "id": 5,
+      "name": "David Warner",
+      "email": "david@example.com",
+      "password": "946317",
+      "role": "user"
     }
   ]
 }
