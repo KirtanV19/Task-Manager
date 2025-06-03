@@ -1,0 +1,47 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Sample Task",
+      "description": "This is a trial task",
+      "status": "pending",
+      "dueDate": "2025-06-05"
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "123456",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "name": "Don joe",
+      "email": "don@example.com",
+      "password": "258639",
+      "role": "user"
+    },
+    {
+      "id": 3,
+      "name": "Kevin Peterson",
+      "email": "kevin@example.com",
+      "password": "456781",
+      "role": "user"
+    },
+    {
+      "id": 4,
+      "name": "Steve Smith",
+      "email": "steve@example.com",
+      "password": "547826",
+      "role": "user"
+    }
+  ]
+}

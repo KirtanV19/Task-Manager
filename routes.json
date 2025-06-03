@@ -1,0 +1,9 @@
+{
+  "/api/tasks": "/tasks",
+  "/api/tasks/:id": "/tasks/:id",
+  "/api/users": "/users",
+  "/api/users/:id": "/users/:id",
+  "/api/auth/login": "/login",
+  "/api/auth/register": "/register",
+  "/api/auth/forgot-password": "/forgot-password"
+}
