@@ -19,21 +19,17 @@ const tasks = createSlice({
     items: [],
     loading: false,
     error: null,
-    status: "idle",
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTasks.pending, (state) => {
-        state.status = "loading";
         state.loading = true;
       })
       .addCase(fetchTasks.fulfilled, (state, action) => {
-        state.status = "succeeded";
         state.items = action.payload;
         state.loading = false;
       })
       .addCase(fetchTasks.rejected, (state, action) => {
-        state.status = "failed";
         state.error = action.error.message;
         state.loading = false;
       });
