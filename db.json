@@ -6,12 +6,6 @@
       "description": "This is a trial task",
       "status": "pending",
       "dueDate": "2025-06-05"
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
     }
   ],
   "users": [
