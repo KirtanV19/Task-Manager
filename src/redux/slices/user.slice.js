@@ -3,12 +3,16 @@ import api from "../../API";
 
 export const fetchUsers = createAsyncThunk(
   "users/fetchusers",
-  async (arg, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await api.get("/users");
+      const response = await api.get("/users?role=user");
+      console.log(response.data);
       return response.data;
-    } catch (err) {
-      return rejectWithValue(err);
+    } catch (error) {
+      return rejectWithValue({
+        message:
+          error.response?.data?.message || error.message || "Unknown error",
+      });
     }
   }
 );
@@ -30,8 +34,7 @@ const users = createSlice({
         state.loading = false;
       })
       .addCase(fetchUsers.rejected, (state, action) => {
-        state.error = action.error.message;
-        state.loading = false;
+        state.error = action.payload?.message;
       });
   },
 });
