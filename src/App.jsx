@@ -3,6 +3,7 @@ import Home from "./screens/Home";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
+import Users from "./components/Users";
 
 const App = () => (
   <Router>
@@ -11,6 +12,7 @@ const App = () => (
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
       <Route path="/forgot-password" element={<ForgotPasswordScreen />} />
+      <Route path="/users" element={<Users />} />
       <Route path="*" element={<h4>Page not found!!</h4>} />
     </Routes>
   </Router>

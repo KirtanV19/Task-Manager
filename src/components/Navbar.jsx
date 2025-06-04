@@ -5,7 +5,7 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     return (
-        <nav className="flex items-center bg-blue-blue7 justify-between px-6 py-1 shadow">
+        <nav className="flex items-center bg-blue-blue8 justify-between px-6 py-1 shadow">
             <Link
                 to="/"
                 className="font-bold text-xl text-black hover:text-blue-800 cursor-pointer"
