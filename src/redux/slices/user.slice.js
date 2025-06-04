@@ -16,6 +16,7 @@ export const fetchUsers = createAsyncThunk(
     }
   }
 );
+
 export const fetchUserOnly = createAsyncThunk(
   "users/fetchusersonly",
   async (_, { rejectWithValue }) => {

@@ -15,15 +15,18 @@ const Users = () => {
         dispatch(fetchUserOnly());
     }, [dispatch]);
 
-    let filterUser = items.filter((item) =>
-        (item.name && item.name.toLowerCase().includes(selectedQuery.toLowerCase())) ||
-        (item.email && item.email.toLowerCase().includes(selectedQuery.toLowerCase()))
+    let filterUser = items.filter(
+        (item) =>
+            (item.name &&
+                item.name.toLowerCase().includes(selectedQuery.toLowerCase())) ||
+            (item.email &&
+                item.email.toLowerCase().includes(selectedQuery.toLowerCase()))
     );
 
     return (
         <>
             {loading && <Progress size="3" duration="1000" variant="classic" />}
-            <Container className="flex flex-col space-y-5">
+            <Container className="flex flex-col space-y-5 p-2">
                 <p className="text-4xl font-bold ">User Management</p>
                 <p className="text-slate-500 text-sm font-bold">
                     Manage all users within the organization.

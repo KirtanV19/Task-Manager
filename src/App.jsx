@@ -4,6 +4,7 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import Users from "./components/Users";
+import Dashboard from "./components/Dashboard";
 
 const App = () => (
   <Router>
@@ -13,6 +14,7 @@ const App = () => (
       <Route path="/register" element={<RegisterScreen />} />
       <Route path="/forgot-password" element={<ForgotPasswordScreen />} />
       <Route path="/users" element={<Users />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="*" element={<h4>Page not found!!</h4>} />
     </Routes>
   </Router>
