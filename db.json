@@ -13,41 +13,83 @@
       "description": "This is a trial task but unique",
       "status": "completed",
       "dueDate": "2025-06-02"
+    },
+    {
+      "id": 3,
+      "title": "Design Homepage",
+      "description": "Create a responsive layout for the homepage",
+      "status": "completed",
+      "dueDate": "2025-06-07"
+    },
+    {
+      "id": 4,
+      "title": "Fix Login Bug",
+      "description": "Resolve issue with user authentication timing out",
+      "status": "pending",
+      "dueDate": "2025-06-06"
+    },
+    {
+      "id": 5,
+      "title": "Update README",
+      "description": "Add installation instructions and examples to the README file",
+      "status": "completed",
+      "dueDate": "2025-05-30"
+    },
+    {
+      "id": 6,
+      "title": "Test API Integration",
+      "description": "Ensure the frontend correctly communicates with the backend API",
+      "status": "pending",
+      "dueDate": "2025-06-09"
+    },
+    {
+      "id": 7,
+      "title": "Refactor Codebase",
+      "description": "Clean up and organize code into reusable components",
+      "status": "pending",
+      "dueDate": "2025-06-10"
+    },
+    {
+      "id": 8,
+      "title": "Write Unit Tests",
+      "description": "Cover critical components with unit tests",
+      "status": "pending",
+      "dueDate": "2025-06-08"
     }
   ],
   "users": [
     {
       "id": 1,
-      "name": "John Doe",
-      "email": "john@example.com",
+      "name": "Sanjay Punani",
+      "email": "sanjay@gmail.com",
       "password": "123456",
       "role": "admin"
     },
     {
       "id": 2,
-      "name": "Don joe",
-      "email": "don@example.com",
+      "name": "Ronak Kapadi",
+      "email": "ronak@example.com",
       "password": "258639",
       "role": "user"
     },
     {
       "id": 3,
-      "name": "Kevin Peterson",
-      "email": "kevin@example.com",
+      "name": "Kirtan Vyas",
+      "email": "kirtan@example.com",
       "password": "456781",
       "role": "user"
     },
     {
       "id": 4,
-      "name": "Steve Smith",
-      "email": "steve@example.com",
+      "name": "Anand Patel",
+      "email": "anand@example.com",
       "password": "547826",
       "role": "user"
     },
     {
       "id": 5,
-      "name": "David Warner",
-      "email": "david@example.com",
+      "name": "Krima Shah",
+      "email": "krima@example.com",
       "password": "946317",
       "role": "user"
     }

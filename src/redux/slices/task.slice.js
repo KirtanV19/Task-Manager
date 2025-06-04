@@ -8,11 +8,10 @@ const setPending = (state) => {
 
 const setRejected = (state, action) => {
   state.loading = false;
-  state.error = action.payload || action.error.message;
+  state.error = action.error.message;
 };
 
 // Simple get and fetch
-
 export const fetchTasks = createAsyncThunk(
   "tasks/fetchtasks",
   async (arg, { rejectWithValue }) => {
@@ -56,9 +55,24 @@ export const fetchTasksByDueDate = createAsyncThunk(
 // Sorting ( by date )
 export const fetchTasksByDate = createAsyncThunk(
   "tasks/fetchtasksbydate",
-  async (arg, { rejectWithValue }) => {
+  async (dueDate, { rejectWithValue }) => {
     try {
-      const response = await api.get(`/tasks`);
+      const response = await api.get(`/tasks?_sort=${dueDate}&_order=desc`);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+// Sorting by Priority [ due date which passed is not includes here ]
+export const fetchTasksByPriority = createAsyncThunk(
+  "tasks/fetchtasksbypriority",
+  async ({ dueDate, status }, { rejectWithValue }) => {
+    try {
+      const response = await api.get(
+        `/tasks?_sort=${dueDate}&status=${status}`
+      );
       return response.data;
     } catch (err) {
       return rejectWithValue(err);
@@ -126,6 +140,13 @@ const tasks = createSlice({
         state.loading = false;
       })
       .addCase(fetchTasksBySearch.rejected, setRejected);
+    builder
+      .addCase(fetchTasksByPriority.pending, setPending)
+      .addCase(fetchTasksByPriority.fulfilled, (state, action) => {
+        state.items = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchTasksByPriority.rejected, setRejected);
   },
 });
 

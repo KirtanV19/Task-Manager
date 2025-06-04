@@ -46,7 +46,7 @@ export const forgotPassword = createAsyncThunk(
 const auth = createSlice({
   name: "auth",
   initialState: {
-    user: null,
+    user: [],
     token: localStorage.getItem("token") || null,
     loading: false,
     error: null,
