@@ -65,7 +65,8 @@ export const fetchTasksByDate = createAsyncThunk(
   }
 );
 
-// Sorting by Priority [ due date which passed is not includes here ]
+// Sorting by Priority [ missing duedate is not includes here ]
+
 export const fetchTasksByPriority = createAsyncThunk(
   "tasks/fetchtasksbypriority",
   async ({ dueDate, status }, { rejectWithValue }) => {

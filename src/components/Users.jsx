@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchUsers } from "../redux/slices/user.slice";
+import { fetchUserOnly } from "../redux/slices/user.slice";
 import { Table, Progress } from "@radix-ui/themes";
 import Container from "../utils/Container";
 const Users = () => {
@@ -8,7 +8,7 @@ const Users = () => {
     const { items, loading } = useSelector((state) => state.users);
 
     useEffect(() => {
-        dispatch(fetchUsers());
+        dispatch(fetchUserOnly());
     }, [dispatch]);
 
     return (

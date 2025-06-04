@@ -1,10 +1,7 @@
 module.exports = (req, res, next) => {
   if (req.method === "POST") {
     if (req.path === "/auth/login") {
-      return res.status(200).json({
-        token: "mock-token",
-        user: { id: 1, email: "john@example.com", name: "John Doe" },
-      });
+      return res.status(200).json({ message: "User registered successfully" });
     }
 
     if (req.path === "/auth/register") {

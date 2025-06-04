@@ -1,25 +1,25 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
+import { EyeNoneIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import { Link } from "react-router-dom";
+import { loginUser } from "../redux/slices/user.slice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        const success = login(email, password);
-
-        if (success) {
-            toast.success("Logged in successfully");
-            navigate("/");
-        } else {
-            toast.error("Invalid email or password");
+        try {
+            await dispatch(loginUser({ email, password })).unwrap();
+            navigate("/login");
+        } catch (error) {
+            alert("Login failed: " + error.message);
         }
     };
 
@@ -29,7 +29,7 @@ const Login = () => {
                 <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">
                     Login
                 </h2>
-                <form className="space-y-5">
+                <form className="space-y-5" onSubmit={handleLogin}>
                     <div className="border border-gray-300 rounded focus-within:ring-2 focus-within:ring-blue-400 flex items-center px-3 py-2">
                         <input
                             type="email"
@@ -54,13 +54,12 @@ const Login = () => {
                             className="ml-2 text-gray-500 hover:text-gray-700 cursor-pointer"
                         >
                             {showPassword ? (
-                                <EyeClosedIcon size={20} />
+                                <EyeNoneIcon size={20} />
                             ) : (
                                 <EyeOpenIcon size={20} />
                             )}
                         </span>
                     </div>
-
 
                     <button
                         type="submit"

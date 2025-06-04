@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
+import { EyeNoneIcon, EyeOpenIcon } from "@radix-ui/react-icons";
+import { registerUser } from "../redux/slices/user.slice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
 const schema = yup.object({
     name: yup.string().required("Name is required"),
@@ -49,7 +50,8 @@ const getPasswordStrength = (password) => {
 };
 
 const Register = () => {
-    // const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [passwordValue, setPasswordValue] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const {
@@ -58,15 +60,14 @@ const Register = () => {
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema), mode: "onTouched" });
 
-    // const onSubmit = (data) => {
-    //     const success = registerUser(data.email, data.password);
-    //     if (success) {
-    //         toast.success("Registered successfully");
-    //         navigate("/login");
-    //     } else {
-    //         toast.error("User already exists");
-    //     }
-    // };
+    const onSubmit = async (data) => {
+        try {
+            await dispatch(registerUser(data)).unwrap();
+            navigate("/login");
+        } catch (error) {
+            console.error("Registration failed", error);
+        }
+    };
 
     return (
         <div className="flex items-center justify-center min-h-[70vh] bg-gray-50">
@@ -74,7 +75,7 @@ const Register = () => {
                 <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">
                     Register
                 </h2>
-                <form className="space-y-5">
+                <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
                     <div>
                         <input
                             type="text"
@@ -112,7 +113,7 @@ const Register = () => {
                             onClick={() => setShowPassword(!showPassword)}
                             className="ml-2 text-gray-500 hover:text-gray-700 cursor-pointer"
                         >
-                            {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
+                            {showPassword ? <EyeNoneIcon /> : <EyeOpenIcon />}
                         </span>
                     </div>
                     {errors.password && (
@@ -127,8 +128,8 @@ const Register = () => {
                             <p
                                 key={index}
                                 className={`flex items-center gap-2 text-sm transform transition-all duration-300 ease-in-out ${check.passed
-                                    ? "text-green-600 opacity-100 translate-y-0"
-                                    : "text-gray-400 opacity-60 -translate-y-1"
+                                        ? "text-green-600 opacity-100 translate-y-0"
+                                        : "text-gray-400 opacity-60 -translate-y-1"
                                     }`}
                             >
                                 <span>{check.passed ? "✓" : "✗"}</span>
