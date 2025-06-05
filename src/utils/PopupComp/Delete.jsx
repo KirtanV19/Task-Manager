@@ -4,7 +4,7 @@ import useModal from "../../hooks/useModal";
 import Modal from "../../components/Modal";
 import ConfirmDialog from "../Popups/ConfirmDialog";
 
-const Example = () => {
+const Delete = () => {
     const { isOpen, content, openModal, closeModal } = useModal();
 
     const handleDelete = () => {
@@ -24,7 +24,7 @@ const Example = () => {
     return (
         <div>
             <button
-                className="bg-red-600 text-white text-lg px-4 py-2 rounded-md hover:bg-red-700"
+                className="bg-red-600 text-white font-semibold text-lg px-4 py-2 rounded-md hover:bg-red-700"
                 onClick={showConfirmDelete}
             >
                 Delete
@@ -37,4 +37,4 @@ const Example = () => {
     );
 };
 
-export default Example;
+export default Delete;

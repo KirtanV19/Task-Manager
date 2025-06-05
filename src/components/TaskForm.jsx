@@ -16,7 +16,6 @@ const schema = yup.object({
 });
 
 const TaskForm = () => {
-
     const {
         register,
         handleSubmit,
@@ -29,7 +28,7 @@ const TaskForm = () => {
 
     return (
         <div className="flex items-center justify-center min-h-[70vh] mt-3">
-            <div className="w-full max-w-md bg-white shadow-xl border-gray-600 hover:rounded-2xl hover:shadow-2xl hover:scale-105 p-8 transition-all">
+            <div className="w-full max-w-md bg-white shadow-xl border-gray-600 p-8 ">
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                     <div>
                         <label className="block mb-1 font-medium text-gray-700">
