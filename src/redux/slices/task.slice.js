@@ -93,16 +93,25 @@ export const fetchTasksBySearch = createAsyncThunk(
   }
 );
 
+// Update task status
+export const updateTaskStatus = createAsyncThunk(
+  "tasks/updateTaskStatus",
+  async ({ id, status }, { rejectWithValue }) => {
+    try {
+      const response = await api.patch(`/tasks/${id}`, { status });
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
 const tasks = createSlice({
   name: "tasks",
   initialState: {
     items: [],
     loading: false,
     error: null,
-  },
-  reducers: {
-    statusAccept: (state, action) => {},
-    statusReject: (state, action) => {},
   },
   extraReducers: (builder) => {
     builder
@@ -152,8 +161,15 @@ const tasks = createSlice({
         state.loading = false;
       })
       .addCase(fetchTasksByPriority.rejected, setRejected);
+
+    builder.addCase(updateTaskStatus.fulfilled, (state, action) => {
+      // Update the specific task in state.items
+      const idx = state.items.findIndex((t) => t.id === action.payload.id);
+      if (idx !== -1) {
+        state.items[idx] = action.payload;
+      }
+    });
   },
 });
 
-export const { statusAccept, statusReject } = tasks.actions;
 export default tasks.reducer;
