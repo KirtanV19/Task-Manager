@@ -21,7 +21,7 @@ const Example = () => {
 
     return (
         <div>
-            <button onClick={showConfirmDelete}>Delete</button>
+            <button className="bg-red-600 text-white text-lg px-4 py-2 rounded-md hover:bg-red-700" onClick={showConfirmDelete}>Delete</button>
 
             <Modal isOpen={isOpen} onClose={closeModal}>
                 {content}
