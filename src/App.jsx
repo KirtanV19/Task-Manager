@@ -4,11 +4,6 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import Users from "./components/Users";
-import Dashboard from "./components/Dashboard";
-import Delete from './utils/PopupComp/Delete'
-import TaskForm from "./components/TaskForm";
-import Create from "./utils/PopupComp/Create";
-
 const App = () => (
   <Router>
     <Routes>
@@ -17,10 +12,6 @@ const App = () => (
       <Route path="/register" element={<RegisterScreen />} />
       <Route path="/forgot-password" element={<ForgotPasswordScreen />} />
       <Route path="/users" element={<Users />} />
-      <Route path="/delete" element={<Delete />} />
-      <Route path="/create" element={<Create />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/task" element={<TaskForm />} />
       <Route path="*" element={<h4>Page not found!!</h4>} />
     </Routes>
   </Router>

@@ -58,16 +58,26 @@ const Users = () => {
                                 <Table.ColumnHeaderCell>Role</Table.ColumnHeaderCell>
                             </Table.Row>
                         </Table.Header>
-                        <Table.Body>
-                            {filterUser.map((item) => (
-                                <Table.Row key={item.id}>
-                                    <Table.RowHeaderCell>{item.name}</Table.RowHeaderCell>
-                                    <Table.Cell>{item.email}</Table.Cell>
-                                    <Table.Cell>{item.role}</Table.Cell>
-                                </Table.Row>
-                            ))}
-                        </Table.Body>
                     </Table.Root>
+
+                    <div className="max-h-80 overflow-y-auto">
+                        <Table.Root
+                            variant="surface"
+                            layout="auto"
+                            size="3"
+                            className="w-full table-fixed"
+                        >
+                            <Table.Body>
+                                {filterUser.map((item) => (
+                                    <Table.Row key={item.id}>
+                                        <Table.RowHeaderCell>{item.name}</Table.RowHeaderCell>
+                                        <Table.Cell>{item.email}</Table.Cell>
+                                        <Table.Cell>{item.role}</Table.Cell>
+                                    </Table.Row>
+                                ))}
+                            </Table.Body>
+                        </Table.Root>
+                    </div>
                 </div>
             </Container>
         </>
