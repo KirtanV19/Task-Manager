@@ -1,13 +1,26 @@
 import { EnvelopeClosedIcon } from "@radix-ui/react-icons";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Modal from "./Modal";
+import useModal from "../hooks/useModal";
+import ForgotPasswordPopup from "../utils/Popups/ForgotPasswordPopup";
 
 const ForgotPassword = () => {
+    const { isOpen, content, openModal, closeModal } = useModal();
 
-    const [email, setEmail] = useState('')
+    const showPopup = () => {
+        openModal(
+            <ForgotPasswordPopup message="Captcha code has been send to your registered e-mail" />
+        );
+    };
+
+    const [email, setEmail] = useState("");
+
     const handleSubmit = () => {
-        alert('Captcha sent to your email id')
-    }
+        showPopup();
+        setEmail("");
+    };
+
     return (
         <div className="flex items-center justify-center min-h-[70vh] bg-gray-50 ">
             <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8 hover:scale-105 hover:shadow-xl transition-all">
@@ -43,6 +56,9 @@ const ForgotPassword = () => {
                     </Link>
                 </form>
             </div>
+            <Modal isOpen={isOpen} onClose={closeModal}>
+                {content}
+            </Modal>
         </div>
     );
 };

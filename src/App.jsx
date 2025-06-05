@@ -5,7 +5,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import Users from "./components/Users";
 import Dashboard from "./components/Dashboard";
-import Example from "./components/Example";
+import Example from "./utils/PopupComp/Example";
 
 const App = () => (
   <Router>

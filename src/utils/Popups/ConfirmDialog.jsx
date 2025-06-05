@@ -7,7 +7,7 @@ const ConfirmDialog = ({ onClose, message, onConfirm }) => {
                 <button
                     onClick={() => {
                         onConfirm(); // Do the action (e.g. delete)
-                        onClose();   // Close modal after confirm
+                        onClose(); // Close modal after confirm
                     }}
                     className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
                 >
