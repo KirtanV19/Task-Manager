@@ -71,10 +71,9 @@ const Register = () => {
 
     const onSubmit = async (data) => {
         try {
-            // Add a unique id to the user object
             const userWithId = { ...data, id: Date.now() };
             await dispatch(registerUser(userWithId)).unwrap();
-            console.log('userWithId', userWithId)
+            console.log("userWithId", userWithId);
             navigate("/login");
         } catch (error) {
             console.error("Registration failed", error);
@@ -93,18 +92,25 @@ const Register = () => {
                             type="text"
                             placeholder="Name"
                             {...register("name")}
-                            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.name
+                                ? "border-red-400 focus:ring-red-200"
+                                : "border-gray-300 focus:ring-blue-400"
+                                }`}
                         />
                         {errors.name && (
                             <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
                         )}
                     </div>
+
                     <div>
                         <input
                             type="email"
                             placeholder="Email"
                             {...register("email")}
-                            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.email
+                                ? "border-red-400 focus:ring-red-200"
+                                : "border-gray-300 focus:ring-blue-400"
+                                }`}
                         />
                         {errors.email && (
                             <p className="text-red-500 text-xs mt-1">
@@ -119,7 +125,10 @@ const Register = () => {
                             placeholder="Password"
                             {...register("password")}
                             onChange={(e) => setPasswordValue(e.target.value)}
-                            className="flex-1 bg-transparent outline-none placeholder-gray-400"
+                            className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.password
+                                ? "border-red-400 focus:ring-red-200"
+                                : "border-gray-300 focus:ring-blue-400"
+                                }`}
                         />
                         <span
                             onClick={() => setShowPassword(!showPassword)}
@@ -128,6 +137,7 @@ const Register = () => {
                             {showPassword ? <EyeNoneIcon /> : <EyeOpenIcon />}
                         </span>
                     </div>
+
                     {errors.password && (
                         <p className="text-red-500 text-xs mt-1">
                             {errors.password.message}

@@ -6,6 +6,7 @@ import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import Users from "./components/Users";
 import Dashboard from "./components/Dashboard";
 import Example from "./utils/PopupComp/Example";
+import TaskForm from "./components/TaskForm";
 
 const App = () => (
   <Router>
@@ -17,6 +18,7 @@ const App = () => (
       <Route path="/users" element={<Users />} />
       <Route path="/example" element={<Example />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/task" element={<TaskForm />} />
       <Route path="*" element={<h4>Page not found!!</h4>} />
     </Routes>
   </Router>
