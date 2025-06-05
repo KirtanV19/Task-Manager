@@ -4,8 +4,10 @@ import { fetchTasks } from "../redux/slices/task.slice";
 import { fetchUserOnly } from "../redux/slices/user.slice";
 import Container from "../utils/Container";
 import { Table } from "@radix-ui/themes";
+import { statusAccept, statusReject } from "../redux/slices/task.slice";
 
 const Dashboard = () => {
+
     const { items: users } = useSelector((state) => state.users);
     const { items: tasks } = useSelector((state) => state.tasks);
 
@@ -14,12 +16,13 @@ const Dashboard = () => {
     useEffect(() => {
         dispatch(fetchTasks());
     }, [dispatch]);
+
     useEffect(() => {
         dispatch(fetchUserOnly());
     }, [dispatch]);
 
     return (
-        <Container className="flex flex-col gap-6 py-8 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-white min-h-screen">
+        <Container className="flex flex-col gap-6 py-4 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-white min-h-screen">
             <h1 className="text-4xl font-extrabold text-blue mb-2">Dashboard</h1>
             <div className="flex flex-wrap gap-6">
                 <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
@@ -36,9 +39,10 @@ const Dashboard = () => {
                 <Table.Root variant="surface" layout="auto" size="3" className="w-full">
                     <Table.Header>
                         <Table.Row>
-                            <Table.ColumnHeaderCell className="text-black800">Task</Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell className="text-black800">Status</Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell className="text-black800">Due Date</Table.ColumnHeaderCell>
+                            <Table.ColumnHeaderCell className="text-black">Task</Table.ColumnHeaderCell>
+                            <Table.ColumnHeaderCell className="text-black">Status</Table.ColumnHeaderCell>
+                            <Table.ColumnHeaderCell className="text-black">Due Date</Table.ColumnHeaderCell>
+                            <Table.ColumnHeaderCell className="text-black">Action</Table.ColumnHeaderCell>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
@@ -49,6 +53,16 @@ const Dashboard = () => {
                                     {task.status}
                                 </Table.Cell>
                                 <Table.Cell>{task.dueDate}</Table.Cell>
+                                {/* <Table.Cell>
+                                    <button className="bg-blue-blue10 text-white p-1 rounded-md">Accept</button>
+                                </Table.Cell>
+                                <Table.Cell>
+                                    <button className="bg-red-red10 text-white p-1 rounded-md">Reject</button>
+                                </Table.Cell> */}
+                                <Table.Cell className="flex gap-5 items-center" justify='center'>
+                                    <button className="bg-blue-blue10 text-white p-1 text-md rounded-md">Accept</button>
+                                    <button className="bg-red-red10 text-white p-1 text-md rounded-md">Reject</button>
+                                </Table.Cell>
                             </Table.Row>
                         ))}
                     </Table.Body>

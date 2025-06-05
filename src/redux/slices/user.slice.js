@@ -1,6 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../API";
 
+const setPending = (state) => {
+  state.loading = true;
+};
+
+const setRejected = (state, action) => {
+  state.error = action.payload?.message;
+};
+
 export const fetchUsers = createAsyncThunk(
   "users/fetchusers",
   async (_, { rejectWithValue }) => {
@@ -87,38 +95,36 @@ const users = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUsers.pending, (state) => {
-        state.loading = true;
-      })
+      .addCase(fetchUsers.pending, setPending)
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.items = action.payload;
         state.loading = false;
       })
-      .addCase(fetchUsers.rejected, (state, action) => {
-        state.error = action.payload?.message;
-      });
+      .addCase(fetchUsers.rejected, setRejected);
 
     builder
-      .addCase(fetchUserOnly.pending, (state) => {
-        state.loading = true;
-      })
+      .addCase(fetchUserOnly.pending, setPending)
       .addCase(fetchUserOnly.fulfilled, (state, action) => {
         state.items = action.payload;
         state.loading = false;
       })
-      .addCase(fetchUserOnly.rejected, (state, action) => {
-        state.error = action.payload?.message;
-      });
+      .addCase(fetchUserOnly.rejected, setRejected);
 
-    builder.addCase(registerUser.fulfilled, (state, action) => {
-      state.items.push(action.payload);
-      state.loading = false;
-    });
+    builder
+      .addCase(registerUser.pending, setPending)
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+        state.loading = false;
+      })
+      .addCase(registerUser.rejected, setRejected);
 
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.currentUser = action.payload;
-      state.loading = false;
-    });
+    builder
+      .addCase(loginUser.pending, setPending)
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.currentUser = action.payload;
+        state.loading = false;
+      })
+      .addCase(loginUser.rejected, setRejected);
   },
 });
 

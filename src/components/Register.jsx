@@ -58,11 +58,23 @@ const Register = () => {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({ resolver: yupResolver(schema), mode: "onTouched" });
+    } = useForm({
+        resolver: yupResolver(schema),
+        mode: "onTouched",
+        defaultValues: {
+            name: "",
+            email: "",
+            password: "",
+            role: "",
+        },
+    });
 
     const onSubmit = async (data) => {
         try {
-            await dispatch(registerUser(data)).unwrap();
+            // Add a unique id to the user object
+            const userWithId = { ...data, id: Date.now() };
+            await dispatch(registerUser(userWithId)).unwrap();
+            console.log('userWithId', userWithId)
             navigate("/login");
         } catch (error) {
             console.error("Registration failed", error);
@@ -128,8 +140,8 @@ const Register = () => {
                             <p
                                 key={index}
                                 className={`flex items-center gap-2 text-sm transform transition-all duration-300 ease-in-out ${check.passed
-                                        ? "text-green-600 opacity-100 translate-y-0"
-                                        : "text-gray-400 opacity-60 -translate-y-1"
+                                    ? "text-green-600 opacity-100 translate-y-0"
+                                    : "text-gray-400 opacity-60 -translate-y-1"
                                     }`}
                             >
                                 <span>{check.passed ? "✓" : "✗"}</span>

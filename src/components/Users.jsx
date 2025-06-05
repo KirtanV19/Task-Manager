@@ -4,12 +4,14 @@ import { fetchUserOnly } from "../redux/slices/user.slice";
 import { Table, Progress } from "@radix-ui/themes";
 import Container from "../utils/Container";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import useDebounce from "../hooks/useDebounce";
 
 const Users = () => {
     const dispatch = useDispatch();
     const { items, loading } = useSelector((state) => state.users);
 
     const [selectedQuery, setSelectedQuery] = useState("");
+    const debouncedQuery = useDebounce(selectedQuery, 400); // 400ms debounce
 
     useEffect(() => {
         dispatch(fetchUserOnly());
@@ -18,9 +20,9 @@ const Users = () => {
     let filterUser = items.filter(
         (item) =>
             (item.name &&
-                item.name.toLowerCase().includes(selectedQuery.toLowerCase())) ||
+                item.name.toLowerCase().includes(debouncedQuery.toLowerCase())) ||
             (item.email &&
-                item.email.toLowerCase().includes(selectedQuery.toLowerCase()))
+                item.email.toLowerCase().includes(debouncedQuery.toLowerCase()))
     );
 
     return (

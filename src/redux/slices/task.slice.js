@@ -66,7 +66,6 @@ export const fetchTasksByDate = createAsyncThunk(
 );
 
 // Sorting by Priority [ missing duedate is not includes here ]
-
 export const fetchTasksByPriority = createAsyncThunk(
   "tasks/fetchtasksbypriority",
   async ({ dueDate, status }, { rejectWithValue }) => {
@@ -100,6 +99,10 @@ const tasks = createSlice({
     items: [],
     loading: false,
     error: null,
+  },
+  reducers: {
+    statusAccept: (state, action) => {},
+    statusReject: (state, action) => {},
   },
   extraReducers: (builder) => {
     builder
@@ -141,6 +144,7 @@ const tasks = createSlice({
         state.loading = false;
       })
       .addCase(fetchTasksBySearch.rejected, setRejected);
+
     builder
       .addCase(fetchTasksByPriority.pending, setPending)
       .addCase(fetchTasksByPriority.fulfilled, (state, action) => {
@@ -151,4 +155,5 @@ const tasks = createSlice({
   },
 });
 
+export const { statusAccept, statusReject } = tasks.actions;
 export default tasks.reducer;
