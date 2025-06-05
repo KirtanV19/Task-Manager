@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTasks, updateTaskStatus } from "../redux/slices/task.slice";
+import { fetchTasks } from "../redux/slices/task.slice";
 import { fetchUserOnly } from "../redux/slices/user.slice";
 import Container from "../utils/Container";
 import { Table } from "@radix-ui/themes";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 const Dashboard = () => {
     const { items: users } = useSelector((state) => state.users);
@@ -11,14 +12,14 @@ const Dashboard = () => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchTasks());
-    }, [dispatch]);
+    const [selectedQuery, setSelectedQuery] = useState("");
 
     useEffect(() => {
+        dispatch(fetchTasks());
         dispatch(fetchUserOnly());
     }, [dispatch]);
 
+    { /*
     const handleAccept = (id) => {
         dispatch(updateTaskStatus({ id, status: "accepted" }));
     };
@@ -26,10 +27,22 @@ const Dashboard = () => {
     const handleReject = (id) => {
         dispatch(updateTaskStatus({ id, status: "rejected" }));
     };
+    */}
 
     return (
         <Container className="flex flex-col gap-5 py-4 px-4 md:px-8  min-h-screen">
-            <h1 className="text-4xl font-extrabold text-blue mb-2">Dashboard</h1>
+            <div className="flex">
+                <h1 className="text-4xl font-extrabold text-blue mb-2">Dashboard</h1>
+                <div className="border border-gray-300 bg-gray-200 rounded focus-within:ring-2 focus-within:ring-blue-400 flex items-center px-3 py-1">
+                    <MagnifyingGlassIcon className="text-gray-500 cursor-pointer mr-2 w-5 h-5" />
+                    <input
+                        type="text"
+                        value={selectedQuery}
+                        onChange={(e) => setSelectedQuery(e.target.value)}
+                        className="bg-transparent w-full outline-none placeholder-gray-400"
+                    />
+                </div>
+            </div>
             <div className="flex flex-wrap gap-6">
                 <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
                     <p className="text-black700 text-lg font-semibold mb-1">
@@ -48,12 +61,7 @@ const Dashboard = () => {
                 Recent Tasks
             </h2>
             <div className="overflow-x-auto rounded-lg shadow border border-gray-200 bg-white">
-                <Table.Root
-                    variant="surface"
-                    layout="auto"
-                    size="3"
-                    className="w-full"
-                >
+                <Table.Root variant="surface" layout="auto" size="3" className="w-full">
                     <Table.Header>
                         <Table.Row>
                             <Table.ColumnHeaderCell className="text-black">
@@ -84,7 +92,10 @@ const Dashboard = () => {
                                     <Table.RowHeaderCell>{task.title}</Table.RowHeaderCell>
                                     <Table.Cell>{task.status}</Table.Cell>
                                     <Table.Cell>{task.dueDate}</Table.Cell>
-                                    <Table.Cell className="flex gap-5 items-center" justify="center">
+                                    <Table.Cell
+                                        className="flex gap-5 items-center"
+                                        justify="center"
+                                    >
                                         <button
                                             className="bg-blue-600 text-white p-1 text-md rounded-md hover:bg-blue-700 transition"
                                             onClick={() => handleAccept(task.id)}
