@@ -11,7 +11,7 @@ const Users = () => {
     const { items, loading } = useSelector((state) => state.users);
 
     const [selectedQuery, setSelectedQuery] = useState("");
-    const debouncedQuery = useDebounce(selectedQuery, 400); // 400ms debounce
+    const debouncedQuery = useDebounce(selectedQuery, 400);
 
     useEffect(() => {
         dispatch(fetchUserOnly());
