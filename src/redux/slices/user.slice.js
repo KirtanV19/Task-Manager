@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../API";
+import { api } from "../../API/client";
 
 const setPending = (state) => {
   state.loading = true;
@@ -11,25 +11,9 @@ const setRejected = (state, action) => {
 
 export const fetchUsers = createAsyncThunk(
   "users/fetchusers",
-  async (_, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const response = await api.get("/users");
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue({
-        message:
-          error.response?.data?.message || error.message || "Unknown error",
-      });
-    }
-  }
-);
-
-export const fetchUserOnly = createAsyncThunk(
-  "users/fetchusersonly",
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await api.get("/users?role=user");
+      const response = await api.USERS.getAll(data);
       console.log(response.data);
       return response.data;
     } catch (error) {
@@ -101,15 +85,6 @@ const users = createSlice({
         state.loading = false;
       })
       .addCase(fetchUsers.rejected, setRejected);
-
-    builder
-      .addCase(fetchUserOnly.pending, setPending)
-      .addCase(fetchUserOnly.fulfilled, (state, action) => {
-        state.items = action.payload;
-        state.loading = false;
-      })
-      .addCase(fetchUserOnly.rejected, setRejected);
-
     builder
       .addCase(registerUser.pending, setPending)
       .addCase(registerUser.fulfilled, (state, action) => {
