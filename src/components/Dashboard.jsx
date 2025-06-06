@@ -58,7 +58,7 @@ const Dashboard = () => {
                     <MagnifyingGlassIcon className="text-gray-500 cursor-pointer mr-2 w-5 h-5" />
                     <input
                         type="text"
-                        name="search"
+                        name="q"
                         placeholder="Search tasks..."
                         value={filter.search}
                         onChange={handleChange}
