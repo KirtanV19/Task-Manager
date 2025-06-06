@@ -7,19 +7,23 @@ import { Table } from "@radix-ui/themes";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 const Dashboard = () => {
+
+    const [filter, setFilter] = useState({});
     const users = useSelector((state) => state.users.items)
     const tasks = useSelector((state) => state.tasks.items)
 
     const dispatch = useDispatch();
 
-    const [selectedQuery, setSelectedQuery] = useState("");
-
+    console.log('filter', filter)
     useEffect(() => {
-        dispatch(fetchTasks({}));
+        dispatch(fetchTasks({
+            params: {
+                ...filter
+            }
+        }));
         dispatch(fetchUsers({}));
-    }, [dispatch]);
+    }, [dispatch, filter]);
 
-    console.log('tasks', tasks)
     { /*
     const handleAccept = (id) => {
         dispatch(updateTaskStatus({ id, status: "accepted" }));
@@ -38,9 +42,9 @@ const Dashboard = () => {
                     <MagnifyingGlassIcon className="text-gray-500 cursor-pointer mr-2 w-5 h-5" />
                     <input
                         type="text"
-                        value={selectedQuery}
-                        onChange={(e) => setSelectedQuery(e.target.value)}
-                        className="bg-transparent w-full outline-none placeholder-gray-400"
+                        value={filter.search}
+                        onChange={(e) => setFilter({ ...filter, search: e.target.value })}
+                        className="bg-transparent w-full outline-none placeholder-gray-300"
                     />
                 </div>
             </div>

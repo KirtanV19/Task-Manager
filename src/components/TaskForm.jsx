@@ -1,30 +1,29 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-const today = new Date();
-today.setHours(0, 0, 0, 0);
+import { useEffect } from "react";
 
 const schema = yup.object({
     title: yup.string().required("Title is required"),
     description: yup.string().required("Description is required"),
     status: yup.string().required("Status is required"),
-    dueDate: yup
-        .date()
-        .min(today, "Due date cannot be in the past")
-        .required("Due date is required"),
+    dueDate: yup.string().required('Due Date is required').test("is-valid-date", "Due date must be a valid date", (value) => { new Date(value) > new Date() }),
 });
 
-const TaskForm = () => {
+const TaskForm = ({ defaultValues = {}, onSubmit }) => {
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({ resolver: yupResolver(schema), mode: "onTouched" });
+    } = useForm({
+        resolver: yupResolver(schema),
+        mode: "onTouched",
+        defaultValues,
+    });
 
-    const onSubmit = (data) => {
-        console.log("data", data);
-    };
+    useEffect(() => {
+        reset(defaultValues);
+    }, [defaultValues]);
 
     return (
         <div className="flex items-center justify-center min-h-[70vh] mt-3">
@@ -110,7 +109,7 @@ const TaskForm = () => {
                         type="submit"
                         className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition font-semibold shadow"
                     >
-                        Add Task
+                        {defaultValues?.id ? "Update Task" : "Add Task"}
                     </button>
                 </form>
             </div>
