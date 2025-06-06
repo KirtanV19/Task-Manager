@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTasks } from "../redux/slices/task.slice";
-import { fetchUserOnly } from "../redux/slices/user.slice";
+import { fetchUsers } from "../redux/slices/user.slice";
 import Container from "../utils/Container";
 import { Table } from "@radix-ui/themes";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 const Dashboard = () => {
-    const { items: users } = useSelector((state) => state.users);
-    const { items: tasks } = useSelector((state) => state.tasks);
+    const users = useSelector((state) => state.users.items)
+    const tasks = useSelector((state) => state.tasks.items)
 
     const dispatch = useDispatch();
 
     const [selectedQuery, setSelectedQuery] = useState("");
 
     useEffect(() => {
-        dispatch(fetchTasks());
-        dispatch(fetchUserOnly());
+        dispatch(fetchTasks({}));
+        dispatch(fetchUsers({}));
     }, [dispatch]);
 
+    console.log('tasks', tasks)
     { /*
     const handleAccept = (id) => {
         dispatch(updateTaskStatus({ id, status: "accepted" }));
@@ -98,14 +99,14 @@ const Dashboard = () => {
                                     >
                                         <button
                                             className="bg-blue-600 text-white p-1 text-md rounded-md hover:bg-blue-700 transition"
-                                            onClick={() => handleAccept(task.id)}
+                                            // onClick={() => handleAccept(task.id)}
                                             disabled={task.status === "accepted"}
                                         >
                                             Accept
                                         </button>
                                         <button
                                             className="bg-red-600 text-white p-1 text-md rounded-md hover:bg-red-700 transition"
-                                            onClick={() => handleReject(task.id)}
+                                            // onClick={() => handleReject(task.id)}
                                             disabled={task.status === "rejected"}
                                         >
                                             Reject

@@ -1,26 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { api } from "../../API/client";
-
-const setPending = (state) => {
-  state.loading = true;
-};
-
-const setRejected = (state, action) => {
-  state.error = action.payload?.message;
-};
+import { api } from "../../api/client";
 
 export const fetchUsers = createAsyncThunk(
   "users/fetchusers",
   async (data, { rejectWithValue }) => {
     try {
       const response = await api.USERS.getAll(data);
-      console.log(response.data);
-      return response.data;
+      return response;
     } catch (error) {
-      return rejectWithValue({
-        message:
-          error.response?.data?.message || error.message || "Unknown error",
-      });
+      return rejectWithValue(error);
     }
   }
 );
@@ -29,7 +17,7 @@ export const registerUser = createAsyncThunk(
   "users/registeruser",
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await api.post("/users", userData);
+      const response = await api.USERS.update("/users", userData);
       return response.data;
     } catch (error) {
       return rejectWithValue({
@@ -44,7 +32,7 @@ export const loginUser = createAsyncThunk(
   "users/loginUser",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await api.get(`/users?email=${email}`);
+      const response = await api.USERS.getAll(`/users?email=${email}`);
       const user = response.data[0];
 
       if (!user || user.password !== password) {
@@ -79,27 +67,39 @@ const users = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUsers.pending, setPending)
+      .addCase(fetchUsers.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.items = action.payload;
         state.loading = false;
       })
-      .addCase(fetchUsers.rejected, setRejected);
+      .addCase(fetchUsers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload?.message;
+      });
     builder
-      .addCase(registerUser.pending, setPending)
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.items.push(action.payload);
         state.loading = false;
       })
-      .addCase(registerUser.rejected, setRejected);
-
-    builder
-      .addCase(loginUser.pending, setPending)
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.currentUser = action.payload;
+      .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-      })
-      .addCase(loginUser.rejected, setRejected);
+        state.error = action.payload?.message;
+      });
+
+    // builder
+    //   .addCase(loginUser.pending, setPending)
+    //   .addCase(loginUser.fulfilled, (state, action) => {
+    //     state.currentUser = action.payload;
+    //     state.loading = false;
+    //   })
+    //   .addCase(loginUser.rejected, setRejected);
   },
 });
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { METHODS } from "../constant";
+import { METHODS } from "../constants";
 
 const api = axios.create({
   baseURL: "http://localhost:3000",

@@ -1,15 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { api } from "../../API/client";
+import { api } from "../../api/client";
 
-// Simple get and fetch
 export const fetchTasks = createAsyncThunk(
   "tasks/fetchtasks",
   async (data, { rejectWithValue }) => {
     try {
       const response = await api.TASKS.getAll(data);
-      return response.data;
-    } catch (err) {
-      return rejectWithValue(err);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
     }
   }
 );
@@ -28,12 +27,13 @@ const tasks = createSlice({
         state.error = null;
       })
       .addCase(fetchTasks.fulfilled, (state, action) => {
+        console.log("action.payload", action);
         state.items = action.payload;
         state.loading = false;
       })
       .addCase(fetchTasks.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload?.message;
       });
   },
 });

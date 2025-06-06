@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchUserOnly } from "../redux/slices/user.slice";
+import { fetchUsers } from "../redux/slices/user.slice";
 import { Table, Progress } from "@radix-ui/themes";
 import Container from "../utils/Container";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
@@ -14,7 +14,7 @@ const Users = () => {
     const debouncedQuery = useDebounce(selectedQuery, 400);
 
     useEffect(() => {
-        dispatch(fetchUserOnly());
+        dispatch(fetchUsers());
     }, [dispatch]);
 
     let filterUser = items.filter(
