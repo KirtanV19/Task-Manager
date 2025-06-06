@@ -55,6 +55,13 @@
       "description": "Cover critical components with unit tests",
       "status": "pending",
       "dueDate": "2025-06-08"
+    },
+    {
+      "id": 9,
+      "title": "Integrate Testing",
+      "description": "Cover overall integration",
+      "status": "completed",
+      "dueDate": "2025-06-07"
     }
   ],
   "users": [

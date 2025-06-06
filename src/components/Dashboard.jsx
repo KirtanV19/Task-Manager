@@ -60,12 +60,21 @@ const Dashboard = () => {
                         type="text"
                         name="q"
                         placeholder="Search tasks..."
-                        value={filter.search}
+                        value={filter.q}
                         onChange={handleChange}
                         className="bg-transparent w-full outline-none placeholder-gray-300"
                     />
                 </div>
-                <select></select>
+                <div>
+                    <input type="date" name="dueDate" value={filter.dueDate} onChange={handleChange} />
+                </div>
+                <div>
+                    <select name="_sort" value={filter._sort} onChange={handleChange}>
+                        <option value=""></option>
+                        <option value="asc">Asc</option>
+                        <option value="desc">Desc</option>
+                    </select>
+                </div>
             </div>
             <div className="flex flex-wrap gap-6">
                 <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
