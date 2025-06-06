@@ -7,32 +7,48 @@ import { Table } from "@radix-ui/themes";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 const Dashboard = () => {
-
     const [filter, setFilter] = useState({});
-    const users = useSelector((state) => state.users.items)
-    const tasks = useSelector((state) => state.tasks.items)
+
+    const users = useSelector((state) => state.users.items);
+    const tasks = useSelector((state) => state.tasks.items);
 
     const dispatch = useDispatch();
 
-    console.log('filter', filter)
-    useEffect(() => {
-        dispatch(fetchTasks({
-            params: {
-                ...filter
-            }
+    console.log("filter", filter);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFilter((prev) => ({
+            ...prev,
+            [name]: value,
         }));
+    };
+
+    useEffect(() => {
         dispatch(fetchUsers({}));
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(
+            fetchTasks({
+                params: {
+                    ...filter,
+                },
+            })
+        );
     }, [dispatch, filter]);
 
-    { /*
-    const handleAccept = (id) => {
-        dispatch(updateTaskStatus({ id, status: "accepted" }));
-    };
-
-    const handleReject = (id) => {
-        dispatch(updateTaskStatus({ id, status: "rejected" }));
-    };
-    */}
+    {
+        /*
+                const handleAccept = (id) => {
+                    dispatch(updateTaskStatus({ id, status: "accepted" }));
+                };
+            
+                const handleReject = (id) => {
+                    dispatch(updateTaskStatus({ id, status: "rejected" }));
+                };
+                */
+    }
 
     return (
         <Container className="flex flex-col gap-5 py-4 px-4 md:px-8  min-h-screen">
@@ -42,8 +58,10 @@ const Dashboard = () => {
                     <MagnifyingGlassIcon className="text-gray-500 cursor-pointer mr-2 w-5 h-5" />
                     <input
                         type="text"
+                        name="search"
+                        placeholder="Search tasks..."
                         value={filter.search}
-                        onChange={(e) => setFilter({ ...filter, search: e.target.value })}
+                        onChange={handleChange}
                         className="bg-transparent w-full outline-none placeholder-gray-300"
                     />
                 </div>
