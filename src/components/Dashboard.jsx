@@ -65,6 +65,7 @@ const Dashboard = () => {
                         className="bg-transparent w-full outline-none placeholder-gray-300"
                     />
                 </div>
+                <select></select>
             </div>
             <div className="flex flex-wrap gap-6">
                 <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">

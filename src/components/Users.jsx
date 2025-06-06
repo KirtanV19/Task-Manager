@@ -4,26 +4,28 @@ import { fetchUsers } from "../redux/slices/user.slice";
 import { Table, Progress } from "@radix-ui/themes";
 import Container from "../utils/Container";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import useDebounce from "../hooks/useDebounce";
 
 const Users = () => {
     const dispatch = useDispatch();
     const { items, loading } = useSelector((state) => state.users);
+    const [filter, setFilter] = useState({});
 
-    const [selectedQuery, setSelectedQuery] = useState("");
-    const debouncedQuery = useDebounce(selectedQuery, 400);
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFilter((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
 
     useEffect(() => {
-        dispatch(fetchUsers());
-    }, [dispatch]);
+        dispatch(fetchUsers({
+            params: {
+                ...filter,
+            }
+        }));
+    }, [dispatch, filter]);
 
-    let filterUser = items.filter(
-        (item) =>
-            (item.name &&
-                item.name.toLowerCase().includes(debouncedQuery.toLowerCase())) ||
-            (item.email &&
-                item.email.toLowerCase().includes(debouncedQuery.toLowerCase()))
-    );
 
     return (
         <>
@@ -38,9 +40,10 @@ const Users = () => {
 
                     <input
                         type="text"
-                        placeholder="Search users by name or email"
-                        value={selectedQuery}
-                        onChange={(e) => setSelectedQuery(e.target.value)}
+                        name="q"
+                        placeholder="Search Users..."
+                        value={filter.q}
+                        onChange={handleChange}
                         className="bg-transparent w-full outline-none placeholder-gray-400"
                     />
                 </div>
@@ -68,7 +71,7 @@ const Users = () => {
                             className="w-full table-fixed"
                         >
                             <Table.Body>
-                                {filterUser.map((item) => (
+                                {items.map((item) => (
                                     <Table.Row key={item.id}>
                                         <Table.RowHeaderCell>{item.name}</Table.RowHeaderCell>
                                         <Table.Cell>{item.email}</Table.Cell>
