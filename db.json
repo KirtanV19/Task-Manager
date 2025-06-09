@@ -6,62 +6,6 @@
       "description": "This is a trial task",
       "status": "pending",
       "dueDate": "2025-06-05"
-    },
-    {
-      "id": 2,
-      "title": "Trial Task",
-      "description": "This is a trial task but unique",
-      "status": "completed",
-      "dueDate": "2025-06-02"
-    },
-    {
-      "id": 3,
-      "title": "Design Homepage",
-      "description": "Create a responsive layout for the homepage",
-      "status": "completed",
-      "dueDate": "2025-06-07"
-    },
-    {
-      "id": 4,
-      "title": "Fix Login Bug",
-      "description": "Resolve issue with user authentication timing out",
-      "status": "pending",
-      "dueDate": "2025-06-06"
-    },
-    {
-      "id": 5,
-      "title": "Update README",
-      "description": "Add installation instructions and examples to the README file",
-      "status": "completed",
-      "dueDate": "2025-05-30"
-    },
-    {
-      "id": 6,
-      "title": "Test API Integration",
-      "description": "Ensure the frontend correctly communicates with the backend API",
-      "status": "pending",
-      "dueDate": "2025-06-09"
-    },
-    {
-      "id": 7,
-      "title": "Refactor Codebase",
-      "description": "Clean up and organize code into reusable components",
-      "status": "pending",
-      "dueDate": "2025-06-10"
-    },
-    {
-      "id": 8,
-      "title": "Write Unit Tests",
-      "description": "Cover critical components with unit tests",
-      "status": "pending",
-      "dueDate": "2025-06-08"
-    },
-    {
-      "id": 9,
-      "title": "Integrate Testing",
-      "description": "Cover overall integration",
-      "status": "completed",
-      "dueDate": "2025-06-07"
     }
   ],
   "users": [
@@ -80,6 +24,14 @@
       "role": "user",
       "userId": 1749460516928,
       "id": 2
+    },
+    {
+      "name": "Anand Patel",
+      "email": "Anandp@example.com",
+      "password": "Anand@123",
+      "role": "user",
+      "userId": 1749461628961,
+      "id": 3
     }
   ]
 }

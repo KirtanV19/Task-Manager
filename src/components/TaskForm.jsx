@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 const schema = yup.object({
     title: yup.string().required("Title is required"),
@@ -21,9 +21,9 @@ const TaskForm = ({ defaultValues = {}, onSubmit }) => {
         defaultValues,
     });
 
-    useEffect(() => {
-        reset(defaultValues);
-    }, [defaultValues]);
+    // useEffect(() => {
+    //     reset(defaultValues);
+    // }, [defaultValues]);
 
     return (
         <div className="flex items-center justify-center min-h-[70vh] mt-3">
