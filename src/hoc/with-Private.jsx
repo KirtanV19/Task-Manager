@@ -1,6 +1,15 @@
+import { useSelector } from "react-redux";
+import { URLS } from "../constants/urls";
+import { Navigate } from "react-router-dom";
+
 const withPrivate = (RenderComponent) => {
     const WrappedComponent = (props) => {
-        return;
+        const currentUser = useSelector((state) => state.users.currentUser);
+
+        if (!currentUser) {
+            return <Navigate to={URLS.LOGIN} />;
+        }
+        return <RenderComponent {...props} />;
     };
 
     WrappedComponent.displayName = `withPrivate(${RenderComponent.displayName || RenderComponent.name || "Component"

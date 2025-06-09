@@ -3,4 +3,4 @@ import { Outlet } from "react-router-dom";
 
 const PrivateLayout = withPrivate(Outlet);
 
-export default PrivateLayout
+export default PrivateLayout;

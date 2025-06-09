@@ -1,4 +1,3 @@
-import React from "react";
 import useRoute from "../hooks/useRoute";
 import { Route, Routes } from "react-router";
 import WithPublic from "../layout/public-layout";

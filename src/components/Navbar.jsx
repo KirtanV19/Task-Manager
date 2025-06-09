@@ -1,16 +1,9 @@
 import { Menubar } from "radix-ui";
-import { useNavigate, Link } from "react-router";
-import { useDispatch } from "react-redux";
-import { logout } from "../redux/slices/user.slice";
+import { Link, useNavigate } from "react-router";
+import LogOut from "./LogOut";
+
 const Navbar = () => {
-
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const handleLogOut = () => {
-        dispatch(logout())
-        navigate('/login')
-    }
     return (
         <nav className="flex items-center bg-blue-blue8 justify-between px-6 py-1 shadow">
             <Link
@@ -45,11 +38,8 @@ const Navbar = () => {
                     </Menubar.Trigger>
                 </Menubar.Menu>
                 <Menubar.Menu>
-                    <Menubar.Trigger
-                        onClick={handleLogOut}
-                        className="px-3 py-1 rounded hover:text-blue-800 hover:bg-blue-100 transition-all cursor-pointer"
-                    >
-                        Logout
+                    <Menubar.Trigger className="px-3 py-1 rounded hover:text-blue-800 hover:bg-blue-100 transition-all cursor-pointer">
+                        <LogOut />
                     </Menubar.Trigger>
                 </Menubar.Menu>
             </Menubar.Root>

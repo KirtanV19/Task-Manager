@@ -3,4 +3,4 @@ import { Outlet } from "react-router-dom";
 
 const PublicLayout = withPublic(Outlet);
 
-export default PublicLayout
+export default PublicLayout;
