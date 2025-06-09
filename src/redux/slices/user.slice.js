@@ -18,8 +18,8 @@ export const registerUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const response = await api.USERS.create({ data: userData });
-      console.log("userData", userData);
-      console.log("response", response);
+      // console.log("userData", userData);
+      // console.log("response", response);
       return response.data;
     } catch (error) {
       return rejectWithValue({
@@ -37,9 +37,9 @@ export const loginUser = createAsyncThunk(
       const response = await api.USERS.getAll({
         params: { email, password },
       });
-
-      const user = response.data?.[0];
-
+      // console.log("response of login user", response);
+      const user = response?.[0]; // not response.data?.[0]
+      // console.log("user", user);
       if (!user || user.password !== password) {
         return rejectWithValue("Invalid credentials");
       }
@@ -66,7 +66,6 @@ const users = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Fetch users
       .addCase(fetchUsers.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -78,9 +77,9 @@ const users = createSlice({
       .addCase(fetchUsers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      })
+      });
 
-      // Register user
+    builder
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -92,9 +91,9 @@ const users = createSlice({
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      })
+      });
 
-      // Login user
+    builder
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;

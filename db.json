@@ -67,18 +67,18 @@
   "users": [
     {
       "name": "Sanjay Punani",
-      "email": "Sanjay@gmail.com",
-      "password": "Sanjay@123",
+      "email": "Admin.sp@example.com",
+      "password": "Admin#123",
       "role": "admin",
-      "userId": 1749456425170,
+      "userId": 1749458266450,
       "id": 1
     },
     {
       "name": "Ronak kapadi",
       "email": "Ronakk@gmail.com",
-      "password": "Ronak*26",
+      "password": "Ronak@123",
       "role": "user",
-      "userId": 1749456588234,
+      "userId": 1749460516928,
       "id": 2
     }
   ]
