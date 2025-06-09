@@ -38,9 +38,7 @@ const Navbar = () => {
                     </Menubar.Trigger>
                 </Menubar.Menu>
                 <Menubar.Menu>
-                    <Menubar.Trigger className="px-3 py-1 rounded hover:text-blue-800 hover:bg-blue-100 transition-all cursor-pointer">
-                        <LogOut />
-                    </Menubar.Trigger>
+                    <LogOut />
                 </Menubar.Menu>
             </Menubar.Root>
         </nav>

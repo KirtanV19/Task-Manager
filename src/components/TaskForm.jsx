@@ -7,7 +7,12 @@ const schema = yup.object({
     title: yup.string().required("Title is required"),
     description: yup.string().required("Description is required"),
     status: yup.string().required("Status is required"),
-    dueDate: yup.string().required('Due Date is required').test("is-valid-date", "Due date must be a valid date", (value) => { new Date(value) > new Date() }),
+    dueDate: yup
+        .string()
+        .required("Due Date is required")
+        .test("is-valid-date", "Due date must be a valid date", (value) => {
+            new Date(value) > new Date();
+        }),
 });
 
 const TaskForm = ({ defaultValues = {}, onSubmit }) => {
@@ -38,8 +43,8 @@ const TaskForm = ({ defaultValues = {}, onSubmit }) => {
                             placeholder="Task Title"
                             {...register("title")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.title
-                                ? "border-red-400 focus:ring-red-200"
-                                : "border-gray-300 focus:ring-blue-400"
+                                    ? "border-red-400 focus:ring-red-200"
+                                    : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
                         {errors.title && (
@@ -57,8 +62,8 @@ const TaskForm = ({ defaultValues = {}, onSubmit }) => {
                             placeholder="Task Description"
                             {...register("description")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.description
-                                ? "border-red-400 focus:ring-red-200"
-                                : "border-gray-300 focus:ring-blue-400"
+                                    ? "border-red-400 focus:ring-red-200"
+                                    : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
                         {errors.description && (
@@ -75,8 +80,8 @@ const TaskForm = ({ defaultValues = {}, onSubmit }) => {
                             type="date"
                             {...register("dueDate")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.dueDate
-                                ? "border-red-400 focus:ring-red-200"
-                                : "border-gray-300 focus:ring-blue-400"
+                                    ? "border-red-400 focus:ring-red-200"
+                                    : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
                         {errors.dueDate && (
@@ -92,8 +97,8 @@ const TaskForm = ({ defaultValues = {}, onSubmit }) => {
                         <select
                             {...register("status")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.status
-                                ? "border-red-400 focus:ring-red-200"
-                                : "border-gray-300 focus:ring-blue-400"
+                                    ? "border-red-400 focus:ring-red-200"
+                                    : "border-gray-300 focus:ring-blue-400"
                                 }`}
                             defaultValue="pending"
                         >

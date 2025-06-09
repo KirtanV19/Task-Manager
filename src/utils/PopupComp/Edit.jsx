@@ -2,7 +2,7 @@ import useModal from "../../hooks/useModal";
 import Modal from "../../components/Modal";
 import TaskForm from "../../components/TaskForm";
 import { useDispatch } from "react-redux";
-import { updateTask } from "../../features/task/taskSlice"; // example
+// import { updateTask } from "../../features/task/taskSlice"; // example
 
 const Edit = ({ task }) => {
     const { isOpen, content, openModal, closeModal } = useModal();
@@ -17,10 +17,10 @@ const Edit = ({ task }) => {
                     dueDate: task.dueDate,
                     status: task.status,
                 }}
-                onSubmit={(updatedData) => {
-                    dispatch(updateTask({ id: task.id, ...updatedData }));
-                    closeModal();
-                }}
+            // onSubmit={(updatedData) => {
+            //     dispatch(updateTask({ id: task.id, ...updatedData }));
+            //     closeModal();
+            // }}
             />
         );
     };
