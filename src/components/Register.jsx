@@ -119,30 +119,35 @@ const Register = () => {
                         )}
                     </div>
 
-                    <div className="w-full border border-gray-300 rounded focus-within:ring-2 focus-within:ring-blue-400 flex items-center px-3 py-2">
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            placeholder="Password"
-                            {...register("password")}
-                            onChange={(e) => setPasswordValue(e.target.value)}
-                            className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.password
-                                ? "border-red-400 focus:ring-red-200"
-                                : "border-gray-300 focus:ring-blue-400"
+                    <div>
+                        <div
+                            className={`w-full px-4 py-2 border rounded focus-within:ring-2 flex justify-between items-center transition-colors ${errors.password
+                                    ? "border-red-400 focus-within:ring-red-200 bg-red-50"
+                                    : "border-gray-300 focus-within:ring-blue-400 hover:border-blue-400"
                                 }`}
-                        />
-                        <span
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="ml-2 text-gray-500 hover:text-gray-700 cursor-pointer"
                         >
-                            {showPassword ? <EyeNoneIcon /> : <EyeOpenIcon />}
-                        </span>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Password"
+                                {...register("password")}
+                                onChange={(e) => setPasswordValue(e.target.value)}
+                                className="w-full outline-none bg-transparent text-gray-800 placeholder-gray-400"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="ml-2 p-1 text-gray-500 hover:text-gray-700 transition-colors focus:outline-none"
+                                aria-label={showPassword ? "Hide password" : "Show password"}
+                            >
+                                {showPassword ? <EyeNoneIcon /> : <EyeOpenIcon />}
+                            </button>
+                        </div>
+                        {errors.password && (
+                            <p className="text-red-500 text-xs mt-1.5 ml-1">
+                                {errors.password.message}
+                            </p>
+                        )}
                     </div>
-
-                    {errors.password && (
-                        <p className="text-red-500 text-xs mt-1">
-                            {errors.password.message}
-                        </p>
-                    )}
 
                     {/* Password rule feedback */}
                     <div className="mt-3 space-y-1">
