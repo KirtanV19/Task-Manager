@@ -12,6 +12,8 @@ export const api = {
       client({ method: METHODS.PUT, url: `/users/${id}`, data, ...config }),
     delete: ({ id, ...config }) =>
       client({ method: METHODS.DELETE, url: `/users/${id}`, ...config }),
+    getUserById: ({ data, ...config }) =>
+      client({ url: `/users/${data.id}`, data, ...config }),
   },
   TASKS: {
     getAll: ({ data, ...config }) => client({ url: "/tasks", data, ...config }),

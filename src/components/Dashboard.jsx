@@ -40,42 +40,74 @@ const Dashboard = () => {
 
     {
         /*
-                const handleAccept = (id) => {
-                    dispatch(updateTaskStatus({ id, status: "accepted" }));
-                };
-            
-                const handleReject = (id) => {
-                    dispatch(updateTaskStatus({ id, status: "rejected" }));
-                };
-                */
+                        const handleAccept = (id) => {
+                            dispatch(updateTaskStatus({ id, status: "accepted" }));
+                        };
+                    
+                        const handleReject = (id) => {
+                            dispatch(updateTaskStatus({ id, status: "rejected" }));
+                        };
+                        */
     }
 
     return (
-        <Container className="flex flex-col gap-5 py-4 px-4 md:px-8  min-h-screen">
-            <div className="flex">
-                <h1 className="text-4xl font-extrabold text-blue mb-2">Dashboard</h1>
-                <div className="border border-gray-300 bg-gray-200 rounded focus-within:ring-2 focus-within:ring-blue-400 flex items-center px-3 py-1">
-                    <MagnifyingGlassIcon className="text-gray-500 cursor-pointer mr-2 w-5 h-5" />
+        <Container className="flex flex-col gap-5 py-3 px-3 md:px-8 min-h-screen">
+            {/* UX Addition */}
+            <div className="flex flex-wrap gap-4 items-center mb-6">
+                <h1 className="text-4xl font-extrabold text-blue-700 mb-2 mr-6">
+                    Dashboard
+                </h1>
+                <div className="flex items-center border border-gray-300 bg-gray-100 rounded-lg focus-within:ring-2 focus-within:ring-blue-400 px-3 py-2 shadow-sm w-64">
+                    <MagnifyingGlassIcon className="text-gray-500 mr-2 w-5 h-5" />
                     <input
                         type="text"
                         name="q"
                         placeholder="Search tasks..."
                         value={filter.q}
                         onChange={handleChange}
-                        className="bg-transparent w-full outline-none placeholder-gray-300"
+                        className="bg-transparent w-full outline-none placeholder-gray-400 text-base"
                     />
                 </div>
-                <div>
-                    <input type="date" name="dueDate" value={filter.dueDate} onChange={handleChange} />
-                </div>
-                <div>
-                    <select name="_sort" value={filter._sort} onChange={handleChange}>
-                        <option value=""></option>
-                        <option value="asc">Asc</option>
-                        <option value="desc">Desc</option>
-                    </select>
-                </div>
+                <input
+                    type="date"
+                    name="dueDate"
+                    value={filter.dueDate}
+                    onChange={handleChange}
+                    className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+                />
+                <select
+                    name="status"
+                    value={filter.status || ""}
+                    onChange={handleChange}
+                    className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+                >
+                    <option value="">All Statuses</option>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <select
+                    name="_sort"
+                    value={filter._sort || ""}
+                    onChange={handleChange}
+                    className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+                >
+                    <option value="">Sort By</option>
+                    <option value="dueDate">Due Date</option>
+                    <option value="status">Status</option>
+                </select>
+                <select
+                    name="_order"
+                    value={filter._order || ""}
+                    onChange={handleChange}
+                    className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+                >
+                    <option value="">Order</option>
+                    <option value="asc">Asc</option>
+                    <option value="desc">Desc</option>
+                </select>
             </div>
+
+            {/* Statistics */}
             <div className="flex flex-wrap gap-6">
                 <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
                     <p className="text-black700 text-lg font-semibold mb-1">
@@ -90,6 +122,7 @@ const Dashboard = () => {
                     <p className="text-3xl font-bold text-black900">{users.length}</p>
                 </div>
             </div>
+            {/* Table */}
             <h2 className="text-2xl font-bold text-black900 mt-8 mb-2">
                 Recent Tasks
             </h2>
@@ -97,16 +130,16 @@ const Dashboard = () => {
                 <Table.Root variant="surface" layout="auto" size="3" className="w-full">
                     <Table.Header>
                         <Table.Row>
-                            <Table.ColumnHeaderCell className="text-black">
+                            <Table.ColumnHeaderCell className="text-black text-center">
                                 Task
                             </Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell className="text-black">
+                            <Table.ColumnHeaderCell className="text-black text-center">
                                 Status
                             </Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell className="text-black">
+                            <Table.ColumnHeaderCell className="text-black text-center">
                                 Due Date
                             </Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell className="text-black">
+                            <Table.ColumnHeaderCell className="text-black text-center">
                                 Action
                             </Table.ColumnHeaderCell>
                         </Table.Row>
@@ -121,28 +154,29 @@ const Dashboard = () => {
                     >
                         <Table.Body>
                             {tasks.map((task) => (
-                                <Table.Row key={task.id}>
-                                    <Table.RowHeaderCell>{task.title}</Table.RowHeaderCell>
-                                    <Table.Cell>{task.status}</Table.Cell>
-                                    <Table.Cell>{task.dueDate}</Table.Cell>
-                                    <Table.Cell
-                                        className="flex gap-5 items-center"
-                                        justify="center"
-                                    >
-                                        <button
-                                            className="bg-blue-600 text-white p-1 text-md rounded-md hover:bg-blue-700 transition"
-                                            // onClick={() => handleAccept(task.id)}
-                                            disabled={task.status === "accepted"}
-                                        >
-                                            Accept
-                                        </button>
-                                        <button
-                                            className="bg-red-600 text-white p-1 text-md rounded-md hover:bg-red-700 transition"
-                                            // onClick={() => handleReject(task.id)}
-                                            disabled={task.status === "rejected"}
-                                        >
-                                            Reject
-                                        </button>
+                                <Table.Row key={task.id} className="text-center">
+                                    <Table.RowHeaderCell className="py-3">
+                                        {task.title}
+                                    </Table.RowHeaderCell>
+                                    <Table.Cell className="py-3">{task.status}</Table.Cell>
+                                    <Table.Cell className="py-3">{task.dueDate}</Table.Cell>
+                                    <Table.Cell className="py-3">
+                                        <div className="flex justify-center gap-3">
+                                            <button
+                                                className="bg-blue-600 text-white px-3 py-1 text-md rounded-md hover:bg-blue-700 transition"
+                                                // onClick={() => handleAccept(task.id)}
+                                                disabled={task.status === "accepted"}
+                                            >
+                                                Accept
+                                            </button>
+                                            <button
+                                                className="bg-red-600 text-white px-3 py-1 text-md rounded-md hover:bg-red-700 transition"
+                                                // onClick={() => handleReject(task.id)}
+                                                disabled={task.status === "rejected"}
+                                            >
+                                                Reject
+                                            </button>
+                                        </div>
                                     </Table.Cell>
                                 </Table.Row>
                             ))}
