@@ -8,14 +8,14 @@ const Routing = () => {
     return (
         <Routes>
             {/* Private routes */}
-            <Route element={<WithPrivate />}>
+            <Route element={<WithPublic />}>
                 {publicRoutes.map(({ id, element: Component, path, ...otherData }) => (
                     <Route key={id} path={path} element={<Component />} {...otherData} />
                 ))}
             </Route>
 
             {/* Public routes */}
-            <Route element={<WithPublic />}>
+            <Route element={<WithPrivate />}>
                 {privateRoutes.map(({ id, element: Component, path, ...otherData }) => (
                     <Route key={id} path={path} element={<Component />} {...otherData} />
                 ))}

@@ -7,7 +7,7 @@ const withPrivate = (RenderComponent) => {
         const currentUser = useSelector((state) => state.users.currentUser);
 
         if (!currentUser) {
-            return <Navigate to={URLS.LOGIN} />;
+            return <Navigate to={URLS.LOGIN} replace />;
         }
         return <RenderComponent {...props} />;
     };

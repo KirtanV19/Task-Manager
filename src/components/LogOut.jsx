@@ -13,7 +13,7 @@ const LogOut = () => {
         navigate('/login')
     }
     return (
-        <button className="px-3 py-1 rounded  hover:text-blue-800 hover:bg-blue-100 transition-all cursor-pointer" onClick={handleLogOut}>Logo</button>
+        <button className="px-3 py-1 rounded  hover:text-blue-800 hover:bg-blue-100 transition-all cursor-pointer" onClick={handleLogOut}>Log Out</button>
     )
 }
 
