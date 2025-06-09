@@ -66,39 +66,20 @@
   ],
   "users": [
     {
-      "id": 1,
       "name": "Sanjay Punani",
-      "email": "sanjay@gmail.com",
-      "password": "123456",
-      "role": "admin"
+      "email": "Sanjay@gmail.com",
+      "password": "Sanjay@123",
+      "role": "admin",
+      "userId": 1749456425170,
+      "id": 1
     },
     {
-      "id": 2,
-      "name": "Ronak Kapadi",
-      "email": "ronak@example.com",
-      "password": "258639",
-      "role": "user"
-    },
-    {
-      "id": 3,
-      "name": "Kirtan Vyas",
-      "email": "kirtan@example.com",
-      "password": "456781",
-      "role": "user"
-    },
-    {
-      "id": 4,
-      "name": "Anand Patel",
-      "email": "anand@example.com",
-      "password": "547826",
-      "role": "user"
-    },
-    {
-      "id": 5,
-      "name": "Krima Shah",
-      "email": "krima@example.com",
-      "password": "946317",
-      "role": "user"
+      "name": "Ronak kapadi",
+      "email": "Ronakk@gmail.com",
+      "password": "Ronak*26",
+      "role": "user",
+      "userId": 1749456588234,
+      "id": 2
     }
   ]
 }

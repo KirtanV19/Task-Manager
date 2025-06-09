@@ -17,7 +17,7 @@ const Login = () => {
         e.preventDefault();
         try {
             await dispatch(loginUser({ email, password })).unwrap();
-            navigate("/login");
+            navigate("/");
         } catch (error) {
             alert("Login failed: " + error.message);
         }

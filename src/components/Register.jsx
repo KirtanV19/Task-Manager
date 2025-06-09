@@ -71,7 +71,7 @@ const Register = () => {
 
     const onSubmit = async (data) => {
         try {
-            const userWithId = { ...data, id: Date.now() };
+            const userWithId = { ...data, userId: Date.now() };
             await dispatch(registerUser(userWithId)).unwrap();
             console.log("userWithId", userWithId);
             navigate("/login");

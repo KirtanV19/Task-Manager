@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from ".";
+import { persistStore } from "redux-persist";
 
 const store = configureStore({
   reducer: rootReducer,
@@ -7,3 +8,5 @@ const store = configureStore({
 });
 
 export default store;
+
+export const persistor = persistStore(store);

@@ -17,7 +17,9 @@ export const registerUser = createAsyncThunk(
   "users/registeruser",
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await api.USERS.update("/users", userData);
+      const response = await api.USERS.create({ data: userData });
+      console.log("userData", userData);
+      console.log("response", response);
       return response.data;
     } catch (error) {
       return rejectWithValue({
@@ -32,41 +34,39 @@ export const loginUser = createAsyncThunk(
   "users/loginUser",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await api.USERS.getAll(`/users?email=${email}`);
-      const user = response.data[0];
+      const response = await api.USERS.getAll({
+        params: { email, password },
+      });
+
+      const user = response.data?.[0];
 
       if (!user || user.password !== password) {
-        return rejectWithValue({ message: "Invalid credentials" });
+        return rejectWithValue("Invalid credentials");
       }
-      localStorage.setItem("authUser", JSON.stringify(user));
 
       return user;
     } catch (error) {
-      return rejectWithValue({
-        message: error.message || "Login failed",
-      });
+      return rejectWithValue(error.message || "Login failed");
     }
   }
 );
-
-const savedUser = JSON.parse(localStorage.getItem("authUser"));
 
 const users = createSlice({
   name: "users",
   initialState: {
     items: [],
-    currentUser: savedUser || null,
+    currentUser: null,
     loading: false,
     error: null,
   },
   reducers: {
     logout: (state) => {
       state.currentUser = null;
-      localStorage.removeItem("authUser");
     },
   },
   extraReducers: (builder) => {
     builder
+      // Fetch users
       .addCase(fetchUsers.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -77,9 +77,10 @@ const users = createSlice({
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload?.message;
-      });
-    builder
+        state.error = action.payload;
+      })
+
+      // Register user
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -90,16 +91,22 @@ const users = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload?.message;
-      });
+        state.error = action.payload;
+      })
 
-    // builder
-    //   .addCase(loginUser.pending, setPending)
-    //   .addCase(loginUser.fulfilled, (state, action) => {
-    //     state.currentUser = action.payload;
-    //     state.loading = false;
-    //   })
-    //   .addCase(loginUser.rejected, setRejected);
+      // Login user
+      .addCase(loginUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.currentUser = action.payload;
+        state.loading = false;
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
 
