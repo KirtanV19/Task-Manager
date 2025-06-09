@@ -81,8 +81,8 @@ const Register = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-[70vh] bg-gray-50">
-            <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+        <div className="flex items-center justify-center min-h-[70vh] bg-gray-50 ">
+            <div className="w-full max-w-md bg-white rounded-lg mt-5 shadow-md p-8 hover:shadow-2xl">
                 <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">
                     Register
                 </h2>
@@ -93,7 +93,7 @@ const Register = () => {
                             placeholder="Name"
                             {...register("name")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.name
-                                ? "border-red-400 focus:ring-red-200"
+                                ? "border-red-400 focus:ring-red-200 bg-red-50"
                                 : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
@@ -108,7 +108,7 @@ const Register = () => {
                             placeholder="Email"
                             {...register("email")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.email
-                                ? "border-red-400 focus:ring-red-200"
+                                ? "border-red-400 focus:ring-red-200 bg-red-50"
                                 : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
@@ -122,8 +122,8 @@ const Register = () => {
                     <div>
                         <div
                             className={`w-full px-4 py-2 border rounded focus-within:ring-2 flex justify-between items-center transition-colors ${errors.password
-                                    ? "border-red-400 focus-within:ring-red-200 bg-red-50"
-                                    : "border-gray-300 focus-within:ring-blue-400 hover:border-blue-400"
+                                ? "border-red-400 focus-within:ring-red-200 bg-red-50"
+                                : "border-gray-300 focus-within:ring-blue-400"
                                 }`}
                         >
                             <input
