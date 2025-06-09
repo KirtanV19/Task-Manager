@@ -1,22 +1,22 @@
-import React from 'react'
-import useRoute from '../hooks/useRoute'
-import { Route, Routes } from 'react-router'
-
+import React from "react";
+import useRoute from "../hooks/useRoute";
+import { Route, Routes } from "react-router";
+import WithPublic from "../layout/public-layout";
+import WithPrivate from "../layout/private-layout";
 const Routing = () => {
-
-    const { privateRoutes, publicRoutes } = useRoute()
+    const { privateRoutes, publicRoutes } = useRoute();
 
     return (
         <Routes>
-            {/* Auth routes */}
-            <Route element={<WithAuth />}>
+            {/* Private routes */}
+            <Route element={<WithPrivate />}>
                 {publicRoutes.map(({ id, element: Component, path, ...otherData }) => (
                     <Route key={id} path={path} element={<Component />} {...otherData} />
                 ))}
             </Route>
 
-            {/* Private routes */}
-            <Route element={<WithUser />}>
+            {/* Public routes */}
+            <Route element={<WithPublic />}>
                 {privateRoutes.map(({ id, element: Component, path, ...otherData }) => (
                     <Route key={id} path={path} element={<Component />} {...otherData} />
                 ))}
@@ -25,7 +25,7 @@ const Routing = () => {
             {/* 404 route */}
             <Route path="*" element={<p>404 | Not Found</p>} />
         </Routes>
-    )
-}
+    );
+};
 
 export default Routing;

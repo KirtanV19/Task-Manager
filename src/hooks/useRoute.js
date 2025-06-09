@@ -1,12 +1,11 @@
 import { useMemo } from "react";
 import { URLS } from "../constants/urls";
-import {
-  Home,
-  LoginScreen,
-  RegisterScreen,
-  ForgotPasswordScreen,
-} from "../screens";
-import { Dashboard, UserDashboard } from "../components";
+import Home from "../screens/Home";
+import Dashboard from "../components/Dashboard";
+import LoginScreen from "../screens/LoginScreen";
+import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
+import RegisterScreen from "../screens/RegisterScreen";
+import UserDashboard from "../components/UserDashboard";
 
 const useRoutes = () => {
   const allRoutes = useMemo(

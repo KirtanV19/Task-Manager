@@ -7,7 +7,7 @@
 
 import { useNavigate, useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { Create, Delete, Edit } from "../utils/PopupComp";
+import Create from '../utils/PopupComp/Create'
 
 const UserDashboard = () => {
 
