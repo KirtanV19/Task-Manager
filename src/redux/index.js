@@ -7,6 +7,7 @@ const usersPersistConfig = {
   key: "users",
   storage,
   whitelist: ["currentUser"],
+  blacklist: ["tasks"],
 };
 
 const rootReducer = combineReducers({
