@@ -19,7 +19,7 @@ const AdminDashboard = () => {
                             <NavigationMenu.Trigger
                                 onClick={() => setActiveTab('tasks')}
                                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${activeTab === 'tasks'
-                                    ? 'bg-blue-50 text-blue-700'
+                                    ? 'bg-gray-200 text-gray-700'
                                     : 'text-gray-700 hover:bg-gray-100'
                                     }`}
                             >
@@ -31,7 +31,7 @@ const AdminDashboard = () => {
                             <NavigationMenu.Trigger
                                 onClick={() => setActiveTab('users')}
                                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${activeTab === 'users'
-                                    ? 'bg-blue-50 text-blue-700'
+                                    ? 'bg-gray-200 text-gray-700'
                                     : 'text-gray-700 hover:bg-gray-100'
                                     }`}
                             >
