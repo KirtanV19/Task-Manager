@@ -6,10 +6,7 @@ import { Link } from "react-router";
 import { Table } from "@radix-ui/themes";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { URLS } from "../constants/urls";
-import { DragHandleHorizontalIcon, PersonIcon } from "@radix-ui/react-icons";
-import { Text } from "@radix-ui/themes";
-import { NavigationMenu } from "radix-ui";
-import Users from "../components/Users";
+
 const Dashboard = () => {
     const [filter, setFilter] = useState({});
 

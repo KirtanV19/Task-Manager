@@ -4,7 +4,7 @@ const URLS = {
   INITIAL: "/",
   LOGIN: "/login",
   LOGOUT: "/logout",
-  FORGOT: "/forgot-password",
+  FORGOT: "/forgot",
   DASHBOARD: "/dashboard",
   USERDASHBOARD: "/user-dashboard",
   REGISTER: "/register",
