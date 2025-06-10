@@ -12,7 +12,7 @@ const Create = () => {
     return (
         <div>
             <button
-                className="bg-gray-200 text-black text-lg font-semibold px-4 py-2 rounded-md hover:bg-gray-300 transition-all"
+                className="bg-gray-200 text-black text-lg font-semibold px-4 py-2 rounded-xl hover:bg-gray-300 transition-all"
                 onClick={openForm}
             >
                 New Task
