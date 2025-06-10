@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTasks } from "../redux/slices/task.slice";
 import { fetchUsers } from "../redux/slices/user.slice";
-import Container from "../utils/Container";
+import { Link } from "react-router";
 import { Table } from "@radix-ui/themes";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-
+import { URLS } from "../constants/urls";
+import { DragHandleHorizontalIcon, PersonIcon } from "@radix-ui/react-icons";
+import { Text } from "@radix-ui/themes";
+import { NavigationMenu } from "radix-ui";
+import Users from "../components/Users";
 const Dashboard = () => {
     const [filter, setFilter] = useState({});
 
@@ -40,23 +44,26 @@ const Dashboard = () => {
 
     {
         /*
-                        const handleAccept = (id) => {
-                            dispatch(updateTaskStatus({ id, status: "accepted" }));
-                        };
-                    
-                        const handleReject = (id) => {
-                            dispatch(updateTaskStatus({ id, status: "rejected" }));
-                        };
-                        */
+                            const handleAccept = (id) => {
+                                dispatch(updateTaskStatus({ id, status: "accepted" }));
+                            };
+                        
+                            const handleReject = (id) => {
+                                dispatch(updateTaskStatus({ id, status: "rejected" }));
+                            };
+                            */
     }
 
     return (
-        <Container className="flex flex-col gap-5 py-3 px-3 md:px-8 min-h-screen">
+        <>
             {/* UX Addition */}
             <div className="flex flex-wrap gap-4 items-center mb-6">
-                <h1 className="text-4xl font-extrabold text-blue-700 mb-2 mr-6">
+                <Link
+                    to={URLS.INITIAL}
+                    className="text-4xl font-extrabold text-blue-700 mb-2 mr-6"
+                >
                     Dashboard
-                </h1>
+                </Link>
                 <div className="flex items-center border border-gray-300 bg-gray-100 rounded-lg focus-within:ring-2 focus-within:ring-blue-400 px-3 py-2 shadow-sm w-64">
                     <MagnifyingGlassIcon className="text-gray-500 mr-2 w-5 h-5" />
                     <input
@@ -184,7 +191,7 @@ const Dashboard = () => {
                     </Table.Root>
                 </div>
             </div>
-        </Container>
+        </>
     );
 };
 

@@ -23,5 +23,7 @@ export const api = {
       client({ method: METHODS.PUT, url: `/tasks/${id}`, data, ...config }),
     delete: ({ id, ...config }) =>
       client({ method: METHODS.DELETE, url: `/tasks/${id}`, ...config }),
+    getSpecificTask: ({ data, ...config }) =>
+      client({ url: `/tasks/${data.userId}`, ...config }),
   },
 };

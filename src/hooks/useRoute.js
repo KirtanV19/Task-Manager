@@ -1,11 +1,12 @@
 import { useMemo } from "react";
 import { URLS } from "../constants/urls";
 import Home from "../screens/Home";
-import Dashboard from "../components/Dashboard";
+import AdminDashboard from "../components/AdminDashboard";
 import LoginScreen from "../screens/LoginScreen";
 import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import UserDashboard from "../components/UserDashboard";
+import Users from "../components/Users";
 
 const useRoutes = () => {
   const allRoutes = useMemo(
@@ -37,13 +38,13 @@ const useRoutes = () => {
       {
         id: "dashboard",
         path: URLS.DASHBOARD,
-        element: Dashboard,
+        element: AdminDashboard,
         isPrivate: true,
       },
       {
-        id: "dashboard",
-        path: URLS.DASHBOARD,
-        element: Dashboard,
+        id: "user",
+        path: URLS.USERS,
+        element: Users,
         isPrivate: true,
       },
       {

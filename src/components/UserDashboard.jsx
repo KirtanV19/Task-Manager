@@ -9,11 +9,13 @@ import Create from "../utils/PopupComp/Create";
 import Delete from '../utils/PopupComp/Delete';
 import Edit from '../utils/PopupComp/Edit';
 
+
 const UserDashboard = () => {
     const { currentUser } = useSelector((state) => state.users);
+    const dispatch = useDispatch();
+
     console.log("currentUser", currentUser);
-    const { id } = useParams();
-    console.log("id", id);
+
 
     return <div>Tasks</div>;
 };
