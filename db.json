@@ -6,24 +6,24 @@
       "description": "This is a trial task",
       "status": "pending",
       "dueDate": "2025-06-05",
-      "userId": 1749472110244
+      "userId": 1749534686543
     }
   ],
   "users": [
     {
-      "name": "Kirtan Vyas",
-      "email": "student@example.com",
-      "password": "Kirtan$51",
-      "role": "user",
-      "userId": 1749472110244,
+      "name": "Sanjay",
+      "email": "Sanjay@gmail.com",
+      "password": "Sanjay@123",
+      "role": "admin",
+      "userId": 1749533866026,
       "id": 1
     },
     {
-      "name": "Sanjay Punani",
-      "email": "Admin.sp@example.com",
-      "password": "Admin@123",
-      "role": "admin",
-      "userId": 1749528375528,
+      "name": "Kirtan",
+      "email": "Kirtan@1gmail.com",
+      "password": "Kirtan@124",
+      "role": "user",
+      "userId": 1749534686543,
       "id": 2
     }
   ]

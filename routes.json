@@ -1,6 +1,7 @@
 {
   "/api/tasks": "/tasks",
   "/api/tasks/:id": "/tasks/:id",
+  "/api/users/:userId/tasks": "/tasks?userId=:userId",
   "/api/users": "/users",
   "/api/users/:id": "/users/:id",
   "/api/auth/login": "/login",
