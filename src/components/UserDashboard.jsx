@@ -49,7 +49,9 @@ const UserDashboard = () => {
         <Container>
             {/* UX Addition */}
             <div className="flex flex-wrap gap-4 items-center mb-6">
-                <p className="text-4xl font-extrabold text-black mb-2 mr-6">Welcome {currentUser.name}</p>
+                <p className="text-4xl font-extrabold text-black mb-2 mr-6">
+                    Welcome {currentUser.name}
+                </p>
                 <div className="flex items-center border border-gray-300 bg-gray-100 rounded-lg focus-within:ring-2 focus-within:ring-blue-400 px-3 py-2 shadow-sm w-64">
                     <MagnifyingGlassIcon className="text-gray-500 mr-2 w-5 h-5" />
                     <input
@@ -98,7 +100,6 @@ const UserDashboard = () => {
                     <option value="asc">Asc</option>
                     <option value="desc">Desc</option>
                 </select>
-
             </div>
 
             {/* Table */}
@@ -138,27 +139,22 @@ const UserDashboard = () => {
                         <Table.Body>
                             {tasks.map((task) => (
                                 <Table.Row key={task.id} className="text-center">
-                                    <Table.RowHeaderCell className="py-3" >
+                                    <Table.RowHeaderCell className="py-3">
                                         {task.title}
                                     </Table.RowHeaderCell>
-                                    <Table.RowHeaderCell className="py-3" >{task.description}</Table.RowHeaderCell>
-                                    <Table.RowHeaderCell className="py-3">{task.status}</Table.RowHeaderCell>
-                                    <Table.RowHeaderCell className="py-3">{task.dueDate}</Table.RowHeaderCell>
+                                    <Table.RowHeaderCell className="py-3">
+                                        {task.description}
+                                    </Table.RowHeaderCell>
+                                    <Table.RowHeaderCell className="py-3">
+                                        {task.status}
+                                    </Table.RowHeaderCell>
+                                    <Table.RowHeaderCell className="py-3">
+                                        {task.dueDate}
+                                    </Table.RowHeaderCell>
                                     <Table.RowHeaderCell className="py-3">
                                         <div className="flex justify-center gap-3">
-                                            {/* <button
-                                                className="bg-green-600 text-white px-3 py-1 text-md rounded-md hover:bg-green-700 transition"
-                                            // onClick={() => handleAccept(task.id)}
-                                            >
-                                                Edit
-                                            </button> */}
                                             <Edit />
-                                            {/* <button
-                                                className="bg-red-600 text-white px-3 py-1 text-md rounded-md hover:bg-red-700 transition"
-                                            // onClick={() => handleReject(task.id)}
-                                            >
-                                                Delete
-                                            </button> */}
+
                                             <Delete />
                                         </div>
                                     </Table.RowHeaderCell>

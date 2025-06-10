@@ -13,6 +13,18 @@ export const fetchTasks = createAsyncThunk(
   }
 );
 
+export const createTask = createAsyncThunk(
+  "tasks/createTask",
+  async (formData, { rejectWithValue }) => {
+    try {
+      const response = await api.TASKS.create({ data: formData });
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const tasks = createSlice({
   name: "tasks",
   initialState: {
@@ -33,6 +45,19 @@ const tasks = createSlice({
       .addCase(fetchTasks.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.message;
+      });
+    builder
+      .addCase(createTask.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(createTask.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+        state.loading = false;
+      })
+      .addCase(createTask.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       });
   },
 });

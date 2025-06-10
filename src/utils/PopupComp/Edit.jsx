@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 
 const Edit = ({ task }) => {
     const { isOpen, content, openModal, closeModal } = useModal();
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const handleEdit = () => {
         openModal(
@@ -16,6 +16,7 @@ const Edit = ({ task }) => {
                     description: task.description,
                     dueDate: task.dueDate,
                     status: task.status,
+                    userId: task.userId
                 }}
             // onSubmit={(updatedData) => {
             //     dispatch(updateTask({ id: task.id, ...updatedData }));
@@ -29,7 +30,7 @@ const Edit = ({ task }) => {
         <div>
             <button
                 onClick={handleEdit}
-                className="text-sm rounded-md font-semibold p-1 text-white bg-green-600 hover:bg-green-700"
+                className="text-sm rounded-md font-semibold px-2 py-1 text-white bg-green-600 hover:bg-green-700"
             >
                 Edit
             </button>

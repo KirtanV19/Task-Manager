@@ -31,6 +31,22 @@
       "status": "pending",
       "dueDate": "2025-06-07",
       "userId": 1749533866026
+    },
+    {
+      "dueDate": "2025-06-11",
+      "status": "pending",
+      "description": "Task description",
+      "title": "Task title ",
+      "userId": 1749534686543,
+      "id": 5
+    },
+    {
+      "dueDate": "2025-06-09",
+      "status": "pending",
+      "description": "checks the assignments",
+      "title": "Check Assignments",
+      "userId": 1749552734301,
+      "id": 6
     }
   ],
   "users": [
@@ -49,6 +65,14 @@
       "role": "user",
       "userId": 1749534686543,
       "id": 2
+    },
+    {
+      "name": "Ronak Kapadi",
+      "email": "Ronakk@gmail.com",
+      "password": "Ronak@123",
+      "role": "user",
+      "userId": 1749552734301,
+      "id": 3
     }
   ]
 }

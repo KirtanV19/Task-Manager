@@ -1,21 +1,29 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-// import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { createTask } from "../redux/slices/task.slice";
+import { useSelector } from "react-redux";
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
 const schema = yup.object({
     title: yup.string().required("Title is required"),
     description: yup.string().required("Description is required"),
     status: yup.string().required("Status is required"),
     dueDate: yup
-        .string()
-        .required("Due Date is required")
-        .test("is-valid-date", "Due date must be a valid date", (value) => {
-            new Date(value) > new Date();
-        }),
+        .date()
+        .transform((value) => value && new Date(value)) // Transform string to Date
+        .min(today, "Due date cannot be in the past")
+        .required("Due date is required"),
 });
 
-const TaskForm = ({ defaultValues = {}, onSubmit }) => {
+const TaskForm = ({ defaultValues = {} }) => {
+
+    const dispatch = useDispatch();
+    const { currentUser } = useSelector((state) => state.users);
+
     const {
         register,
         handleSubmit,
@@ -25,6 +33,21 @@ const TaskForm = ({ defaultValues = {}, onSubmit }) => {
         mode: "onTouched",
         defaultValues,
     });
+
+    const onSubmit = async (data) => {
+        try {
+            const formattedDate = new Date(data.dueDate).toISOString().split('T')[0];
+            const formdataWithId = {
+                ...data,
+                dueDate: formattedDate, // Ensure consistent YYYY-MM-DD format
+                userId: currentUser.userId
+            }
+            await dispatch(createTask(formdataWithId)).unwrap()
+            console.log('formdataWithId', formdataWithId)
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     // useEffect(() => {
     //     reset(defaultValues);
@@ -43,8 +66,8 @@ const TaskForm = ({ defaultValues = {}, onSubmit }) => {
                             placeholder="Task Title"
                             {...register("title")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.title
-                                    ? "border-red-400 focus:ring-red-200"
-                                    : "border-gray-300 focus:ring-blue-400"
+                                ? "border-red-400 focus:ring-red-200"
+                                : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
                         {errors.title && (
@@ -62,8 +85,8 @@ const TaskForm = ({ defaultValues = {}, onSubmit }) => {
                             placeholder="Task Description"
                             {...register("description")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.description
-                                    ? "border-red-400 focus:ring-red-200"
-                                    : "border-gray-300 focus:ring-blue-400"
+                                ? "border-red-400 focus:ring-red-200"
+                                : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
                         {errors.description && (
@@ -80,8 +103,8 @@ const TaskForm = ({ defaultValues = {}, onSubmit }) => {
                             type="date"
                             {...register("dueDate")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.dueDate
-                                    ? "border-red-400 focus:ring-red-200"
-                                    : "border-gray-300 focus:ring-blue-400"
+                                ? "border-red-400 focus:ring-red-200"
+                                : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
                         {errors.dueDate && (
@@ -97,8 +120,8 @@ const TaskForm = ({ defaultValues = {}, onSubmit }) => {
                         <select
                             {...register("status")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.status
-                                    ? "border-red-400 focus:ring-red-200"
-                                    : "border-gray-300 focus:ring-blue-400"
+                                ? "border-red-400 focus:ring-red-200"
+                                : "border-gray-300 focus:ring-blue-400"
                                 }`}
                             defaultValue="pending"
                         >

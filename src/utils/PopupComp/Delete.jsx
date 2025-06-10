@@ -24,7 +24,7 @@ const Delete = () => {
     return (
         <div>
             <button
-                className="bg-red-600 text-white font-semibold text-sm p-1 rounded-md hover:bg-red-700"
+                className="bg-red-600 text-white font-semibold text-sm px-2 py-1 rounded-md hover:bg-red-700"
                 onClick={showConfirmDelete}
             >
                 Delete
