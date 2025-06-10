@@ -7,47 +7,47 @@ import { NavigationMenu } from "radix-ui";
 
 const AdminDashboard = () => {
 
-    const [handleTask, setHandleTask] = useState(false);
-    const [handleUser, setHandleUser] = useState(false);
-
-    const handleTasks = () => {
-        setHandleTask(true)
-        setHandleUser(false)
-    }
-    const handleUsers = () => {
-        setHandleUser(true)
-        setHandleTask(false)
-    }
+    const [activeTab, setActiveTab] = useState('tasks'); // Better state management
 
     return (
-        <div>
-            <NavigationMenu.Root orientation="vertical" className="w-2/5 col-span-2">
-                <NavigationMenu.List>
-                    <NavigationMenu.Item>
-                        <NavigationMenu.Trigger
-                            onClick={handleTasks}
-                            className="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-gray-200 transition-all text-gray-700 font-semibold"
-                        >
-                            <DragHandleHorizontalIcon className="w-5 h-5" />
-                            <Text weight={"bold"}>Tasks</Text>
-                        </NavigationMenu.Trigger>
-                    </NavigationMenu.Item>
-                    <NavigationMenu.Item>
-                        <NavigationMenu.Trigger
-                            onClick={handleUsers}
-                            className="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-gray-200 transition-all text-gray-700 font-semibold"
-                        >
-                            <PersonIcon className="w-5 h-5" />
-                            <Text weight={"bold"}  >Users</Text>
-                        </NavigationMenu.Trigger>
-                    </NavigationMenu.Item>
-                </NavigationMenu.List>
-            </NavigationMenu.Root>
+        <div className="flex min-h-screen bg-gray-50">
+            {/* Sidebar Navigation */}
+            <aside className="w-64 bg-white shadow-lg border-r border-gray-200">
+                <NavigationMenu.Root orientation="vertical" className="p-4">
+                    <NavigationMenu.List className="space-y-2">
+                        <NavigationMenu.Item>
+                            <NavigationMenu.Trigger
+                                onClick={() => setActiveTab('tasks')}
+                                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${activeTab === 'tasks'
+                                    ? 'bg-blue-50 text-blue-700'
+                                    : 'text-gray-700 hover:bg-gray-100'
+                                    }`}
+                            >
+                                <DragHandleHorizontalIcon className="w-5 h-5" />
+                                <Text weight="medium">Tasks</Text>
+                            </NavigationMenu.Trigger>
+                        </NavigationMenu.Item>
+                        <NavigationMenu.Item>
+                            <NavigationMenu.Trigger
+                                onClick={() => setActiveTab('users')}
+                                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${activeTab === 'users'
+                                    ? 'bg-blue-50 text-blue-700'
+                                    : 'text-gray-700 hover:bg-gray-100'
+                                    }`}
+                            >
+                                <PersonIcon className="w-5 h-5" />
+                                <Text weight="medium">Users</Text>
+                            </NavigationMenu.Trigger>
+                        </NavigationMenu.Item>
+                    </NavigationMenu.List>
+                </NavigationMenu.Root>
+            </aside>
 
-            <div className='w-3/5 col-span-3'>
-                {handleTask === true && <Dashboard />}
-                {handleUser === true && <Users />}
-            </div>
+            {/* Main Content */}
+            <main className="flex-1 p-8">
+                {activeTab === 'tasks' && <Dashboard />}
+                {activeTab === 'users' && <Users />}
+            </main>
         </div>
     )
 }
