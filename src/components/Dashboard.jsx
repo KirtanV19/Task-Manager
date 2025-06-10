@@ -8,6 +8,7 @@ import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { URLS } from "../constants/urls";
 
 const Dashboard = () => {
+
     const [filter, setFilter] = useState({});
 
     const users = useSelector((state) => state.users.items);
@@ -15,7 +16,7 @@ const Dashboard = () => {
 
     const dispatch = useDispatch();
 
-    console.log("filter", filter);
+    // console.log("filter", filter);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -41,14 +42,14 @@ const Dashboard = () => {
 
     {
         /*
-                            const handleAccept = (id) => {
-                                dispatch(updateTaskStatus({ id, status: "accepted" }));
-                            };
-                        
-                            const handleReject = (id) => {
-                                dispatch(updateTaskStatus({ id, status: "rejected" }));
-                            };
-                            */
+                                const handleAccept = (id) => {
+                                    dispatch(updateTaskStatus({ id, status: "accepted" }));
+                                };
+                            
+                                const handleReject = (id) => {
+                                    dispatch(updateTaskStatus({ id, status: "rejected" }));
+                                };
+                                */
     }
 
     return (
@@ -57,7 +58,7 @@ const Dashboard = () => {
             <div className="flex flex-wrap gap-4 items-center mb-6">
                 <Link
                     to={URLS.INITIAL}
-                    className="text-4xl font-extrabold text-blue-700 mb-2 mr-6"
+                    className="text-4xl font-extrabold text-black mb-2 mr-6"
                 >
                     Dashboard
                 </Link>
