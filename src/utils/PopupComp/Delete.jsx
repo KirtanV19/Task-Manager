@@ -3,12 +3,23 @@
 import useModal from "../../hooks/useModal";
 import Modal from "../../components/Modal";
 import ConfirmDialog from "../Popups/ConfirmDialog";
+import { fetchTasks } from "../../redux/slices/task.slice";
+import { useDispatch } from "react-redux";
+import { api } from "../../api/client";
 
-const Delete = () => {
+const Delete = ({ taskId }) => {
     const { isOpen, content, openModal, closeModal } = useModal();
+    const dispatch = useDispatch();
 
-    const handleDelete = () => {
-        console.log("Deleted!");
+    const handleDelete = async () => {
+        try {
+            await api.TASKS.delete({ id: taskId });
+            dispatch(fetchTasks({}))
+            closeModal()
+        } catch (error) {
+            console.error(error);
+
+        }
     };
 
     const showConfirmDelete = () => {

@@ -6,7 +6,7 @@ const Create = () => {
     const { isOpen, content, openModal, closeModal } = useModal();
 
     const openForm = () => {
-        openModal(<TaskForm />);
+        openModal(<TaskForm closeModal={closeModal} />);
     };
 
     return (
