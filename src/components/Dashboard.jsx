@@ -6,25 +6,15 @@ import { Link } from "react-router";
 import { Table } from "@radix-ui/themes";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { URLS } from "../constants/urls";
+import { updateTaskStatus } from "../redux/slices/task.slice";
 
 const Dashboard = () => {
-
     const [filter, setFilter] = useState({});
 
     const users = useSelector((state) => state.users.items);
     const tasks = useSelector((state) => state.tasks.items);
 
     const dispatch = useDispatch();
-
-    // console.log("filter", filter);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFilter((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
-    };
 
     useEffect(() => {
         dispatch(fetchUsers({}));
@@ -40,17 +30,27 @@ const Dashboard = () => {
         );
     }, [dispatch, filter]);
 
-    {
-        /*
-                                const handleAccept = (id) => {
-                                    dispatch(updateTaskStatus({ id, status: "accepted" }));
-                                };
-                            
-                                const handleReject = (id) => {
-                                    dispatch(updateTaskStatus({ id, status: "rejected" }));
-                                };
-                                */
-    }
+    // console.log("filter", filter);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFilter((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
+    const handleAccept = (id) => {
+        // console.log("id", id);
+        dispatch(updateTaskStatus({ id, status: "accepted" }));
+    };
+
+    const handleReject = (id) => {
+        console.log("id", id);
+        // console.log('Rejected');
+
+        dispatch(updateTaskStatus({ id, status: "rejected" }));
+    };
 
     return (
         <>
@@ -87,8 +87,8 @@ const Dashboard = () => {
                     className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
                 >
                     <option value="">All Statuses</option>
-                    <option value="pending">Pending</option>
-                    <option value="completed">Completed</option>
+                    <option value="accepted">Accepted</option>
+                    <option value="rejected">Rejected</option>
                 </select>
                 <select
                     name="_sort"
@@ -98,7 +98,6 @@ const Dashboard = () => {
                 >
                     <option value="">Sort By</option>
                     <option value="dueDate">Due Date</option>
-                    <option value="status">Status</option>
                 </select>
                 <select
                     name="_order"
@@ -169,14 +168,14 @@ const Dashboard = () => {
                                         <div className="flex justify-center gap-3">
                                             <button
                                                 className="bg-blue-600 text-white px-3 py-1 text-md rounded-md hover:bg-blue-700 transition"
-                                                // onClick={() => handleAccept(task.id)}
+                                                onClick={() => handleAccept(task.id)}
                                                 disabled={task.status === "accepted"}
                                             >
                                                 Accept
                                             </button>
                                             <button
                                                 className="bg-red-600 text-white px-3 py-1 text-md rounded-md hover:bg-red-700 transition"
-                                                // onClick={() => handleReject(task.id)}
+                                                onClick={() => handleReject(task.id)}
                                                 disabled={task.status === "rejected"}
                                             >
                                                 Reject

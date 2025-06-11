@@ -25,6 +25,25 @@ export const createTask = createAsyncThunk(
   }
 );
 
+export const updateTaskStatus = createAsyncThunk(
+  "tasks/updateTaskStatus",
+  async ({ id, status }, { getState, rejectWithValue }) => {
+    try {
+      // Get the full task from the current state
+      const task = getState().tasks.items.find((t) => t.id === id);
+      if (!task) throw new Error("Task not found");
+      // Send the full task object with updated status
+      const response = await api.TASKS.update({
+        id,
+        data: { ...task, status },
+      });
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const tasks = createSlice({
   name: "tasks",
   initialState: {
@@ -59,19 +78,14 @@ const tasks = createSlice({
         state.loading = false;
         state.error = action.error.message;
       });
-    // builder
-    //   .addCase(deleteTask.pending, (state) => {
-    //     state.loading = true;
-    //     state.error = null;
-    //   })
-    //   .addCase(deleteTask.fulfilled, (state, action) => {
-    //     state.items = state.items.filter((item) => item.id !== action.payload);
-    //     state.loading = false;
-    //   })
-    //   .addCase(deleteTask.rejected, (state, action) => {
-    //     state.loading = false;
-    //     state.error = action.error.message;
-    //   });
+    builder.addCase(updateTaskStatus.fulfilled, (state, action) => {
+      const idx = state.items.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (idx !== -1) {
+        state.items[idx] = { ...state.items[idx], ...action.payload };
+      }
+    });
   },
 });
 
