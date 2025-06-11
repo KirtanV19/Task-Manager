@@ -1,8 +1,3 @@
-// Task component for specific a user
-
-// UX Addition, listing of tasks with Edit and Delete method
-// New Task button to create a task.
-
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Create from "../utils/PopupComp/Create";
@@ -23,9 +18,9 @@ const UserDashboard = () => {
     // const userTasks = tasks.filter((task) => task.userId === currentUser.userId);
 
     // console.log("userTasks", userTasks);
-    console.log("tasks", tasks);
-    console.log("currentUser", currentUser);
-    console.log("filter", filter);
+    // console.log("tasks", tasks);
+    // console.log("currentUser", currentUser);
+    // console.log("filter", filter);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -153,9 +148,8 @@ const UserDashboard = () => {
                                     </Table.RowHeaderCell>
                                     <Table.RowHeaderCell className="py-3">
                                         <div className="flex justify-center gap-3">
-                                            <Edit />
-
-                                            <Delete />
+                                            <Edit task={task} />
+                                            {/* <Delete taskId={task.id} /> */}
                                         </div>
                                     </Table.RowHeaderCell>
                                 </Table.Row>

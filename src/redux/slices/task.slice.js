@@ -59,6 +59,19 @@ const tasks = createSlice({
         state.loading = false;
         state.error = action.error.message;
       });
+    // builder
+    //   .addCase(deleteTask.pending, (state) => {
+    //     state.loading = true;
+    //     state.error = null;
+    //   })
+    //   .addCase(deleteTask.fulfilled, (state, action) => {
+    //     state.items = state.items.filter((item) => item.id !== action.payload);
+    //     state.loading = false;
+    //   })
+    //   .addCase(deleteTask.rejected, (state, action) => {
+    //     state.loading = false;
+    //     state.error = action.error.message;
+    //   });
   },
 });
 

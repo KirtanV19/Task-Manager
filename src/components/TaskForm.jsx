@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { createTask } from "../redux/slices/task.slice";
 import { useSelector } from "react-redux";
-
+import useModal from '../hooks/useModal'
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
@@ -23,6 +23,7 @@ const TaskForm = ({ defaultValues = {} }) => {
 
     const dispatch = useDispatch();
     const { currentUser } = useSelector((state) => state.users);
+    const { closeModal } = useModal()
 
     const {
         register,
@@ -42,16 +43,13 @@ const TaskForm = ({ defaultValues = {} }) => {
                 dueDate: formattedDate, // Ensure consistent YYYY-MM-DD format
                 userId: currentUser.userId
             }
-            await dispatch(createTask(formdataWithId)).unwrap()
-            console.log('formdataWithId', formdataWithId)
+            const response = await dispatch(createTask(formdataWithId)).unwrap();
+            console.log('formdataWithId', response);
+            closeModal()
         } catch (error) {
             console.error(error);
         }
     }
-
-    // useEffect(() => {
-    //     reset(defaultValues);
-    // }, [defaultValues]);
 
     return (
         <div className="flex items-center justify-center min-h-[70vh] mt-3">

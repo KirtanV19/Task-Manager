@@ -26,10 +26,8 @@ const Users = () => {
         }));
     }, [dispatch, debouncedFilter]);
 
-
     return (
         <>
-
             <Container className="flex flex-col space-y-5 p-2">
                 <p className="text-4xl font-bold ">User Management</p>
                 <p className="text-slate-500 text-sm font-bold">

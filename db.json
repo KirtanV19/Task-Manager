@@ -1,77 +1,45 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "title": "Sample Task",
-      "description": "This is a trial task",
-      "status": "pending",
-      "dueDate": "2025-06-05",
-      "userId": 1749534686543
-    },
-    {
-      "id": 2,
-      "title": "Sample Task",
-      "description": "This is a trial task",
-      "status": "pending",
-      "dueDate": "2025-06-07",
-      "userId": 1749533866026
-    },
-    {
-      "id": 3,
-      "title": "Sample Task",
-      "description": "This is a trial task",
-      "status": "pending",
-      "dueDate": "2025-06-09",
-      "userId": 1749534686543
-    },
-    {
-      "id": 4,
-      "title": "Sample Task",
-      "description": "This is a trial task",
-      "status": "pending",
-      "dueDate": "2025-06-07",
-      "userId": 1749533866026
-    },
-    {
       "dueDate": "2025-06-11",
       "status": "pending",
-      "description": "Task description",
-      "title": "Task title ",
-      "userId": 1749534686543,
-      "id": 5
+      "description": "1",
+      "title": "1",
+      "userId": 1749625024121,
+      "id": 1
     },
     {
-      "dueDate": "2025-06-09",
-      "status": "pending",
-      "description": "checks the assignments",
-      "title": "Check Assignments",
-      "userId": 1749552734301,
-      "id": 6
+      "dueDate": "2025-06-13",
+      "status": "accepted",
+      "description": "3",
+      "title": "2",
+      "userId": 1749625024121,
+      "id": 2
     }
   ],
   "users": [
     {
-      "name": "Sanjay",
-      "email": "Sanjay@gmail.com",
-      "password": "Sanjay@123",
-      "role": "admin",
-      "userId": 1749533866026,
+      "name": "Test",
+      "email": "test@gmail.com",
+      "password": "Test@123",
+      "role": "user",
+      "userId": 1749625024121,
       "id": 1
     },
     {
-      "name": "Kirtan",
-      "email": "Kirtan@1gmail.com",
-      "password": "Kirtan@124",
+      "name": "Test",
+      "email": "test@gmail.com",
+      "password": "Test@123",
       "role": "user",
-      "userId": 1749534686543,
+      "userId": 1749625302498,
       "id": 2
     },
     {
-      "name": "Ronak Kapadi",
-      "email": "Ronakk@gmail.com",
-      "password": "Ronak@123",
-      "role": "user",
-      "userId": 1749552734301,
+      "name": "Admin",
+      "email": "admin.lb@gmail.com",
+      "password": "Admin@123",
+      "role": "admin",
+      "userId": 1749631663864,
       "id": 3
     }
   ]
