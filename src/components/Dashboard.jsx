@@ -58,11 +58,11 @@ const Dashboard = () => {
             <div className="flex flex-wrap gap-4 items-center mb-6">
                 <Link
                     to={URLS.INITIAL}
-                    className="text-4xl font-extrabold text-black mb-2 mr-6"
+                    className="text-3xl sm:text-4xl font-extrabold text-black mb-2 mr-4 sm:mr-6"
                 >
                     Dashboard
                 </Link>
-                <div className="flex items-center border border-gray-300 bg-gray-100 rounded-lg focus-within:ring-2 focus-within:ring-blue-400 px-3 py-2 shadow-sm w-64">
+                <div className="flex items-center border border-gray-300 bg-gray-100 rounded-lg focus-within:ring-2 focus-within:ring-blue-400 px-2 sm:px-3 py-2 shadow-sm w-full sm:w-64 max-w-xs">
                     <MagnifyingGlassIcon className="text-gray-500 mr-2 w-5 h-5" />
                     <input
                         type="text"
@@ -73,20 +73,38 @@ const Dashboard = () => {
                         className="bg-transparent w-full outline-none placeholder-gray-400 text-base"
                     />
                 </div>
-                <input
-                    type="date"
-                    name="dueDate"
-                    value={filter.dueDate}
-                    onChange={handleChange}
-                    className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
-                />
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-0">
+                    <label className="flex items-center text-sm font-medium text-gray-700">
+                        Start:
+                        <input
+                            type="date"
+                            name="dueDate_gte"
+                            value={filter.dueDate_gte || ''}
+                            onChange={handleChange}
+                            placeholder="Start Date"
+                            className="border border-gray-300 rounded-lg px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+                        />
+                    </label>
+                    <label className="flex items-center text-sm font-medium text-gray-700 sm:ml-2">
+                        End:
+                        <input
+                            type="date"
+                            name="dueDate_lte"
+                            value={filter.dueDate_lte || ''}
+                            onChange={handleChange}
+                            placeholder="End Date"
+                            className="border border-gray-300 rounded-lg px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+                        />
+                    </label>
+                </div>
                 <select
                     name="status"
                     value={filter.status || ""}
                     onChange={handleChange}
-                    className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+                    className="border border-gray-300 rounded-lg px-2 py-2 sm:px-3 ml-0 sm:ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm text-sm"
                 >
-                    <option value="">All Statuses</option>
+                    <option value="">All Status</option>
+                    <option value="pending">Pending</option>
                     <option value="accepted">Accepted</option>
                     <option value="rejected">Rejected</option>
                 </select>
