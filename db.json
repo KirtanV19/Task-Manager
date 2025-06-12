@@ -77,7 +77,7 @@
     {
       "name": "Admin",
       "email": "student@example.com",
-      "password": "Test@123",
+      "password": "Test^123",
       "role": "user",
       "userId": 1749710187974,
       "id": 4

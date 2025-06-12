@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { loginUser } from "../redux/slices/user.slice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { URLS } from "../constants/urls";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -71,7 +72,7 @@ const Login = () => {
                     <div className="flex gap-4 items-center place-content-center">
                         <p>Forgot Password? </p>
                         <Link
-                            to="/forgot-password"
+                            to={URLS.FORGOT}
                             className="text-blue-600 hover:text-blue-800"
                         >
                             Click here

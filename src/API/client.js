@@ -10,6 +10,8 @@ export const api = {
       client({ method: METHODS.POST, url: "/users", data, ...config }),
     update: ({ id, data, ...config }) =>
       client({ method: METHODS.PUT, url: `/users/${id}`, data, ...config }),
+    patch: ({ id, data, ...config }) =>
+      client({ method: METHODS.PATCH, url: `/users/${id}`, data, ...config }),
     delete: ({ id, ...config }) =>
       client({ method: METHODS.DELETE, url: `/users/${id}`, ...config }),
   },

@@ -41,14 +41,14 @@ const Navbar = () => {
                                 Register
                             </Link>
                         </Menubar.Menu>
-                        <Menubar.Menu>
+                        {/*<Menubar.Menu>
                             <Link
                                 to={URLS.FORGOT}
                                 className="px-3 py-1.5 rounded hover:text-blue-800 hover:bg-blue-100 transition-all"
                             >
                                 Forgot Password
                             </Link>
-                        </Menubar.Menu>
+                        </Menubar.Menu>*/}
                     </>
                 ) : (
                     <Menubar.Menu>
