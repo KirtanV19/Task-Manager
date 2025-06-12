@@ -13,7 +13,7 @@ const Dashboard = () => {
 
     const users = useSelector((state) => state.users.items);
     const tasks = useSelector((state) => state.tasks.items);
-
+    const { currentUser } = useSelector(state => state.users)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -49,13 +49,10 @@ const Dashboard = () => {
     return (
         <>
             {/* UX Addition */}
-            <div className="flex flex-wrap gap-4 items-center mb-6">
-                <Link
-                    to={URLS.INITIAL}
-                    className="text-3xl sm:text-4xl font-extrabold text-black mb-2 mr-4 sm:mr-6"
-                >
-                    Dashboard
-                </Link>
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-center mb-6 w-full">
+                <p className="text-lg sm:text-3xl font-bold text-black mb-2 sm:mb-0 mr-0 sm:mr-6 w-full sm:w-auto text-center sm:text-left">
+                    Welcome, {currentUser.name}
+                </p>
                 <div className="flex items-center border border-gray-300 bg-gray-100 rounded-lg focus-within:ring-2 focus-within:ring-blue-400 px-2 sm:px-3 py-2 shadow-sm w-full sm:w-64 max-w-xs">
                     <MagnifyingGlassIcon className="text-gray-500 mr-2 w-5 h-5" />
                     <input
@@ -67,7 +64,7 @@ const Dashboard = () => {
                         className="bg-transparent w-full outline-none placeholder-gray-400 text-base"
                     />
                 </div>
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-0">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-2 w-full sm:w-auto">
                     <label className="flex items-center text-sm font-medium text-gray-700">
                         Start:
                         <input

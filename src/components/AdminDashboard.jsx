@@ -10,15 +10,15 @@ import { Text } from "@radix-ui/themes";
 import { NavigationMenu } from "radix-ui";
 import { useNavigate } from 'react-router-dom'
 import { logout } from "../redux/slices/user.slice";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { URLS } from "../constants/urls";
 
 const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState("tasks"); // Better state management
-    const { currentUser } = useSelector((state) => state.users);
+    // const { currentUser } = useSelector((state) => state.users);
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    console.log('Admin', currentUser);
+    // console.log('Admin', currentUser);
 
     const handleLogout = () => {
         dispatch(logout())
