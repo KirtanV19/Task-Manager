@@ -8,7 +8,7 @@ import {
 } from "@radix-ui/react-icons";
 import { Text } from "@radix-ui/themes";
 import { NavigationMenu } from "radix-ui";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/slices/user.slice";
 import { useDispatch } from "react-redux";
 import { URLS } from "../constants/urls";
@@ -16,14 +16,14 @@ import { URLS } from "../constants/urls";
 const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState("tasks"); // Better state management
     // const { currentUser } = useSelector((state) => state.users);
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     // console.log('Admin', currentUser);
 
     const handleLogout = () => {
-        dispatch(logout())
-        navigate(URLS.LOGIN)
-    }
+        dispatch(logout());
+        navigate(URLS.LOGIN);
+    };
 
     return (
         <div className="flex min-h-screen bg-gray-50">
@@ -41,8 +41,8 @@ const AdminDashboard = () => {
                                 <NavigationMenu.Trigger
                                     onClick={() => setActiveTab("tasks")}
                                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${activeTab === "tasks"
-                                        ? "bg-gray-200 text-gray-700"
-                                        : "text-gray-700 hover:bg-gray-100"
+                                            ? "bg-gray-200 text-gray-700"
+                                            : "text-gray-700 hover:bg-gray-100"
                                         }`}
                                 >
                                     <DragHandleHorizontalIcon className="w-5 h-5" />
@@ -53,8 +53,8 @@ const AdminDashboard = () => {
                                 <NavigationMenu.Trigger
                                     onClick={() => setActiveTab("users")}
                                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${activeTab === "users"
-                                        ? "bg-gray-200 text-gray-700"
-                                        : "text-gray-700 hover:bg-gray-100"
+                                            ? "bg-gray-200 text-gray-700"
+                                            : "text-gray-700 hover:bg-gray-100"
                                         }`}
                                 >
                                     <PersonIcon className="w-5 h-5" />
@@ -64,7 +64,10 @@ const AdminDashboard = () => {
                         </div>
                         <div>
                             <NavigationMenu.Item>
-                                <NavigationMenu.Trigger onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all text-white bg-red-500 hover:bg-red-600">
+                                <NavigationMenu.Trigger
+                                    onClick={handleLogout}
+                                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all text-white bg-red-400 hover:bg-red-600"
+                                >
                                     <ArrowLeftIcon className="w-5 h-5" />
                                     <Text weight="medium">Logout</Text>
                                 </NavigationMenu.Trigger>

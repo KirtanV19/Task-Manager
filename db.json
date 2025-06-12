@@ -1,4 +1,30 @@
 {
-  "tasks": [],
-  "users": []
+  "tasks": [
+    {
+      "dueDate": "2025-07-09",
+      "status": "pending",
+      "description": "samples",
+      "title": "Sample",
+      "userId": 1749720649986,
+      "id": 1
+    }
+  ],
+  "users": [
+    {
+      "name": "Test",
+      "email": "test@gmail.com",
+      "password": "Test@123",
+      "role": "user",
+      "userId": 1749720649986,
+      "id": 1
+    },
+    {
+      "name": "Admin",
+      "email": "admin@gmail.com",
+      "password": "Admin@123",
+      "role": "admin",
+      "userId": 1749721098733,
+      "id": 2
+    }
+  ]
 }

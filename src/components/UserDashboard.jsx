@@ -98,62 +98,41 @@ const UserDashboard = () => {
                     <h2 className="text-black900 mb-2 text-2xl font-bold">My Tasks</h2>
                     <Create />
                 </div>
-                <div className="overflow-x-auto rounded-lg shadow border border-gray-200 bg-white">
-                    <Table.Root variant="surface" layout="auto" size="3" className="w-full">
-                        <Table.Header>
-                            <Table.Row>
-                                <Table.ColumnHeaderCell className="text-black text-center">
-                                    Task
-                                </Table.ColumnHeaderCell>
-                                <Table.ColumnHeaderCell className="text-black text-center">
-                                    Description
-                                </Table.ColumnHeaderCell>
-                                <Table.ColumnHeaderCell className="text-black text-center">
-                                    Status
-                                </Table.ColumnHeaderCell>
-                                <Table.ColumnHeaderCell className="text-black text-center">
-                                    Due Date
-                                </Table.ColumnHeaderCell>
-                                <Table.ColumnHeaderCell className="text-black text-center">
-                                    Action
-                                </Table.ColumnHeaderCell>
+
+                <Table.Root variant="surface" layout="auto" size="3" className="w-full">
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.ColumnHeaderCell className="text-black text-center">
+                                Task
+                            </Table.ColumnHeaderCell>
+                            <Table.ColumnHeaderCell className="text-black text-center">
+                                Description
+                            </Table.ColumnHeaderCell>
+                            <Table.ColumnHeaderCell className="text-black text-center">
+                                Status
+                            </Table.ColumnHeaderCell>
+                            <Table.ColumnHeaderCell className="text-black text-center">
+                                Due Date
+                            </Table.ColumnHeaderCell>
+                            <Table.ColumnHeaderCell className="text-black text-center">
+                                Action
+                            </Table.ColumnHeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                        {tasks.map((task) => (
+                            <Table.Row key={task.id}>
+                                <Table.Cell justify={"center"}>{task.title}</Table.Cell>
+                                <Table.Cell justify={"center"}>{task.description}</Table.Cell>
+                                <Table.Cell justify={"center"}>{task.status}</Table.Cell>
+                                <Table.Cell justify={"center"}>{task.dueDate}</Table.Cell>
+                                <Table.Cell justify={"center"}>
+                                    <Edit task={task} />
+                                </Table.Cell>
                             </Table.Row>
-                        </Table.Header>
-                    </Table.Root>
-                    <div className="max-h-80 overflow-y-auto">
-                        <Table.Root
-                            variant="surface"
-                            layout="auto"
-                            size="3"
-                            className="w-full table-fixed"
-                        >
-                            <Table.Body>
-                                {tasks.map((task) => (
-                                    <Table.Row key={task.id} className="text-center">
-                                        <Table.RowHeaderCell className="py-3">
-                                            {task.title}
-                                        </Table.RowHeaderCell>
-                                        <Table.RowHeaderCell className="py-3">
-                                            {task.description}
-                                        </Table.RowHeaderCell>
-                                        <Table.RowHeaderCell className="py-3">
-                                            {task.status}
-                                        </Table.RowHeaderCell>
-                                        <Table.RowHeaderCell className="py-3">
-                                            {task.dueDate}
-                                        </Table.RowHeaderCell>
-                                        <Table.RowHeaderCell className="py-3">
-                                            <div className="flex justify-center gap-3">
-                                                <Edit task={task} />
-                                                {/* <Delete taskId={task.id} /> */}
-                                            </div>
-                                        </Table.RowHeaderCell>
-                                    </Table.Row>
-                                ))}
-                            </Table.Body>
-                        </Table.Root>
-                    </div>
-                </div>
+                        ))}
+                    </Table.Body>
+                </Table.Root>
             </Container>
         </>
     );

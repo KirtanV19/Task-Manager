@@ -13,7 +13,7 @@ const Dashboard = () => {
 
     const users = useSelector((state) => state.users.items);
     const tasks = useSelector((state) => state.tasks.items);
-    const { currentUser } = useSelector(state => state.users)
+    const { currentUser } = useSelector((state) => state.users);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -139,64 +139,52 @@ const Dashboard = () => {
             <h2 className="text-2xl font-bold text-black900 mt-8 mb-2">
                 Recent Tasks
             </h2>
-            <div className="overflow-x-auto rounded-lg shadow border border-gray-200 bg-white">
-                <Table.Root variant="surface" layout="auto" size="3" className="w-full">
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.ColumnHeaderCell className="text-black text-center">
-                                Task
-                            </Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell className="text-black text-center">
-                                Status
-                            </Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell className="text-black text-center">
-                                Due Date
-                            </Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell className="text-black text-center">
-                                Action
-                            </Table.ColumnHeaderCell>
+
+            <Table.Root variant="surface" layout="auto" size="3" className="w-full">
+                <Table.Header>
+                    <Table.Row>
+                        <Table.ColumnHeaderCell className="text-black text-center">
+                            Task
+                        </Table.ColumnHeaderCell>
+                        <Table.ColumnHeaderCell className="text-black text-center">
+                            Status
+                        </Table.ColumnHeaderCell>
+                        <Table.ColumnHeaderCell className="text-black text-center">
+                            Due Date
+                        </Table.ColumnHeaderCell>
+                        <Table.ColumnHeaderCell className="text-black text-center">
+                            Action
+                        </Table.ColumnHeaderCell>
+                    </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                    {tasks.map((task) => (
+                        <Table.Row key={task.id}>
+                            <Table.Cell justify={"center"}>{task.title}</Table.Cell>
+                            <Table.Cell justify={"center"}>{task.status}</Table.Cell>
+                            <Table.Cell justify={"center"}>{task.dueDate}</Table.Cell>
+                            <Table.Cell justify={"center"}>
+                                <div className="flex justify-center gap-3">
+                                    <button
+                                        className="bg-blue-600 text-white px-3 py-1 text-md rounded-md hover:bg-blue-700 transition"
+                                        onClick={() => handleAccept(task.id)}
+                                        disabled={task.status === "accepted"}
+                                    >
+                                        Accept
+                                    </button>
+                                    <button
+                                        className="bg-red-600 text-white px-3 py-1 text-md rounded-md hover:bg-red-700 transition"
+                                        onClick={() => handleReject(task.id)}
+                                        disabled={task.status === "rejected"}
+                                    >
+                                        Reject
+                                    </button>
+                                </div>
+                            </Table.Cell>
                         </Table.Row>
-                    </Table.Header>
-                </Table.Root>
-                <div className="max-h-80 overflow-y-auto">
-                    <Table.Root
-                        variant="surface"
-                        layout="auto"
-                        size="3"
-                        className="w-full table-fixed"
-                    >
-                        <Table.Body>
-                            {tasks.map((task) => (
-                                <Table.Row key={task.id} className="text-center">
-                                    <Table.RowHeaderCell className="py-3">
-                                        {task.title}
-                                    </Table.RowHeaderCell>
-                                    <Table.Cell className="py-3">{task.status}</Table.Cell>
-                                    <Table.Cell className="py-3">{task.dueDate}</Table.Cell>
-                                    <Table.Cell className="py-3">
-                                        <div className="flex justify-center gap-3">
-                                            <button
-                                                className="bg-blue-600 text-white px-3 py-1 text-md rounded-md hover:bg-blue-700 transition"
-                                                onClick={() => handleAccept(task.id)}
-                                                disabled={task.status === "accepted"}
-                                            >
-                                                Accept
-                                            </button>
-                                            <button
-                                                className="bg-red-600 text-white px-3 py-1 text-md rounded-md hover:bg-red-700 transition"
-                                                onClick={() => handleReject(task.id)}
-                                                disabled={task.status === "rejected"}
-                                            >
-                                                Reject
-                                            </button>
-                                        </div>
-                                    </Table.Cell>
-                                </Table.Row>
-                            ))}
-                        </Table.Body>
-                    </Table.Root>
-                </div>
-            </div>
+                    ))}
+                </Table.Body>
+            </Table.Root>
         </>
     );
 };

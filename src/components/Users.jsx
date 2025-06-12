@@ -4,7 +4,7 @@ import { fetchUsers } from "../redux/slices/user.slice";
 import { Table } from "@radix-ui/themes";
 import Container from "../utils/Container";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import useDebounce from '../hooks/useDebounce'
+import useDebounce from "../hooks/useDebounce";
 
 const Users = () => {
     const dispatch = useDispatch();
@@ -21,9 +21,11 @@ const Users = () => {
     };
 
     useEffect(() => {
-        dispatch(fetchUsers({
-            params: debouncedFilter
-        }));
+        dispatch(
+            fetchUsers({
+                params: debouncedFilter,
+            })
+        );
     }, [dispatch, debouncedFilter]);
 
     return (
@@ -45,36 +47,32 @@ const Users = () => {
                         className="bg-transparent w-full outline-none placeholder-gray-400"
                     />
                 </div>
-                <div className="overflow-x-auto rounded-lg shadow border border-gray-200 bg-white">
-                    <Table.Root variant="surface" layout="auto" size="3" className="w-full">
-                        <Table.Header>
-                            <Table.Row>
-                                <Table.ColumnHeaderCell>Name</Table.ColumnHeaderCell>
-                                <Table.ColumnHeaderCell>Email</Table.ColumnHeaderCell>
-                                <Table.ColumnHeaderCell>Role</Table.ColumnHeaderCell>
+
+                <Table.Root variant="surface" layout="auto" size="3" className="w-full">
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.ColumnHeaderCell className="text-black text-center">
+                                Name
+                            </Table.ColumnHeaderCell>
+                            <Table.ColumnHeaderCell className="text-black text-center">
+                                Email
+                            </Table.ColumnHeaderCell>
+                            <Table.ColumnHeaderCell className="text-black text-center">
+                                Role
+                            </Table.ColumnHeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                        {items.map((item) => (
+                            <Table.Row key={item.id}>
+                                <Table.Cell justify={"center"}>{item.name}</Table.Cell>
+                                <Table.Cell justify={"center"}>{item.email}</Table.Cell>
+                                <Table.Cell justify={"center"}>{item.role}</Table.Cell>
                             </Table.Row>
-                        </Table.Header>
-                    </Table.Root>
-                    <div className="max-h-80 overflow-y-auto">
-                        <Table.Root
-                            variant="surface"
-                            layout="auto"
-                            size="3"
-                            className="w-full table-fixed"
-                        >
-                            <Table.Body>
-                                {items.map((item) => (
-                                    <Table.Row key={item.id}>
-                                        <Table.RowHeaderCell>{item.name}</Table.RowHeaderCell>
-                                        <Table.Cell>{item.email}</Table.Cell>
-                                        <Table.Cell>{item.role}</Table.Cell>
-                                    </Table.Row>
-                                ))}
-                            </Table.Body>
-                        </Table.Root>
-                    </div>
-                </div>
-            </Container >
+                        ))}
+                    </Table.Body>
+                </Table.Root>
+            </Container>
         </>
     );
 };
