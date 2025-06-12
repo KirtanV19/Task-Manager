@@ -14,7 +14,7 @@ const useRoutes = () => {
       {
         id: "root",
         path: URLS.INITIAL,
-        element: Home,
+        element: LoginScreen,
         isPublic: true,
       },
       {

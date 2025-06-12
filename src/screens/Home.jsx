@@ -1,4 +1,3 @@
-// Dashboard Screen
 import Navbar from '../components/Navbar'
 
 const Home = () => {

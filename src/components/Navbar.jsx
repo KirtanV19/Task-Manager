@@ -15,7 +15,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="flex items-center bg-white justify-between px-6 py-3 shadow">
+        <nav className="flex items-center bg-white justify-between px-6 py-3 shadow mb-5">
             <Link
                 to={currentUser ? (currentUser.role === 'admin' ? URLS.DASHBOARD : URLS.USERDASHBOARD) : URLS.INITIAL}
                 className="font-bold text-xl text-black transition hover:text-blue-800"
