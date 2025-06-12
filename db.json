@@ -44,7 +44,7 @@
       "title": "2",
       "description": "3",
       "dueDate": "2025-06-18",
-      "status": "rejected",
+      "status": "accepted",
       "userId": 1749635833165,
       "id": 6
     }
@@ -73,6 +73,14 @@
       "role": "user",
       "userId": 1749635857115,
       "id": 3
+    },
+    {
+      "name": "Admin",
+      "email": "student@example.com",
+      "password": "Test@123",
+      "role": "user",
+      "userId": 1749710187974,
+      "id": 4
     }
   ]
 }

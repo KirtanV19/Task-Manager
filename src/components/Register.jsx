@@ -6,7 +6,7 @@ import { EyeNoneIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import { registerUser } from "../redux/slices/user.slice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-
+import { api } from "../api/client";
 const schema = yup.object({
     name: yup.string().required("Name is required"),
     email: yup.string().email().required("Email is required"),
@@ -50,7 +50,6 @@ const getPasswordStrength = (password) => {
 };
 
 const Register = () => {
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     // useEffect(() => { dispatch(fetchUsers({})) }, [dispatch])
@@ -73,17 +72,36 @@ const Register = () => {
         },
     });
 
+    // const onSubmit = async (data) => {
+    //     try {
+    //         const userWithId = { ...data, userId: Date.now() };
+    //         await dispatch(registerUser(userWithId)).unwrap();
+    //         console.log("userWithId", userWithId);
+    //         navigate("/login");
+    //     } catch (error) {
+    //         console.error("Registration failed", error);
+    //     }
+    // };
+
     const onSubmit = async (data) => {
         try {
             const userWithId = { ...data, userId: Date.now() };
+            const { email } = userWithId;
+
+            // Check if user already exists
+            const response = await api.USERS.getAll({ params: { email } });
+            if (Array.isArray(response) && response.length > 0) {
+                alert("User with this email already exists!");
+                return;
+            }
+
+            // Register new user
             await dispatch(registerUser(userWithId)).unwrap();
-            console.log("userWithId", userWithId);
             navigate("/login");
         } catch (error) {
             console.error("Registration failed", error);
         }
     };
-    // console.log('items', items)
     return (
         <div className="flex items-center justify-center min-h-[70vh] bg-gray-50 ">
             <div className="w-full max-w-md bg-white rounded-lg mt-5 shadow-md p-8 hover:shadow-2xl">
