@@ -32,11 +32,23 @@ export const updateTaskStatus = createAsyncThunk(
       // Get the full task from the current state
       const task = getState().tasks.items.find((t) => t.id === id);
       if (!task) throw new Error("Task not found");
-      // Send the full task object with updated status
-      const response = await api.TASKS.update({
+      // Use PATCH instead of PUT
+      const response = await api.TASKS.patch({
         id,
-        data: { ...task, status },
+        data: { status }, // Only send the status field for PATCH
       });
+      return { ...task, ...response }; // Merge updated fields
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const updateTask = createAsyncThunk(
+  "tasks/updateTask",
+  async ({ id, data }, { rejectWithValue }) => {
+    try {
+      const response = await api.TASKS.patch({ id, data }); // Use PATCH here
       return response;
     } catch (error) {
       return rejectWithValue(error);
@@ -79,6 +91,14 @@ const tasks = createSlice({
         state.error = action.error.message;
       });
     builder.addCase(updateTaskStatus.fulfilled, (state, action) => {
+      const idx = state.items.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (idx !== -1) {
+        state.items[idx] = { ...state.items[idx], ...action.payload };
+      }
+    });
+    builder.addCase(updateTask.fulfilled, (state, action) => {
       const idx = state.items.findIndex(
         (item) => item.id === action.payload.id
       );

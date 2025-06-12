@@ -1,10 +1,9 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch } from "react-redux";
-import { createTask } from "../redux/slices/task.slice";
-import { useSelector } from "react-redux";
-import useModal from '../hooks/useModal'
+import { useDispatch, useSelector } from "react-redux";
+import { createTask, updateTask } from "../redux/slices/task.slice"; // <-- import updateTask
+
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
@@ -14,16 +13,14 @@ const schema = yup.object({
     status: yup.string().required("Status is required"),
     dueDate: yup
         .date()
-        .transform((value) => value && new Date(value)) // Transform string to Date
+        .transform((value) => value && new Date(value))
         .min(today, "Due date cannot be in the past")
         .required("Due date is required"),
 });
 
-const TaskForm = ({ defaultValues = {} }) => {
-
+const TaskForm = ({ defaultValues = {}, closeModal }) => {
     const dispatch = useDispatch();
     const { currentUser } = useSelector((state) => state.users);
-    const { closeModal } = useModal()
 
     const {
         register,
@@ -37,19 +34,27 @@ const TaskForm = ({ defaultValues = {} }) => {
 
     const onSubmit = async (data) => {
         try {
-            const formattedDate = new Date(data.dueDate).toISOString().split('T')[0];
+            const formattedDate = new Date(data.dueDate).toISOString().split("T")[0];
             const formdataWithId = {
+                ...defaultValues,
                 ...data,
-                dueDate: formattedDate, // Ensure consistent YYYY-MM-DD format
-                userId: currentUser.userId
+                dueDate: formattedDate,
+                userId: currentUser.userId,
+            };
+            if (defaultValues?.id) {
+                // Edit mode
+                await dispatch(
+                    updateTask({ id: defaultValues.id, data: formdataWithId })
+                ).unwrap();
+            } else {
+                // Create mode
+                await dispatch(createTask(formdataWithId)).unwrap();
             }
-            const response = await dispatch(createTask(formdataWithId)).unwrap();
-            console.log('formdataWithId', response);
-            closeModal()
+            if (closeModal) closeModal();
         } catch (error) {
             console.error(error);
         }
-    }
+    };
 
     return (
         <div className="flex items-center justify-center min-h-[70vh] mt-3">
@@ -64,8 +69,8 @@ const TaskForm = ({ defaultValues = {} }) => {
                             placeholder="Task Title"
                             {...register("title")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.title
-                                ? "border-red-400 focus:ring-red-200"
-                                : "border-gray-300 focus:ring-blue-400"
+                                    ? "border-red-400 focus:ring-red-200"
+                                    : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
                         {errors.title && (
@@ -83,8 +88,8 @@ const TaskForm = ({ defaultValues = {} }) => {
                             placeholder="Task Description"
                             {...register("description")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.description
-                                ? "border-red-400 focus:ring-red-200"
-                                : "border-gray-300 focus:ring-blue-400"
+                                    ? "border-red-400 focus:ring-red-200"
+                                    : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
                         {errors.description && (
@@ -101,8 +106,8 @@ const TaskForm = ({ defaultValues = {} }) => {
                             type="date"
                             {...register("dueDate")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.dueDate
-                                ? "border-red-400 focus:ring-red-200"
-                                : "border-gray-300 focus:ring-blue-400"
+                                    ? "border-red-400 focus:ring-red-200"
+                                    : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
                         {errors.dueDate && (
@@ -118,8 +123,8 @@ const TaskForm = ({ defaultValues = {} }) => {
                         <select
                             {...register("status")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.status
-                                ? "border-red-400 focus:ring-red-200"
-                                : "border-gray-300 focus:ring-blue-400"
+                                    ? "border-red-400 focus:ring-red-200"
+                                    : "border-gray-300 focus:ring-blue-400"
                                 }`}
                             defaultValue="pending"
                         >

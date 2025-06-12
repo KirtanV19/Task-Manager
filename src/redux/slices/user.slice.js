@@ -18,9 +18,12 @@ export const registerUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const response = await api.USERS.create({ data: userData });
+
+      console.log("response of slice", response);
+      console.log("response.data", response.data);
       // console.log("userData", userData);
       // console.log("response", response);
-      return response.data;
+      return response;
     } catch (error) {
       return rejectWithValue({
         message:
@@ -37,9 +40,9 @@ export const loginUser = createAsyncThunk(
       const response = await api.USERS.getAll({
         params: { email, password },
       });
-      // console.log("response of login user", response);
+
       const user = response?.[0]; // not response.data?.[0]
-      // console.log("user", user);
+
       if (!user || user.password !== password) {
         return rejectWithValue("Invalid credentials");
       }
@@ -85,7 +88,10 @@ const users = createSlice({
         state.error = null;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
+        console.log("action.payload", action.payload);
+
         state.items.push(action.payload);
+
         state.loading = false;
       })
       .addCase(registerUser.rejected, (state, action) => {

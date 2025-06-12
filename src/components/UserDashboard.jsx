@@ -15,13 +15,6 @@ const UserDashboard = () => {
 
     const dispatch = useDispatch();
 
-    // const userTasks = tasks.filter((task) => task.userId === currentUser.userId);
-
-    // console.log("userTasks", userTasks);
-    // console.log("tasks", tasks);
-    // console.log("currentUser", currentUser);
-    // console.log("filter", filter);
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFilter((prev) => ({
@@ -71,7 +64,7 @@ const UserDashboard = () => {
                     onChange={handleChange}
                     className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
                 >
-                    <option value="">All Status</option>
+                    <option>All Status</option>
                     <option value="pending">Pending</option>
                     <option value="completed">Completed</option>
                 </select>
@@ -81,7 +74,7 @@ const UserDashboard = () => {
                     onChange={handleChange}
                     className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
                 >
-                    <option value="">Sort By</option>
+                    <option>Sort By</option>
                     <option value="dueDate">Due Date</option>
                     <option value="status">Status</option>
                 </select>
@@ -91,7 +84,7 @@ const UserDashboard = () => {
                     onChange={handleChange}
                     className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
                 >
-                    <option value="">Order</option>
+                    <option>Order</option>
                     <option value="asc">Asc</option>
                     <option value="desc">Desc</option>
                 </select>

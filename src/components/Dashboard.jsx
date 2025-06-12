@@ -30,8 +30,6 @@ const Dashboard = () => {
         );
     }, [dispatch, filter]);
 
-    // console.log("filter", filter);
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFilter((prev) => ({
@@ -41,14 +39,10 @@ const Dashboard = () => {
     };
 
     const handleAccept = (id) => {
-        // console.log("id", id);
         dispatch(updateTaskStatus({ id, status: "accepted" }));
     };
 
     const handleReject = (id) => {
-        console.log("id", id);
-        // console.log('Rejected');
-
         dispatch(updateTaskStatus({ id, status: "rejected" }));
     };
 
@@ -79,7 +73,7 @@ const Dashboard = () => {
                         <input
                             type="date"
                             name="dueDate_gte"
-                            value={filter.dueDate_gte || ''}
+                            value={filter.dueDate_gte || ""}
                             onChange={handleChange}
                             placeholder="Start Date"
                             className="border border-gray-300 rounded-lg px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
@@ -90,7 +84,7 @@ const Dashboard = () => {
                         <input
                             type="date"
                             name="dueDate_lte"
-                            value={filter.dueDate_lte || ''}
+                            value={filter.dueDate_lte || ""}
                             onChange={handleChange}
                             placeholder="End Date"
                             className="border border-gray-300 rounded-lg px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
@@ -103,7 +97,6 @@ const Dashboard = () => {
                     onChange={handleChange}
                     className="border border-gray-300 rounded-lg px-2 py-2 sm:px-3 ml-0 sm:ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm text-sm"
                 >
-                    <option value="">All Status</option>
                     <option value="pending">Pending</option>
                     <option value="accepted">Accepted</option>
                     <option value="rejected">Rejected</option>
@@ -144,6 +137,7 @@ const Dashboard = () => {
                     <p className="text-3xl font-bold text-black900">{users.length}</p>
                 </div>
             </div>
+
             {/* Table */}
             <h2 className="text-2xl font-bold text-black900 mt-8 mb-2">
                 Recent Tasks

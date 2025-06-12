@@ -50,8 +50,12 @@ const getPasswordStrength = (password) => {
 };
 
 const Register = () => {
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    // useEffect(() => { dispatch(fetchUsers({})) }, [dispatch])
+
+    // const { items } = useSelector(state => state.users)
     const [passwordValue, setPasswordValue] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const {
@@ -79,7 +83,7 @@ const Register = () => {
             console.error("Registration failed", error);
         }
     };
-
+    // console.log('items', items)
     return (
         <div className="flex items-center justify-center min-h-[70vh] bg-gray-50 ">
             <div className="w-full max-w-md bg-white rounded-lg mt-5 shadow-md p-8 hover:shadow-2xl">

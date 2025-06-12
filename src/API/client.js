@@ -21,6 +21,8 @@ export const api = {
       client({ method: METHODS.POST, url: "/tasks", data, ...config }),
     update: ({ id, data, ...config }) =>
       client({ method: METHODS.PUT, url: `/tasks/${id}`, data, ...config }),
+    patch: ({ id, data, ...config }) =>
+      client({ method: METHODS.PATCH, url: `/tasks/${id}`, data, ...config }),
     delete: ({ id, ...config }) =>
       client({ method: METHODS.DELETE, url: `/tasks/${id}`, ...config }),
   },
