@@ -16,16 +16,24 @@ const CustomTable = ({
         <table>
             <thead>
                 <tr>
-                    {columns.map((column) => (
-                        <th
-                            key={column.id}
-                            className="hover:cursor-pointer select-none"
-                            onClick={() => onSort && onSort(column.field_name)}
-                        >
-                            {column.label}
-                            {getSortIcon(column.field_name)}
-                        </th>
-                    ))}
+                    {columns.map((column) => {
+                        const isSortable = column.sortable !== false;
+                        return (
+                            <th
+                                key={column.id}
+                                className={`${isSortable ? "hover:cursor-pointer select-none" : ""
+                                    }`}
+                                onClick={
+                                    isSortable
+                                        ? () => onSort && onSort(column.field_name)
+                                        : undefined
+                                }
+                            >
+                                {column.label}
+                                {isSortable && getSortIcon(column.field_name)}
+                            </th>
+                        );
+                    })}
                 </tr>
             </thead>
             <tbody>
