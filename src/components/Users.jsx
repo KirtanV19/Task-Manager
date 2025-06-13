@@ -7,7 +7,6 @@ import useDebounce from "../hooks/useDebounce";
 import CustomTable from "../shared/table";
 
 const Users = () => {
-
     const dispatch = useDispatch();
     const { items } = useSelector((state) => state.users);
     const [filter, setFilter] = useState({});
@@ -94,7 +93,6 @@ const Users = () => {
                         ))}
                     </Table.Body>
                 </Table.Root> */}
-
             </Container>
         </>
     );

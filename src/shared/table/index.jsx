@@ -1,10 +1,30 @@
-const CustomTable = ({ data = [], columns = [] }) => {
+const CustomTable = ({
+    data = [],
+    columns = [],
+    onSort,
+    sortField,
+    sortOrder,
+}) => {
+    const getSortIcon = (field) => {
+        if (sortField !== field) return null;
+        if (sortOrder === "asc") return "▲";
+        if (sortOrder === "desc") return "▼";
+        return null;
+    };
+
     return (
         <table>
             <thead>
                 <tr>
                     {columns.map((column) => (
-                        <th key={column.id} className="hover:cursor-pointer" onClick={() => alert(`${column.label} is clicked`)}>{column.label}</th>
+                        <th
+                            key={column.id}
+                            className="hover:cursor-pointer select-none"
+                            onClick={() => onSort && onSort(column.field_name)}
+                        >
+                            {column.label}
+                            {getSortIcon(column.field_name)}
+                        </th>
                     ))}
                 </tr>
             </thead>

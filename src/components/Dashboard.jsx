@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTasks } from "../redux/slices/task.slice";
 import { fetchUsers } from "../redux/slices/user.slice";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { updateTaskStatus } from "../redux/slices/task.slice";
 import CustomTable from "../shared/table";
 
@@ -11,7 +10,7 @@ const Dashboard = () => {
 
     const users = useSelector((state) => state.users.items);
     const tasks = useSelector((state) => state.tasks.items);
-    const { currentUser } = useSelector((state) => state.users);
+    // const { currentUser } = useSelector((state) => state.users);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -44,13 +43,27 @@ const Dashboard = () => {
         dispatch(updateTaskStatus({ id, status: "rejected" }));
     };
 
+    const handleSort = (field) => {
+        setFilter((prev) => {
+            // Cycle: asc -> desc -> none
+            if (prev._sort !== field) {
+                return { ...prev, _sort: field, _order: "asc" };
+            }
+            if (prev._order === "asc") {
+                return { ...prev, _sort: field, _order: "desc" };
+            }
+            // Third click: remove sorting
+            const { _sort, _order, ...rest } = prev;
+            return rest;
+        });
+    };
+
     const columns = [
         {
             id: "title",
             label: "Task",
             field_name: "title",
             render: ({ row }) => row.title, // [.title === key name given in row of data. ]
-
         },
         {
             id: "status",
@@ -211,7 +224,13 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <CustomTable data={tasks} columns={columns} />
+            <CustomTable
+                data={tasks}
+                columns={columns}
+                onSort={handleSort}
+                sortField={filter._sort}
+                sortOrder={filter._order}
+            />
             {/* <Table.Root variant="surface" layout="auto" size="3" className="w-full">
                 <Table.Header>
                     <Table.Row>
