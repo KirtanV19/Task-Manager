@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "../redux/slices/user.slice";
-import { Table } from "@radix-ui/themes";
 import Container from "../utils/Container";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import useDebounce from "../hooks/useDebounce";
+import CustomTable from "../shared/table";
 
 const Users = () => {
+
     const dispatch = useDispatch();
     const { items } = useSelector((state) => state.users);
     const [filter, setFilter] = useState({});
@@ -28,6 +29,27 @@ const Users = () => {
         );
     }, [dispatch, debouncedFilter]);
 
+    const columns = [
+        {
+            id: "name",
+            label: "Name",
+            field_name: "name",
+            render: ({ row }) => row.name,
+        },
+        {
+            id: "email",
+            label: "Email",
+            field_name: "email",
+            render: ({ row }) => row.email,
+        },
+        {
+            id: "role",
+            label: "Role",
+            field_name: "role",
+            render: ({ row }) => row.role,
+        },
+    ];
+
     return (
         <>
             <Container className="flex flex-col space-y-5 p-2">
@@ -47,8 +69,9 @@ const Users = () => {
                         className="bg-transparent w-full outline-none placeholder-gray-400"
                     />
                 </div>
+                <CustomTable columns={columns} data={items} />
 
-                <Table.Root variant="surface" layout="auto" size="3" className="w-full">
+                {/* <Table.Root variant="surface" layout="auto" size="3" className="w-full">
                     <Table.Header>
                         <Table.Row>
                             <Table.ColumnHeaderCell className="text-black text-center">
@@ -71,7 +94,8 @@ const Users = () => {
                             </Table.Row>
                         ))}
                     </Table.Body>
-                </Table.Root>
+                </Table.Root> */}
+
             </Container>
         </>
     );

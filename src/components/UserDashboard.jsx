@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Create from "../utils/PopupComp/Create";
-// import Delete from "../utils/PopupComp/Delete";
 import Edit from "../utils/PopupComp/Edit";
 import Container from "../utils/Container";
 import { fetchTasks } from "../redux/slices/task.slice";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { Table } from "@radix-ui/themes";
 import Navbar from "./Navbar";
+import CustomTable from "../shared/table";
 
 const UserDashboard = () => {
     const { currentUser } = useSelector((state) => state.users);
@@ -33,6 +32,39 @@ const UserDashboard = () => {
             })
         );
     }, [dispatch, filter]);
+
+    const columns = [
+        {
+            id: "task",
+            label: "Task",
+            field_name: "task",
+            render: ({ row }) => row.title,
+        },
+        {
+            id: "description",
+            label: "Description",
+            field_name: "description",
+            render: ({ row }) => row.description,
+        },
+        {
+            id: "status",
+            label: "Status",
+            field_name: "status",
+            render: ({ row }) => row.status,
+        },
+        {
+            id: "dueDate",
+            label: "Due Date",
+            field_name: "dueDate",
+            render: ({ row }) => row.dueDate,
+        },
+        {
+            id: 'action',
+            label: 'Action',
+            field_name: 'action',
+            render: ({ row }) => <Edit task={row} />
+        }
+    ];
 
     return (
         <>
@@ -98,8 +130,9 @@ const UserDashboard = () => {
                     <h2 className="text-black900 mb-2 text-2xl font-bold">My Tasks</h2>
                     <Create />
                 </div>
+                <CustomTable columns={columns} data={tasks} />
 
-                <Table.Root variant="surface" layout="auto" size="3" className="w-full">
+                {/* <Table.Root variant="surface" layout="auto" size="3" className="w-full">
                     <Table.Header>
                         <Table.Row>
                             <Table.ColumnHeaderCell className="text-black text-center">
@@ -132,7 +165,8 @@ const UserDashboard = () => {
                             </Table.Row>
                         ))}
                     </Table.Body>
-                </Table.Root>
+                </Table.Root> */}
+
             </Container>
         </>
     );

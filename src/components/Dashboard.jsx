@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTasks } from "../redux/slices/task.slice";
 import { fetchUsers } from "../redux/slices/user.slice";
-import { Link } from "react-router";
-import { Table } from "@radix-ui/themes";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { URLS } from "../constants/urls";
 import { updateTaskStatus } from "../redux/slices/task.slice";
+import CustomTable from "../shared/table";
 
 const Dashboard = () => {
     const [filter, setFilter] = useState({});
@@ -46,11 +44,55 @@ const Dashboard = () => {
         dispatch(updateTaskStatus({ id, status: "rejected" }));
     };
 
+    const columns = [
+        {
+            id: "task",
+            label: "Task",
+            field_name: "task",
+            render: ({ row }) => row.title, // [.title === key name given in row of data. ]
+        },
+        {
+            id: "status",
+            label: "Status",
+            field_name: "status",
+            render: ({ row }) => row.status,
+        },
+        {
+            id: "dueDate",
+            label: "Due Date",
+            field_name: "dueDate",
+            render: ({ row }) => row.dueDate,
+        },
+        {
+            id: 'action',
+            label: 'Action',
+            field_name: 'action',
+            render: ({ row }) => (
+                <div className="flex items-center justify-between">
+                    <button
+                        className="bg-blue-600 text-white px-3 py-1 text-md rounded-md hover:bg-blue-700 transition"
+                        onClick={() => handleAccept(row.id)}
+                        disabled={row.status === "accepted"}
+                    >
+                        Accept
+                    </button>
+                    <button
+                        className="bg-red-600 text-white px-3 py-1 text-md rounded-md hover:bg-red-700 transition"
+                        onClick={() => handleReject(row.id)}
+                        disabled={row.status === "rejected"}
+                    >
+                        Reject
+                    </button>
+                </div>
+            )
+        },
+    ];
+
     return (
         <>
             {/* UX Addition */}
-            <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-center mb-6 w-full">
-                <p className="text-lg sm:text-3xl font-bold text-black mb-2 sm:mb-0 mr-0 sm:mr-6 w-full sm:w-auto text-center sm:text-left">
+            <div className="flex  sm:flex-row flex-wrap gap-4 items-center mb-6 w-full">
+                <p className="text-lg sm:text-3xl font-medium text-black mb-2 sm:mb-0 mr-0 sm:mr-6 w-full sm:w-auto  sm:text-left">
                     Welcome, {currentUser.name}
                 </p>
                 <div className="flex items-center border border-gray-300 bg-gray-100 rounded-lg focus-within:ring-2 focus-within:ring-blue-400 px-2 sm:px-3 py-2 shadow-sm w-full sm:w-64 max-w-xs">
@@ -64,35 +106,35 @@ const Dashboard = () => {
                         className="bg-transparent w-full outline-none placeholder-gray-400 text-base"
                     />
                 </div>
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-2 w-full sm:w-auto">
-                    <label className="flex items-center text-sm font-medium text-gray-700">
-                        Start:
-                        <input
-                            type="date"
-                            name="dueDate_gte"
-                            value={filter.dueDate_gte || ""}
-                            onChange={handleChange}
-                            placeholder="Start Date"
-                            className="border border-gray-300 rounded-lg px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
-                        />
-                    </label>
-                    <label className="flex items-center text-sm font-medium text-gray-700 sm:ml-2">
-                        End:
-                        <input
-                            type="date"
-                            name="dueDate_lte"
-                            value={filter.dueDate_lte || ""}
-                            onChange={handleChange}
-                            placeholder="End Date"
-                            className="border border-gray-300 rounded-lg px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
-                        />
-                    </label>
-                </div>
+
+                <label className="flex items-center text-sm font-medium text-gray-700">
+                    Start:
+                    <input
+                        type="date"
+                        name="dueDate_gte"
+                        value={filter.dueDate_gte || ""}
+                        onChange={handleChange}
+                        placeholder="Start Date"
+                        className="border border-gray-300 rounded-lg px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+                    />
+                </label>
+                <label className="flex items-center text-sm font-medium text-gray-700 sm:ml-2">
+                    End:
+                    <input
+                        type="date"
+                        name="dueDate_lte"
+                        value={filter.dueDate_lte || ""}
+                        onChange={handleChange}
+                        placeholder="End Date"
+                        className="border border-gray-300 rounded-lg px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+                    />
+                </label>
+
                 <select
                     name="status"
                     value={filter.status || ""}
                     onChange={handleChange}
-                    className="border border-gray-300 rounded-lg px-2 py-2 sm:px-3 ml-0 sm:ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm text-sm"
+                    className="border border-gray-300 rounded-lg px-3 py-2 sm:px-3 ml-0 sm:ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm "
                 >
                     <option value="pending">Pending</option>
                     <option value="accepted">Accepted</option>
@@ -104,7 +146,7 @@ const Dashboard = () => {
                     onChange={handleChange}
                     className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
                 >
-                    <option value="">Sort By</option>
+                    <option>Sort By</option>
                     <option value="dueDate">Due Date</option>
                 </select>
                 <select
@@ -113,13 +155,13 @@ const Dashboard = () => {
                     onChange={handleChange}
                     className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
                 >
-                    <option value="">Order</option>
+                    <option>Order</option>
                     <option value="asc">Asc</option>
                     <option value="desc">Desc</option>
                 </select>
             </div>
 
-            {/* Statistics */}
+            {/* Statistics - Done */}
             <div className="flex flex-wrap gap-6">
                 <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
                     <p className="text-black700 text-lg font-semibold mb-1">
@@ -135,12 +177,14 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            {/* Table */}
+            {/* Table - Done */}
             <h2 className="text-2xl font-bold text-black900 mt-8 mb-2">
                 Recent Tasks
             </h2>
 
-            <Table.Root variant="surface" layout="auto" size="3" className="w-full">
+            <CustomTable data={tasks} columns={columns} />
+
+            {/* <Table.Root variant="surface" layout="auto" size="3" className="w-full">
                 <Table.Header>
                     <Table.Row>
                         <Table.ColumnHeaderCell className="text-black text-center">
@@ -184,7 +228,7 @@ const Dashboard = () => {
                         </Table.Row>
                     ))}
                 </Table.Body>
-            </Table.Root>
+            </Table.Root> */}
         </>
     );
 };
