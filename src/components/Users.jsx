@@ -59,7 +59,6 @@ const Users = () => {
                 </p>
                 <div className="border border-gray-300 bg-gray-200 rounded focus-within:ring-2 focus-within:ring-blue-400 flex items-center px-3 py-2">
                     <MagnifyingGlassIcon className="text-gray-500 cursor-pointer mr-2 w-5 h-5" />
-
                     <input
                         type="text"
                         name="q"

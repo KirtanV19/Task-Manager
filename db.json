@@ -2,11 +2,83 @@
   "tasks": [
     {
       "dueDate": "2025-07-09",
-      "status": "rejected",
+      "status": "accepted",
       "description": "sample",
       "title": "Sample",
       "userId": 1749720649986,
       "id": 1
+    },
+    {
+      "dueDate": "2025-06-20",
+      "status": "rejected",
+      "description": "1",
+      "title": "1",
+      "userId": 1749720649986,
+      "id": 2
+    },
+    {
+      "dueDate": "2025-06-17",
+      "status": "accepted",
+      "description": "fkghhhthj",
+      "title": "qwer",
+      "userId": 1749720649986,
+      "id": 3
+    },
+    {
+      "dueDate": "2025-06-30",
+      "status": "rejected",
+      "description": "esgojve.gv",
+      "title": "qp398vmibj",
+      "userId": 1749720649986,
+      "id": 4
+    },
+    {
+      "dueDate": "2025-06-29",
+      "status": "accepted",
+      "description": "efvb4",
+      "title": "4dfsbth",
+      "userId": 1749720649986,
+      "id": 5
+    },
+    {
+      "dueDate": "2025-06-24",
+      "status": "rejected",
+      "description": "soidgm ",
+      "title": "kijrgibtrb eofsibvjboi",
+      "userId": 1749720649986,
+      "id": 6
+    },
+    {
+      "dueDate": "2025-06-27",
+      "status": "accepted",
+      "description": "scfg",
+      "title": "qwert",
+      "userId": 1749720649986,
+      "id": 7
+    },
+    {
+      "dueDate": "2025-06-25",
+      "status": "rejected",
+      "description": "wertrteyhyh",
+      "title": "23",
+      "userId": 1749720649986,
+      "id": 8
+    },
+    {
+      "dueDate": "2025-06-27",
+      "status": "accepted",
+      "description": "omuyjy",
+      "title": "qweerett",
+      "userId": 1749720649986,
+      "id": 9
+    },
+    {
+      "dueDate": "2025-06-25",
+      "status": "rejected",
+      "description": "dcgbjmklfdh",
+      "title": "awdrgyjikp",
+      "userId": 1749720649986,
+      "id": 10
     }
   ],
   "users": [

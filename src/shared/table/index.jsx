@@ -1,10 +1,10 @@
 const CustomTable = ({ data = [], columns = [] }) => {
     return (
-        <table >
+        <table>
             <thead>
                 <tr>
                     {columns.map((column) => (
-                        <th key={column.id}>{column.label}</th>
+                        <th key={column.id} className="hover:cursor-pointer" onClick={() => alert(`${column.label} is clicked`)}>{column.label}</th>
                     ))}
                 </tr>
             </thead>

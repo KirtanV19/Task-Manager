@@ -46,10 +46,11 @@ const Dashboard = () => {
 
     const columns = [
         {
-            id: "task",
+            id: "title",
             label: "Task",
-            field_name: "task",
+            field_name: "title",
             render: ({ row }) => row.title, // [.title === key name given in row of data. ]
+
         },
         {
             id: "status",
@@ -64,9 +65,9 @@ const Dashboard = () => {
             render: ({ row }) => row.dueDate,
         },
         {
-            id: 'action',
-            label: 'Action',
-            field_name: 'action',
+            id: "action",
+            label: "Action",
+            field_name: "action",
             render: ({ row }) => (
                 <div className="flex items-center justify-between">
                     <button
@@ -84,14 +85,14 @@ const Dashboard = () => {
                         Reject
                     </button>
                 </div>
-            )
+            ),
         },
     ];
 
     return (
         <>
             {/* UX Addition */}
-            <div className="flex  sm:flex-row flex-wrap gap-4 items-center mb-6 w-full">
+            {/* <div className="flex  sm:flex-row flex-wrap gap-4 items-center mb-6 w-full">
                 <p className="text-lg sm:text-3xl font-medium text-black mb-2 sm:mb-0 mr-0 sm:mr-6 w-full sm:w-auto  sm:text-left">
                     Welcome, {currentUser.name}
                 </p>
@@ -159,7 +160,7 @@ const Dashboard = () => {
                     <option value="asc">Asc</option>
                     <option value="desc">Desc</option>
                 </select>
-            </div>
+            </div> */}
 
             {/* Statistics - Done */}
             <div className="flex flex-wrap gap-6">
@@ -182,8 +183,35 @@ const Dashboard = () => {
                 Recent Tasks
             </h2>
 
-            <CustomTable data={tasks} columns={columns} />
+            <div className="flex justify-between">
+                <div>
+                    <label>
+                        Entries per page:
+                        <select
+                            name="_limit"
+                            value={filter._limit}
+                            onChange={handleChange}
+                            className="border border-gray-300 rounded-lg px-3 py-2 sm:px-3 ml-0 sm:ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm "
+                        >
+                            <option value="10">10</option>
+                            <option value="2">2</option>
+                            <option value="5">5</option>
+                        </select>
+                    </label>
+                </div>
+                <div>
+                    <input
+                        className="border rounded-lg px-3 py-2 border-gray-500 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-base shadow-sm"
+                        type="text"
+                        name="q"
+                        value={filter.q}
+                        onChange={handleChange}
+                        placeholder="Search..."
+                    />
+                </div>
+            </div>
 
+            <CustomTable data={tasks} columns={columns} />
             {/* <Table.Root variant="surface" layout="auto" size="3" className="w-full">
                 <Table.Header>
                     <Table.Row>
