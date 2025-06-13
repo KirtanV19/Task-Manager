@@ -10,7 +10,7 @@
     },
     {
       "dueDate": "2025-06-20",
-      "status": "rejected",
+      "status": "accepted",
       "description": "1",
       "title": "1",
       "userId": 1749720649986,
@@ -18,7 +18,7 @@
     },
     {
       "dueDate": "2025-06-17",
-      "status": "accepted",
+      "status": "rejected",
       "description": "fkghhhthj",
       "title": "qwer",
       "userId": 1749720649986,
@@ -42,7 +42,7 @@
     },
     {
       "dueDate": "2025-06-24",
-      "status": "rejected",
+      "status": "accepted",
       "description": "soidgm ",
       "title": "kijrgibtrb eofsibvjboi",
       "userId": 1749720649986,

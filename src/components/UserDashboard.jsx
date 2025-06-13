@@ -70,60 +70,7 @@ const UserDashboard = () => {
         <>
             <Navbar />
             <Container>
-                {/* UX Addition */}
-                <div className="flex flex-wrap gap-4 items-center mb-6">
-                    <p className="text-4xl font-extrabold text-black mb-2 mr-6">
-                        Welcome {currentUser.name}
-                    </p>
-                    <div className="flex items-center border border-gray-300 bg-gray-100 rounded-lg focus-within:ring-2 focus-within:ring-blue-400 px-3 py-2 shadow-sm w-64">
-                        <MagnifyingGlassIcon className="text-gray-500 mr-2 w-5 h-5" />
-                        <input
-                            type="text"
-                            name="q"
-                            placeholder="Search tasks..."
-                            value={filter.q}
-                            onChange={handleChange}
-                            className="bg-transparent w-full outline-none placeholder-gray-400 text-base"
-                        />
-                    </div>
-                    <input
-                        type="date"
-                        name="dueDate"
-                        value={filter.dueDate}
-                        onChange={handleChange}
-                        className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
-                    />
-                    <select
-                        name="status"
-                        value={filter.status || ""}
-                        onChange={handleChange}
-                        className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
-                    >
-                        <option>All Status</option>
-                        <option value="pending">Pending</option>
-                        <option value="completed">Completed</option>
-                    </select>
-                    <select
-                        name="_sort"
-                        value={filter._sort || ""}
-                        onChange={handleChange}
-                        className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
-                    >
-                        <option>Sort By</option>
-                        <option value="dueDate">Due Date</option>
-                        <option value="status">Status</option>
-                    </select>
-                    <select
-                        name="_order"
-                        value={filter._order || ""}
-                        onChange={handleChange}
-                        className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
-                    >
-                        <option>Order</option>
-                        <option value="asc">Asc</option>
-                        <option value="desc">Desc</option>
-                    </select>
-                </div>
+
 
                 {/* Table */}
                 <div className="flex items-center justify-between">
@@ -132,7 +79,16 @@ const UserDashboard = () => {
                 </div>
                 <CustomTable columns={columns} data={tasks} />
 
-                {/* <Table.Root variant="surface" layout="auto" size="3" className="w-full">
+
+
+            </Container>
+        </>
+    );
+};
+
+export default UserDashboard;
+
+{/* <Table.Root variant="surface" layout="auto" size="3" className="w-full">
                     <Table.Header>
                         <Table.Row>
                             <Table.ColumnHeaderCell className="text-black text-center">
@@ -167,9 +123,58 @@ const UserDashboard = () => {
                     </Table.Body>
                 </Table.Root> */}
 
-            </Container>
-        </>
-    );
-};
+{/* UX Addition */ }
 
-export default UserDashboard;
+{/* <div className="flex flex-wrap gap-4 items-center mb-6">
+    <p className="text-4xl font-extrabold text-black mb-2 mr-6">
+        Welcome {currentUser.name}
+    </p>
+    <div className="flex items-center border border-gray-300 bg-gray-100 rounded-lg focus-within:ring-2 focus-within:ring-blue-400 px-3 py-2 shadow-sm w-64">
+        <MagnifyingGlassIcon className="text-gray-500 mr-2 w-5 h-5" />
+        <input
+            type="text"
+            name="q"
+            placeholder="Search tasks..."
+            value={filter.q}
+            onChange={handleChange}
+            className="bg-transparent w-full outline-none placeholder-gray-400 text-base"
+        />
+    </div>
+    <input
+        type="date"
+        name="dueDate"
+        value={filter.dueDate}
+        onChange={handleChange}
+        className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+    />
+    <select
+        name="status"
+        value={filter.status || ""}
+        onChange={handleChange}
+        className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+    >
+        <option>All Status</option>
+        <option value="pending">Pending</option>
+        <option value="completed">Completed</option>
+    </select>
+    <select
+        name="_sort"
+        value={filter._sort || ""}
+        onChange={handleChange}
+        className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+    >
+        <option>Sort By</option>
+        <option value="dueDate">Due Date</option>
+        <option value="status">Status</option>
+    </select>
+    <select
+        name="_order"
+        value={filter._order || ""}
+        onChange={handleChange}
+        className="border border-gray-300 rounded-lg px-3 py-2 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+    >
+        <option>Order</option>
+        <option value="asc">Asc</option>
+        <option value="desc">Desc</option>
+    </select>
+</div> */}

@@ -45,14 +45,14 @@ const Dashboard = () => {
 
     const handleSort = (field) => {
         setFilter((prev) => {
-            // Cycle: asc -> desc -> none
+
             if (prev._sort !== field) {
                 return { ...prev, _sort: field, _order: "asc" };
             }
             if (prev._order === "asc") {
                 return { ...prev, _sort: field, _order: "desc" };
             }
-            // Third click: remove sorting
+
             const { _sort, _order, ...rest } = prev;
             return rest;
         });
@@ -104,8 +104,71 @@ const Dashboard = () => {
 
     return (
         <>
-            {/* UX Addition */}
-            {/* <div className="flex  sm:flex-row flex-wrap gap-4 items-center mb-6 w-full">
+            {/* Statistics - Done */}
+            <div className="flex flex-wrap gap-6">
+                <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
+                    <p className="text-black700 text-lg font-semibold mb-1">
+                        Total Tasks
+                    </p>
+                    <p className="text-3xl font-bold text-black900">{tasks.length}</p>
+                </div>
+                <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
+                    <p className="text-black700 text-lg font-semibold mb-1">
+                        Total Users
+                    </p>
+                    <p className="text-3xl font-bold text-black900">{users.length}</p>
+                </div>
+            </div>
+
+            {/* Table - Done */}
+            <h2 className="text-2xl font-bold text-black900 mt-8 mb-2">
+                Recent Tasks
+            </h2>
+
+            <div className="flex justify-between">
+                <div>
+                    <label>
+                        Entries per page:
+                        <select
+                            name="_limit"
+                            value={filter._limit}
+                            onChange={handleChange}
+                            className="border border-gray-300 rounded-lg px-3 py-2 sm:px-3 ml-0 sm:ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm "
+                        >
+                            <option value="10">10</option>
+                            <option value="2">2</option>
+                            <option value="5">5</option>
+                        </select>
+                    </label>
+                </div>
+                <div>
+                    <input
+                        className="border rounded-lg px-3 py-2 border-gray-500 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-base shadow-sm"
+                        type="text"
+                        name="q"
+                        value={filter.q}
+                        onChange={handleChange}
+                        placeholder="Search..."
+                    />
+                </div>
+            </div>
+
+            <CustomTable
+                data={tasks}
+                columns={columns}
+                onSort={handleSort}
+                sortField={filter._sort}
+                sortOrder={filter._order}
+            />
+        </>
+    );
+};
+
+export default Dashboard;
+
+{/* UX Addition */ }
+
+{/* <div className="flex  sm:flex-row flex-wrap gap-4 items-center mb-6 w-full">
                 <p className="text-lg sm:text-3xl font-medium text-black mb-2 sm:mb-0 mr-0 sm:mr-6 w-full sm:w-auto  sm:text-left">
                     Welcome, {currentUser.name}
                 </p>
@@ -175,63 +238,7 @@ const Dashboard = () => {
                 </select>
             </div> */}
 
-            {/* Statistics - Done */}
-            <div className="flex flex-wrap gap-6">
-                <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
-                    <p className="text-black700 text-lg font-semibold mb-1">
-                        Total Tasks
-                    </p>
-                    <p className="text-3xl font-bold text-black900">{tasks.length}</p>
-                </div>
-                <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
-                    <p className="text-black700 text-lg font-semibold mb-1">
-                        Total Users
-                    </p>
-                    <p className="text-3xl font-bold text-black900">{users.length}</p>
-                </div>
-            </div>
-
-            {/* Table - Done */}
-            <h2 className="text-2xl font-bold text-black900 mt-8 mb-2">
-                Recent Tasks
-            </h2>
-
-            <div className="flex justify-between">
-                <div>
-                    <label>
-                        Entries per page:
-                        <select
-                            name="_limit"
-                            value={filter._limit}
-                            onChange={handleChange}
-                            className="border border-gray-300 rounded-lg px-3 py-2 sm:px-3 ml-0 sm:ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm "
-                        >
-                            <option value="10">10</option>
-                            <option value="2">2</option>
-                            <option value="5">5</option>
-                        </select>
-                    </label>
-                </div>
-                <div>
-                    <input
-                        className="border rounded-lg px-3 py-2 border-gray-500 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-base shadow-sm"
-                        type="text"
-                        name="q"
-                        value={filter.q}
-                        onChange={handleChange}
-                        placeholder="Search..."
-                    />
-                </div>
-            </div>
-
-            <CustomTable
-                data={tasks}
-                columns={columns}
-                onSort={handleSort}
-                sortField={filter._sort}
-                sortOrder={filter._order}
-            />
-            {/* <Table.Root variant="surface" layout="auto" size="3" className="w-full">
+{/* <Table.Root variant="surface" layout="auto" size="3" className="w-full">
                 <Table.Header>
                     <Table.Row>
                         <Table.ColumnHeaderCell className="text-black text-center">
@@ -276,8 +283,3 @@ const Dashboard = () => {
                     ))}
                 </Table.Body>
             </Table.Root> */}
-        </>
-    );
-};
-
-export default Dashboard;

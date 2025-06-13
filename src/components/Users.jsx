@@ -68,8 +68,14 @@ const Users = () => {
                     />
                 </div>
                 <CustomTable columns={columns} data={items} />
+            </Container>
+        </>
+    );
+};
 
-                {/* <Table.Root variant="surface" layout="auto" size="3" className="w-full">
+export default Users;
+
+{/* <Table.Root variant="surface" layout="auto" size="3" className="w-full">
                     <Table.Header>
                         <Table.Row>
                             <Table.ColumnHeaderCell className="text-black text-center">
@@ -93,9 +99,3 @@ const Users = () => {
                         ))}
                     </Table.Body>
                 </Table.Root> */}
-            </Container>
-        </>
-    );
-};
-
-export default Users;
