@@ -60,7 +60,6 @@ const ForgotPassword = () => {
                 return;
             }
 
-            // 3. (confirm password is already checked by yup)
 
             // 4. Update password
             await api.USERS.patch({
