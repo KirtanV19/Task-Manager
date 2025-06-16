@@ -161,7 +161,7 @@ const ForgotPassword = () => {
                         type="submit"
                         className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition font-semibold shadow"
                     >
-                        Reset my Password
+                        Reset Password
                     </button>
                     <Link
                         to="/login"
