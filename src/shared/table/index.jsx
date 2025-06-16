@@ -21,7 +21,9 @@ const CustomTable = ({
                         return (
                             <th
                                 key={column.id}
-                                className={`${isSortable ? "hover:cursor-pointer select-none" : "hover:cursor-pointer"
+                                className={`${isSortable
+                                        ? "hover:cursor-pointer select-none"
+                                        : "hover:cursor-pointer"
                                     }`}
                                 onClick={
                                     isSortable
@@ -37,17 +39,23 @@ const CustomTable = ({
                 </tr>
             </thead>
             <tbody>
-                {data.map((a, index) => (
-                    <tr key={a.id}>
-                        {columns.map((column) => (
-                            <td key={column.id}>
-                                {column.render
-                                    ? column.render({ row: a, rowIndex: index })
-                                    : a[column.field_name]}
-                            </td>
-                        ))}
+                {data.length <= 0 ? (
+                    <tr>
+                        <td colSpan={columns.length}>No Items Found.</td>
                     </tr>
-                ))}
+                ) : (
+                    data.map((a, index) => (
+                        <tr key={a.id}>
+                            {columns.map((column) => (
+                                <td key={column.id}>
+                                    {column.render
+                                        ? column.render({ row: a, rowIndex: index })
+                                        : a[column.field_name]}
+                                </td>
+                            ))}
+                        </tr>
+                    ))
+                )}
             </tbody>
         </table>
     );
