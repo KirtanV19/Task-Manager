@@ -13,7 +13,7 @@ import { logout } from "../redux/slices/user.slice";
 import { useDispatch } from "react-redux";
 import { URLS } from "../constants/urls";
 // import Sample from "./Sample";
-
+import NewSample from "./NewSample";
 const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState("tasks"); // Better state management
     // const { currentUser } = useSelector((state) => state.users);
@@ -80,7 +80,7 @@ const AdminDashboard = () => {
 
             {/* Main Content */}
             <main className="flex-1 p-8">
-                {activeTab === "tasks" && <Dashboard />}
+                {activeTab === "tasks" && <NewSample />}
                 {activeTab === "users" && <Users />}
             </main>
         </div>
