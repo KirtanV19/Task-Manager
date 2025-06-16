@@ -5,6 +5,7 @@ import useSearch from "../hooks/useSearch";
 import useLimit from "../hooks/useLimit";
 import usePage from "../hooks/usePage";
 import CustomTableCopy from "../shared/table/main";
+import { updateTaskStatus } from "../redux/slices/task.slice";
 
 const NewSample = () => {
     const [filter, setFilter] = useState({});
@@ -35,6 +36,14 @@ const NewSample = () => {
     }, [q, limit, page]);
     console.log("tasks", tasks);
 
+    const handleAccept = (id) => {
+        dispatch(updateTaskStatus({ id, status: "accepted" }));
+    };
+
+    const handleReject = (id) => {
+        dispatch(updateTaskStatus({ id, status: "rejected" }));
+    };
+
     const columns = [
         {
             id: "title",
@@ -63,14 +72,14 @@ const NewSample = () => {
                 <div className="flex items-center justify-between">
                     <button
                         className="bg-blue-600 text-white px-3 py-1 text-md rounded-md hover:bg-blue-700 transition"
-                        // onClick={() => handleAccept(row.id)}
+                        onClick={() => handleAccept(row.id)}
                         disabled={row.status === "accepted"}
                     >
                         Accept
                     </button>
                     <button
                         className="bg-red-600 text-white px-3 py-1 text-md rounded-md hover:bg-red-700 transition"
-                        // onClick={() => handleReject(row.id)}
+                        onClick={() => handleReject(row.id)}
                         disabled={row.status === "rejected"}
                     >
                         Reject
