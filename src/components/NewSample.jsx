@@ -43,9 +43,9 @@ const NewSample = () => {
             </label>
             <select value={limit} onChange={(e) => setLimit(e.target.value)}>
                 <option value="">Select limit</option>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
+                <option value="5">2</option>
+                <option value="10">5</option>
+                <option value="15">10</option>
             </select>
         </div>
     );

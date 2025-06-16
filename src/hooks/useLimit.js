@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const useLimit = () => {
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(2);
   return { limit, setLimit };
 };
 
