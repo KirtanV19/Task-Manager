@@ -4,16 +4,16 @@
       "title": "1",
       "description": "1",
       "dueDate": "2025-06-19",
-      "status": "rejected",
-      "userId": 1750058437589,
+      "status": "pending",
+      "userId": 1750070869853,
       "id": 1
     },
     {
       "title": "2",
-      "description": "2",
-      "dueDate": "2025-06-27",
-      "status": "accepted",
-      "userId": 1750058437589,
+      "description": "3",
+      "dueDate": "2025-06-23",
+      "status": "pending",
+      "userId": 1750070893564,
       "id": 2
     }
   ],
@@ -23,7 +23,7 @@
       "email": "admin@gmail.com",
       "password": "Admin@123",
       "role": "admin",
-      "userId": 1750058427062,
+      "userId": 1750070856974,
       "id": 1
     },
     {
@@ -31,8 +31,16 @@
       "email": "test@gmail.com",
       "password": "Test@123",
       "role": "user",
-      "userId": 1750058437589,
+      "userId": 1750070869853,
       "id": 2
+    },
+    {
+      "name": "Test1",
+      "email": "test1@gmail.com",
+      "password": "Test#123",
+      "role": "user",
+      "userId": 1750070893564,
+      "id": 3
     }
   ]
 }
