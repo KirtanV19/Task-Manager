@@ -4,7 +4,7 @@
       "title": "1",
       "description": "1",
       "dueDate": "2025-06-19",
-      "status": "accepted",
+      "status": "rejected",
       "userId": 1750058437589,
       "id": 1
     },
@@ -12,7 +12,7 @@
       "title": "2",
       "description": "2",
       "dueDate": "2025-06-27",
-      "status": "rejected",
+      "status": "accepted",
       "userId": 1750058437589,
       "id": 2
     }

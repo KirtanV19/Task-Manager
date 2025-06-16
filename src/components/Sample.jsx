@@ -10,16 +10,19 @@ const columns = [
         field: "title",
         headerName: "Task",
         flex: 1,
+        renderCell: ({ row }) => row.title
     },
     {
         field: "status",
         headerName: "Status",
         flex: 1,
+        renderCell: ({ row }) => row.status
     },
     {
         field: "dueDate",
         headerName: "Due Date",
         flex: 1,
+        renderCell: ({ row }) => row.dueDate
     },
     {
         field: "action",
