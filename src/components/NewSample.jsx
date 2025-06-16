@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchTasks } from "../redux/slices/task.slice";
 import useSearch from "../hooks/useSearch";
 import useLimit from "../hooks/useLimit";
+import usePage from "../hooks/usePage";
 import CustomTableCopy from "../shared/table/main";
 
 const NewSample = () => {
@@ -11,6 +12,7 @@ const NewSample = () => {
     const tasks = useSelector((state) => state.tasks.items);
     const { q, setQ } = useSearch();
     const { limit, setLimit } = useLimit();
+    const { page, setPage } = usePage();
 
     useEffect(() => {
         dispatch(
@@ -28,8 +30,9 @@ const NewSample = () => {
 
             q: q ? q : undefined,
             _limit: limit ? limit : undefined,
+            _page: page ? page : undefined,
         }));
-    }, [q, limit]);
+    }, [q, limit, page]);
     console.log("tasks", tasks);
 
     const columns = [
@@ -77,28 +80,54 @@ const NewSample = () => {
         },
     ];
     return (
-        <div>
-            <label>
-                Input:{" "}
-                <input
-                    type="text"
-                    value={q}
-                    onChange={(e) => setQ(e.target.value)}
-                    placeholder="Enter a text"
-                />
-            </label>
-            <label>
-                Select items per page:{" "}
-                <select value={limit} onChange={(e) => setLimit(e.target.value)}>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                </select>
-            </label>
+        <>
+            <div>
+                <label>
+                    Input:{" "}
+                    <input
+                        type="text"
+                        value={q}
+                        onChange={(e) => setQ(e.target.value)}
+                        placeholder="Enter a text"
+                    />
+                </label>
+                <label>
+                    Select items per page:{" "}
+                    <select
+                        value={limit}
+                        onChange={(e) => {
+                            setLimit(e.target.value);
+                            setPage(1);
+                        }}
+                    >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                    </select>
+                </label>
+            </div>
 
             <CustomTableCopy columns={columns} data={tasks} />
-        </div>
+
+            <div className="flex justify-end items-center gap-4 mt-4">
+                <button
+                    className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                    onClick={() => setPage((prev) => Math.max(1, prev - 1))}
+                    disabled={page <= 1}
+                >
+                    Previous
+                </button>
+                <span>Page {page}</span>
+                <button
+                    className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                    onClick={() => setPage((prev) => prev + 1)}
+                    disabled={tasks.length < limit}
+                >
+                    Next
+                </button>
+            </div>
+        </>
     );
 };
 
