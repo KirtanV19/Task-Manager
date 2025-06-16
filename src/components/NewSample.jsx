@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchTasks } from "../redux/slices/task.slice";
 import useSearch from "../hooks/useSearch";
 import useLimit from "../hooks/useLimit";
+import CustomTableCopy from "../shared/table/main";
 
 const NewSample = () => {
     const [filter, setFilter] = useState({});
@@ -29,7 +30,52 @@ const NewSample = () => {
             _limit: limit ? limit : undefined,
         }));
     }, [q, limit]);
-    console.log('tasks', tasks)
+    console.log("tasks", tasks);
+
+    const columns = [
+        {
+            id: "title",
+            label: "Task",
+            field_name: "title",
+            render: ({ row }) => row.title, // [.title === key name given in row of data. ]
+        },
+        {
+            id: "status",
+            label: "Status",
+            field_name: "status",
+            render: ({ row }) => row.status,
+        },
+        {
+            id: "dueDate",
+            label: "Due Date",
+            field_name: "dueDate",
+            render: ({ row }) => row.dueDate,
+        },
+        {
+            id: "action",
+            label: "Action",
+            field_name: "action",
+            sortable: false,
+            render: ({ row }) => (
+                <div className="flex items-center justify-between">
+                    <button
+                        className="bg-blue-600 text-white px-3 py-1 text-md rounded-md hover:bg-blue-700 transition"
+                        // onClick={() => handleAccept(row.id)}
+                        disabled={row.status === "accepted"}
+                    >
+                        Accept
+                    </button>
+                    <button
+                        className="bg-red-600 text-white px-3 py-1 text-md rounded-md hover:bg-red-700 transition"
+                        // onClick={() => handleReject(row.id)}
+                        disabled={row.status === "rejected"}
+                    >
+                        Reject
+                    </button>
+                </div>
+            ),
+        },
+    ];
     return (
         <div>
             <label>
@@ -41,12 +87,17 @@ const NewSample = () => {
                     placeholder="Enter a text"
                 />
             </label>
-            <select value={limit} onChange={(e) => setLimit(e.target.value)}>
-                <option value="">Select limit</option>
-                <option value="5">2</option>
-                <option value="10">5</option>
-                <option value="15">10</option>
-            </select>
+            <label>
+                Select items per page:{" "}
+                <select value={limit} onChange={(e) => setLimit(e.target.value)}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                </select>
+            </label>
+
+            <CustomTableCopy columns={columns} data={tasks} />
         </div>
     );
 };
