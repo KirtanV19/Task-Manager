@@ -12,10 +12,14 @@ const schema = yup.object({
     description: yup.string().required("Description is required"),
     status: yup.string().required("Status is required"),
     dueDate: yup
-        .date()
-        .transform((value) => value && new Date(value))
-        .min(today, "Due date cannot be in the past")
-        .required("Due date is required"),
+        .string()
+        .required("Due date is required")
+        .test("min", "Due date cannot be in the past", function (value) {
+            if (!value) return false;
+            const selected = new Date(value);
+            selected.setHours(0, 0, 0, 0);
+            return selected >= today;
+        }),
 });
 
 const TaskForm = ({ defaultValues = {}, closeModal }) => {
@@ -34,11 +38,11 @@ const TaskForm = ({ defaultValues = {}, closeModal }) => {
 
     const onSubmit = async (data) => {
         try {
-            const formattedDate = new Date(data.dueDate).toISOString().split("T")[0];
+            // Use the date string directly
             const formdataWithId = {
                 ...defaultValues,
                 ...data,
-                dueDate: formattedDate,
+                dueDate: data.dueDate, // <-- Use as-is
                 userId: currentUser.userId,
             };
             if (defaultValues?.id) {
@@ -69,8 +73,8 @@ const TaskForm = ({ defaultValues = {}, closeModal }) => {
                             placeholder="Task Title"
                             {...register("title")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.title
-                                    ? "border-red-400 focus:ring-red-200"
-                                    : "border-gray-300 focus:ring-blue-400"
+                                ? "border-red-400 focus:ring-red-200"
+                                : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
                         {errors.title && (
@@ -88,8 +92,8 @@ const TaskForm = ({ defaultValues = {}, closeModal }) => {
                             placeholder="Task Description"
                             {...register("description")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.description
-                                    ? "border-red-400 focus:ring-red-200"
-                                    : "border-gray-300 focus:ring-blue-400"
+                                ? "border-red-400 focus:ring-red-200"
+                                : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
                         {errors.description && (
@@ -106,8 +110,8 @@ const TaskForm = ({ defaultValues = {}, closeModal }) => {
                             type="date"
                             {...register("dueDate")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.dueDate
-                                    ? "border-red-400 focus:ring-red-200"
-                                    : "border-gray-300 focus:ring-blue-400"
+                                ? "border-red-400 focus:ring-red-200"
+                                : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
                         {errors.dueDate && (
@@ -123,8 +127,8 @@ const TaskForm = ({ defaultValues = {}, closeModal }) => {
                         <select
                             {...register("status")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.status
-                                    ? "border-red-400 focus:ring-red-200"
-                                    : "border-gray-300 focus:ring-blue-400"
+                                ? "border-red-400 focus:ring-red-200"
+                                : "border-gray-300 focus:ring-blue-400"
                                 }`}
                             defaultValue="pending"
                         >
