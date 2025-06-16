@@ -6,6 +6,7 @@ import { updateTaskStatus } from "../redux/slices/task.slice";
 import CustomTable from "../shared/table";
 
 const Dashboard = () => {
+
     const [filter, setFilter] = useState({
         _limit: 10,
         _page: 1,

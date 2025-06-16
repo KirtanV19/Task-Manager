@@ -1,46 +1,4 @@
 {
-  "tasks": [
-    {
-      "dueDate": "2025-06-18",
-      "status": "pending",
-      "description": "2",
-      "title": "1",
-      "userId": 1750050996710,
-      "id": 1
-    },
-    {
-      "title": "Qwerty",
-      "description": "ytrewQ",
-      "dueDate": "2025-06-16",
-      "status": "pending",
-      "userId": 1750052967559,
-      "id": 2
-    }
-  ],
-  "users": [
-    {
-      "name": "Admin",
-      "email": "admin@gmail.com",
-      "password": "Admin@123",
-      "role": "admin",
-      "userId": 1750050948545,
-      "id": 1
-    },
-    {
-      "name": "Test1",
-      "email": "test1@gmail.com",
-      "password": "Test@111",
-      "role": "user",
-      "userId": 1750050996710,
-      "id": 2
-    },
-    {
-      "name": "Test2",
-      "email": "test2@gmail.com",
-      "password": "Test@213",
-      "role": "user",
-      "userId": 1750052967559,
-      "id": 3
-    }
-  ]
+  "tasks": [],
+  "users": []
 }
