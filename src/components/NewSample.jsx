@@ -4,7 +4,7 @@ import { fetchTasks } from "../redux/slices/task.slice";
 import useSearch from "../hooks/useSearch";
 import useLimit from "../hooks/useLimit";
 import usePage from "../hooks/usePage";
-import CustomTableCopy from "../shared/table/main";
+import CustomTableCopy from "../shared/table/table";
 import { updateTaskStatus } from "../redux/slices/task.slice";
 
 const NewSample = () => {
