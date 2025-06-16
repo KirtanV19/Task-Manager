@@ -22,8 +22,8 @@ const CustomTable = ({
                             <th
                                 key={column.id}
                                 className={`${isSortable
-                                        ? "hover:cursor-pointer select-none"
-                                        : "hover:cursor-pointer"
+                                    ? "hover:cursor-pointer select-none"
+                                    : "hover:cursor-pointer"
                                     }`}
                                 onClick={
                                     isSortable
