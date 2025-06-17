@@ -17,7 +17,7 @@ const CustomPagination = ({ limit, page, setPage, tasks }) => {
                 Next
             </button>
         </div>
-    )
-}
+    );
+};
 
 export default CustomPagination;

@@ -1,4 +1,3 @@
-
 const CustomSearch = ({ q, setQ }) => {
     return (
         <div className="flex items-center">
