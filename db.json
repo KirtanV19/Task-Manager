@@ -65,6 +65,62 @@
       "role": "user",
       "userId": 1750070893564,
       "id": 3
+    },
+    {
+      "name": "Kirtan",
+      "email": "kirtan@gmail.com",
+      "password": "Kirtan@1",
+      "role": "user",
+      "userId": 1750154236758,
+      "id": 4
+    },
+    {
+      "name": "Ronak",
+      "email": "ronak@gmail.com",
+      "password": "Ronak@123",
+      "role": "user",
+      "userId": 1750154255101,
+      "id": 5
+    },
+    {
+      "name": "Anand",
+      "email": "anand@gmail.com",
+      "password": "Ananad@123",
+      "role": "user",
+      "userId": 1750154274797,
+      "id": 6
+    },
+    {
+      "name": "Krima",
+      "email": "krima@gmail.com",
+      "password": "Krima@123",
+      "role": "user",
+      "userId": 1750154295829,
+      "id": 7
+    },
+    {
+      "name": "Harsh",
+      "email": "harsh@gmail.com",
+      "password": "Harsh@123",
+      "role": "user",
+      "userId": 1750154361451,
+      "id": 8
+    },
+    {
+      "name": "Akshat",
+      "email": "akshat@gmail.com",
+      "password": "Akshat@123",
+      "role": "user",
+      "userId": 1750154378883,
+      "id": 9
+    },
+    {
+      "name": "User",
+      "email": "user@gmail.com",
+      "password": "User@123",
+      "role": "user",
+      "userId": 1750154416347,
+      "id": 10
     }
   ]
 }
