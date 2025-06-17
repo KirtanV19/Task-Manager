@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/slices/user.slice";
 import { useDispatch } from "react-redux";
 import { URLS } from "../constants/urls";
-// import Sample from "./Sample";
 import NewSample from "./NewSample";
 const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState("tasks"); // Better state management
