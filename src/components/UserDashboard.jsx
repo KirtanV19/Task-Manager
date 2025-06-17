@@ -8,6 +8,7 @@ import CustomTableCopy from "../shared/table/table";
 import useSearch from "../hooks/useSearch";
 import useLimit from "../hooks/useLimit";
 import usePage from "../hooks/usePage";
+import useDebounce from "../hooks/useDebounce";
 import useSortFilter from "../hooks/useSortFilter";
 import CustomDateRangePicker from "../shared/datepicker";
 import CustomPagination from "../shared/pagination";
@@ -24,16 +25,19 @@ const UserDashboard = () => {
     const { page, setPage } = usePage();
     const { sort, handleSort } = useSortFilter();
 
+    const debouncedValue = useDebounce(q, 400)
+
+
     useEffect(() => {
         setFilter((prev) => ({
             ...prev,
-            q: q ? q : undefined,
+            q: debouncedValue ? debouncedValue : undefined,
             _limit: limit ? limit : undefined,
             _page: page ? page : undefined,
             _sort: sort.field ? sort.field : undefined,
             _order: sort.order ? sort.order : undefined,
         }));
-    }, [q, limit, page, sort, setFilter]);
+    }, [debouncedValue, limit, page, sort, setFilter]);
 
     useEffect(() => {
         dispatch(

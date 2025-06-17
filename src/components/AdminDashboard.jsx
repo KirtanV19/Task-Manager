@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Dashboard from "./Dashboard";
 import Users from "./Users";
 import {
     DragHandleHorizontalIcon,

@@ -7,6 +7,7 @@ import useLimit from "../hooks/useLimit";
 import usePage from "../hooks/usePage";
 import useFilter from "../hooks/useFilter";
 import useSortFilter from "../hooks/useSortFilter";
+import useDebounce from "../hooks/useDebounce";
 import CustomTableCopy from "../shared/table/table";
 import { updateTaskStatus } from "../redux/slices/task.slice";
 import CustomDateRangePicker from "../shared/datepicker";
@@ -22,6 +23,8 @@ const NewSample = () => {
     const { page, setPage } = usePage();
     const { sort, handleSort } = useSortFilter();
 
+    const debouncedValue = useDebounce(q, 400)
+
     const tasks = useSelector((state) => state.tasks.items);
     const users = useSelector((state) => state.users.items);
 
@@ -32,13 +35,13 @@ const NewSample = () => {
     useEffect(() => {
         setFilter((prev) => ({
             ...prev,
-            q: q ? q : undefined,
+            q: debouncedValue ? debouncedValue : undefined,
             _limit: limit ? limit : undefined,
             _page: page ? page : undefined,
             _sort: sort.field ? sort.field : undefined,
             _order: sort.order ? sort.order : undefined,
         }));
-    }, [q, limit, page, sort, setFilter]);
+    }, [debouncedValue, limit, page, sort, setFilter]);
 
     useEffect(() => {
         dispatch(

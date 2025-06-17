@@ -8,6 +8,7 @@ import useSearch from "../hooks/useSearch";
 import useLimit from "../hooks/useLimit";
 import useSortFilter from "../hooks/useSortFilter";
 import usePage from "../hooks/usePage";
+import useDebounce from "../hooks/useDebounce";
 import CustomSelect from "../shared/select";
 import CustomPagination from "../shared/pagination";
 
@@ -20,16 +21,18 @@ const Users = () => {
     const { page, setPage } = usePage();
     const { items } = useSelector((state) => state.users);
 
+    const debouncedValue = useDebounce(q, 400)
+
     useEffect(() => {
         setFilter((prev) => ({
             ...prev,
-            q: q ? q : undefined,
+            q: debouncedValue ? debouncedValue : undefined,
             _limit: limit ? limit : undefined,
             _sort: sort.field ? sort.field : undefined,
             _order: sort.order ? sort.order : undefined,
             _page: page ? page : undefined,
         }));
-    }, [q, limit, sort, setFilter, page]);
+    }, [debouncedValue, limit, sort, setFilter, page]);
 
     useEffect(() => {
         dispatch(
