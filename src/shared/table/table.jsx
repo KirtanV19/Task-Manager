@@ -1,10 +1,27 @@
-const CustomTableCopy = ({ data = [], columns = [] }) => {
+const CustomTableCopy = ({ data = [], columns = [], onSort, sort }) => {
+    const getSortIcon = (field) => {
+        if (sort?.field !== field) return null;
+        if (sort.order === "asc") return " ▲";
+        if (sort.order === "desc") return " ▼";
+        return null;
+    };
+
     return (
         <table>
             <thead>
                 <tr>
                     {columns.map((column) => {
-                        return <th key={column.id}>{column.label}</th>;
+                        const isSortable = column.sortable !== false;
+                        return (
+                            <th
+                                key={column.id}
+                                className={isSortable ? "cursor-pointer select-none" : ""}
+                                onClick={isSortable ? () => onSort && onSort(column.field_name) : undefined}
+                            >
+                                {column.label}
+                                {isSortable && getSortIcon(column.field_name)}
+                            </th>
+                        );
                     })}
                 </tr>
             </thead>

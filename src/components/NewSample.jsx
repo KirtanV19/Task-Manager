@@ -4,6 +4,7 @@ import { fetchTasks } from "../redux/slices/task.slice";
 import useSearch from "../hooks/useSearch";
 import useLimit from "../hooks/useLimit";
 import usePage from "../hooks/usePage";
+import useSortFilter from "../hooks/useSortFilter";
 import CustomTableCopy from "../shared/table/table";
 import { updateTaskStatus } from "../redux/slices/task.slice";
 
@@ -14,6 +15,7 @@ const NewSample = () => {
     const { q, setQ } = useSearch();
     const { limit, setLimit } = useLimit();
     const { page, setPage } = usePage();
+    const { sort, handleSort } = useSortFilter();
 
     useEffect(() => {
         dispatch(
@@ -28,12 +30,14 @@ const NewSample = () => {
     useEffect(() => {
         setFilter((prev) => ({
             ...prev,
-
             q: q ? q : undefined,
             _limit: limit ? limit : undefined,
             _page: page ? page : undefined,
+            _sort: sort.field ? sort.field : undefined,
+            _order: sort.order ? sort.order : undefined,
         }));
-    }, [q, limit, page]);
+    }, [q, limit, page, sort]);
+
     console.log("tasks", tasks);
 
     const handleAccept = (id) => {
@@ -117,7 +121,7 @@ const NewSample = () => {
                 </label>
             </div>
 
-            <CustomTableCopy columns={columns} data={tasks} />
+            <CustomTableCopy columns={columns} data={tasks} onSort={handleSort} />
 
             <div className="flex justify-end items-center gap-4 mt-4">
                 <button
