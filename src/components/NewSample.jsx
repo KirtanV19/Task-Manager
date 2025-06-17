@@ -107,25 +107,21 @@ const NewSample = () => {
         },
     ];
     return (
-        <>
+        <div className="flex flex-col space-y-3">
             {/* Statistics */}
             <div className="flex flex-wrap gap-6">
                 <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
-                    <p className="text-black text-lg font-medium mb-1">
-                        Total Tasks
-                    </p>
+                    <p className="text-black text-lg font-medium mb-1">Total Tasks</p>
                     <p className="text-3xl font-light text-black">{tasks.length}</p>
                 </div>
                 <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
-                    <p className="text-black text-lg font-medium mb-1">
-                        Total Users
-                    </p>
+                    <p className="text-black text-lg font-medium mb-1">Total Users</p>
                     <p className="text-3xl font-light text-black">{users.length}</p>
                 </div>
             </div>
 
             {/* Limit & Search */}
-            <div className="flex justify-between mb-4">
+            <div className="flex justify-between">
                 <div className="flex items-center">
                     <select
                         value={limit}
@@ -166,11 +162,11 @@ const NewSample = () => {
             />
 
             {/* Total items and Pagination */}
-            <div>
+            <div className="flex justify-between items-center">
                 <p>
                     Showing 1 to {limit} of {tasks.length} entries
                 </p>
-                <div className="flex justify-end items-center gap-4 mt-4">
+                <div className="flex  items-center gap-4 mt-4">
                     <button
                         className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
                         onClick={() => setPage((prev) => Math.max(1, prev - 1))}
@@ -188,7 +184,7 @@ const NewSample = () => {
                     </button>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
