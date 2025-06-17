@@ -10,6 +10,9 @@ import useSortFilter from "../hooks/useSortFilter";
 import CustomTableCopy from "../shared/table/table";
 import { updateTaskStatus } from "../redux/slices/task.slice";
 import CustomDateRangePicker from "../shared/datepicker";
+import CustomSearch from "../shared/search";
+import CustomSelect from "../shared/select";
+import CustomPagination from "../shared/pagination";
 
 const NewSample = () => {
     const dispatch = useDispatch();
@@ -132,24 +135,7 @@ const NewSample = () => {
 
             {/* Limit, Date Range & Search */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
-                <div className="flex items-center mb-2 md:mb-0">
-                    <select
-                        value={limit}
-                        className="border border-gray-300 rounded-md px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
-                        onChange={(e) => {
-                            setLimit(Number(e.target.value));
-                            setPage(1);
-                        }}
-                    >
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                    </select>
-                    <label htmlFor="entries" className="font-medium ml-2">
-                        entries per page
-                    </label>
-                </div>
+                <CustomSelect limit={limit} setLimit={setLimit} setPage={setPage} />
                 <div className="mb-2 md:mb-0">
                     <CustomDateRangePicker
                         value={{
@@ -159,17 +145,7 @@ const NewSample = () => {
                         onChange={handleDateRangeChange}
                     />
                 </div>
-                <div className="flex items-center">
-                    <label htmlFor="search" className="font-medium">
-                        Search:
-                    </label>
-                    <input
-                        type="text"
-                        value={q}
-                        onChange={(e) => setQ(e.target.value)}
-                        className="border border-gray-300 rounded-md px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
-                    />
-                </div>
+                <CustomSearch q={q} setQ={setQ} />
             </div>
 
             {/* Custom Table */}
@@ -185,23 +161,7 @@ const NewSample = () => {
                 <p className="text-sm">
                     Showing 1 to {limit} of {tasks.length} entries
                 </p>
-                <div className="flex items-center gap-4 mt-2 md:mt-0">
-                    <button
-                        className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                        onClick={() => setPage((prev) => Math.max(1, prev - 1))}
-                        disabled={page <= 1}
-                    >
-                        Previous
-                    </button>
-                    <span>Page {page}</span>
-                    <button
-                        className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                        onClick={() => setPage((prev) => prev + 1)}
-                        disabled={tasks.length < limit}
-                    >
-                        Next
-                    </button>
-                </div>
+                <CustomPagination limit={limit} page={page} setPage={setPage} tasks={tasks} />
             </div>
         </div>
     );
