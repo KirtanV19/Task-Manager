@@ -38,7 +38,7 @@ const NewSample = () => {
         }));
     }, [q, limit, page, sort]);
 
-    console.log("tasks", tasks);
+    // console.log("tasks", tasks);
 
     const handleAccept = (id) => {
         dispatch(updateTaskStatus({ id, status: "accepted" }));
@@ -51,9 +51,15 @@ const NewSample = () => {
     const columns = [
         {
             id: "title",
-            label: "Task",
+            label: "Title",
             field_name: "title",
             render: ({ row }) => row.title, // [.title === key name given in row of data. ]
+        },
+        {
+            id: "description",
+            label: "Description",
+            field_name: "description",
+            render: ({ row }) => row.description,
         },
         {
             id: "status",
@@ -73,7 +79,7 @@ const NewSample = () => {
             field_name: "action",
             sortable: false,
             render: ({ row }) => (
-                <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
                     <button
                         className="bg-blue-600 text-white px-3 py-1 text-md rounded-md hover:bg-blue-700 transition"
                         onClick={() => handleAccept(row.id)}
@@ -121,7 +127,8 @@ const NewSample = () => {
                 </label>
             </div>
 
-            <CustomTableCopy columns={columns} data={tasks} onSort={handleSort} />
+            <CustomTableCopy columns={columns} data={tasks} onSort={handleSort} sort={sort} />
+
 
             <div className="flex justify-end items-center gap-4 mt-4">
                 <button
