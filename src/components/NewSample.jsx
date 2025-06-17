@@ -173,14 +173,12 @@ const NewSample = () => {
             </div>
 
             {/* Custom Table */}
-            <div className="overflow-x-auto   bg-white rounded-xl border border-gray-200 shadow">
-                <CustomTableCopy
-                    columns={columns}
-                    data={tasks}
-                    onSort={handleSort}
-                    sort={sort}
-                />
-            </div>
+            <CustomTableCopy
+                columns={columns}
+                data={tasks}
+                onSort={handleSort}
+                sort={sort}
+            />
 
             {/* Total items and Pagination */}
             <div className="flex flex-col md:flex-row md:justify-between md:items-center mt-4 gap-2">
