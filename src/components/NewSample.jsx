@@ -9,6 +9,7 @@ import useFilter from "../hooks/useFilter";
 import useSortFilter from "../hooks/useSortFilter";
 import CustomTableCopy from "../shared/table/table";
 import { updateTaskStatus } from "../redux/slices/task.slice";
+import CustomDateRangePicker from "../shared/datepicker";
 
 const NewSample = () => {
     const dispatch = useDispatch();
@@ -54,6 +55,14 @@ const NewSample = () => {
 
     const handleReject = (id) => {
         dispatch(updateTaskStatus({ id, status: "rejected" }));
+    };
+
+    const handleDateRangeChange = ({ start, end }) => {
+        setFilter((prev) => ({
+            ...prev,
+            dueDate_gte: start || undefined,
+            dueDate_lte: end || undefined,
+        }));
     };
 
     const columns = [
@@ -139,6 +148,9 @@ const NewSample = () => {
                     <label htmlFor="entries" className="font-medium ml-2">
                         entries per page
                     </label>
+                </div>
+                <div>
+                    <CustomDateRangePicker onChange={handleDateRangeChange} />
                 </div>
                 <div className="flex items-center">
                     <label htmlFor="search" className="font-medium">
