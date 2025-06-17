@@ -100,20 +100,11 @@ const NewSample = () => {
     ];
     return (
         <>
-            <div>
-                <label>
-                    Input:{" "}
-                    <input
-                        type="text"
-                        value={q}
-                        onChange={(e) => setQ(e.target.value)}
-                        placeholder="Enter a text"
-                    />
-                </label>
-                <label>
-                    Select items per page:{" "}
+            <div className="flex justify-between mb-4">
+                <div className="flex items-center">
                     <select
                         value={limit}
+                        className="border border-gray-300 rounded-lg px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
                         onChange={(e) => {
                             setLimit(e.target.value);
                             setPage(1);
@@ -124,7 +115,17 @@ const NewSample = () => {
                         <option value="5">5</option>
                         <option value="10">10</option>
                     </select>
-                </label>
+                    <label className="font-medium">entries per page</label>
+                </div>
+                <div className="flex items-center">
+                    <label htmlFor="search" className="font-medium">Search:</label>
+                    <input
+                        type="text"
+                        value={q}
+                        onChange={(e) => setQ(e.target.value)}
+                        className="border rounded-md px-2 py-1 border-gray-500 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-base shadow-sm"
+                    />
+                </div>
             </div>
 
             <CustomTableCopy columns={columns} data={tasks} onSort={handleSort} sort={sort} />
