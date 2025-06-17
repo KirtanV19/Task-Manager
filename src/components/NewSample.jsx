@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTasks } from "../redux/slices/task.slice";
 import { fetchUsers } from "../redux/slices/user.slice";
 import useSearch from "../hooks/useSearch";
 import useLimit from "../hooks/useLimit";
 import usePage from "../hooks/usePage";
+import useFilter from "../hooks/useFilter";
 import useSortFilter from "../hooks/useSortFilter";
 import CustomTableCopy from "../shared/table/table";
 import { updateTaskStatus } from "../redux/slices/task.slice";
 
 const NewSample = () => {
-    const [filter, setFilter] = useState({});
     const dispatch = useDispatch();
-
+    const { filter, setFilter } = useFilter()
     const { q, setQ } = useSearch();
     const { limit, setLimit } = useLimit();
     const { page, setPage } = usePage();
@@ -34,7 +34,7 @@ const NewSample = () => {
             _sort: sort.field ? sort.field : undefined,
             _order: sort.order ? sort.order : undefined,
         }));
-    }, [q, limit, page, sort]);
+    }, [q, limit, page, sort, setFilter]);
 
     useEffect(() => {
         dispatch(
@@ -61,7 +61,7 @@ const NewSample = () => {
             id: "title",
             label: "Title",
             field_name: "title",
-            render: ({ row }) => row.title, // [.title === key name given in row of data. ]
+            render: ({ row }) => row.title, // [.title === key name given in row of data (db.json). ]
         },
         {
             id: "description",
