@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTasks } from "../redux/slices/task.slice";
+import { fetchUsers } from "../redux/slices/user.slice";
 import useSearch from "../hooks/useSearch";
 import useLimit from "../hooks/useLimit";
 import usePage from "../hooks/usePage";
@@ -11,21 +12,18 @@ import { updateTaskStatus } from "../redux/slices/task.slice";
 const NewSample = () => {
     const [filter, setFilter] = useState({});
     const dispatch = useDispatch();
-    const tasks = useSelector((state) => state.tasks.items);
+
     const { q, setQ } = useSearch();
     const { limit, setLimit } = useLimit();
     const { page, setPage } = usePage();
     const { sort, handleSort } = useSortFilter();
 
+    const tasks = useSelector((state) => state.tasks.items);
+    const users = useSelector((state) => state.users.items);
+
     useEffect(() => {
-        dispatch(
-            fetchTasks({
-                params: {
-                    ...filter,
-                },
-            })
-        );
-    }, [dispatch, filter]);
+        dispatch(fetchUsers({}));
+    }, [dispatch]);
 
     useEffect(() => {
         setFilter((prev) => ({
@@ -37,6 +35,16 @@ const NewSample = () => {
             _order: sort.order ? sort.order : undefined,
         }));
     }, [q, limit, page, sort]);
+
+    useEffect(() => {
+        dispatch(
+            fetchTasks({
+                params: {
+                    ...filter,
+                },
+            })
+        );
+    }, [dispatch, filter]);
 
     // console.log("tasks", tasks);
 
@@ -100,12 +108,28 @@ const NewSample = () => {
     ];
     return (
         <>
+            {/* Statistics */}
+            <div className="flex flex-wrap gap-6">
+                <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
+                    <p className="text-black text-lg font-medium mb-1">
+                        Total Tasks
+                    </p>
+                    <p className="text-3xl font-light text-black">{tasks.length}</p>
+                </div>
+                <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
+                    <p className="text-black text-lg font-medium mb-1">
+                        Total Users
+                    </p>
+                    <p className="text-3xl font-light text-black">{users.length}</p>
+                </div>
+            </div>
+
             {/* Limit & Search */}
             <div className="flex justify-between mb-4">
                 <div className="flex items-center">
                     <select
                         value={limit}
-                        className="border border-gray-300 rounded-lg px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+                        className="border border-gray-300 rounded-md px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
                         onChange={(e) => {
                             setLimit(e.target.value);
                             setPage(1);
@@ -128,7 +152,7 @@ const NewSample = () => {
                         type="text"
                         value={q}
                         onChange={(e) => setQ(e.target.value)}
-                        className="border border-gray-300 rounded-lg px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
+                        className="border border-gray-300 rounded-md px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
                     />
                 </div>
             </div>
