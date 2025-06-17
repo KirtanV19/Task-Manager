@@ -13,7 +13,7 @@ import CustomDateRangePicker from "../shared/datepicker";
 
 const NewSample = () => {
     const dispatch = useDispatch();
-    const { filter, setFilter } = useFilter()
+    const { filter, setFilter } = useFilter();
     const { q, setQ } = useSearch();
     const { limit, setLimit } = useLimit();
     const { page, setPage } = usePage();
@@ -115,28 +115,29 @@ const NewSample = () => {
             ),
         },
     ];
+
     return (
         <div className="flex flex-col space-y-6">
             {/* Statistics */}
-            <div className="flex flex-wrap gap-6 mb-4">
-                <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
+            <div className="flex flex-col md:flex-row gap-4 md:gap-6 mb-4">
+                <div className="flex-1 min-w-0 bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
                     <p className="text-black text-lg font-medium mb-1">Total Tasks</p>
                     <p className="text-3xl font-light text-black">{tasks.length}</p>
                 </div>
-                <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
+                <div className="flex-1 min-w-0 bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
                     <p className="text-black text-lg font-medium mb-1">Total Users</p>
                     <p className="text-3xl font-light text-black">{users.length}</p>
                 </div>
             </div>
 
-            {/* Limit & Search */}
-            <div className="flex justify-between mb-2">
-                <div className="flex items-center">
+            {/* Limit, Date Range & Search */}
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
+                <div className="flex items-center mb-2 md:mb-0">
                     <select
                         value={limit}
                         className="border border-gray-300 rounded-md px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
                         onChange={(e) => {
-                            setLimit(e.target.value);
+                            setLimit(Number(e.target.value));
                             setPage(1);
                         }}
                     >
@@ -149,8 +150,14 @@ const NewSample = () => {
                         entries per page
                     </label>
                 </div>
-                <div>
-                    <CustomDateRangePicker onChange={handleDateRangeChange} />
+                <div className="mb-2 md:mb-0">
+                    <CustomDateRangePicker
+                        value={{
+                            start: filter.dueDate_gte || "",
+                            end: filter.dueDate_lte || "",
+                        }}
+                        onChange={handleDateRangeChange}
+                    />
                 </div>
                 <div className="flex items-center">
                     <label htmlFor="search" className="font-medium">
@@ -166,19 +173,21 @@ const NewSample = () => {
             </div>
 
             {/* Custom Table */}
-            <CustomTableCopy
-                columns={columns}
-                data={tasks}
-                onSort={handleSort}
-                sort={sort}
-            />
+            <div className="overflow-x-auto   bg-white rounded-xl border border-gray-200 shadow">
+                <CustomTableCopy
+                    columns={columns}
+                    data={tasks}
+                    onSort={handleSort}
+                    sort={sort}
+                />
+            </div>
 
             {/* Total items and Pagination */}
-            <div className="flex justify-between items-center mt-4">
-                <p>
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center mt-4 gap-2">
+                <p className="text-sm">
                     Showing 1 to {limit} of {tasks.length} entries
                 </p>
-                <div className="flex  items-center gap-4 mt-4">
+                <div className="flex items-center gap-4 mt-2 md:mt-0">
                     <button
                         className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
                         onClick={() => setPage((prev) => Math.max(1, prev - 1))}

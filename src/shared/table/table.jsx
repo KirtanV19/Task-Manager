@@ -9,7 +9,7 @@ const CustomTableCopy = ({ data = [], columns = [], onSort, sort }) => {
     };
 
     return (
-        <table className="p-2 bg-white rounded-xl border border-gray-200 shadow">
+        <table >
             <thead>
                 <tr>
                     {columns.map((column) => {
