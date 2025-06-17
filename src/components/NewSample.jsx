@@ -100,6 +100,7 @@ const NewSample = () => {
     ];
     return (
         <>
+            {/* Limit & Search */}
             <div className="flex justify-between mb-4">
                 <div className="flex items-center">
                     <select
@@ -115,38 +116,53 @@ const NewSample = () => {
                         <option value="5">5</option>
                         <option value="10">10</option>
                     </select>
-                    <label className="font-medium">entries per page</label>
+                    <label htmlFor="entries" className="font-medium ml-2">
+                        entries per page
+                    </label>
                 </div>
                 <div className="flex items-center">
-                    <label htmlFor="search" className="font-medium">Search:</label>
+                    <label htmlFor="search" className="font-medium">
+                        Search:
+                    </label>
                     <input
                         type="text"
                         value={q}
                         onChange={(e) => setQ(e.target.value)}
-                        className="border rounded-md px-2 py-1 border-gray-500 w-full focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-400 text-base shadow-sm"
+                        className="border border-gray-300 rounded-lg px-2 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
                     />
                 </div>
             </div>
 
-            <CustomTableCopy columns={columns} data={tasks} onSort={handleSort} sort={sort} />
+            {/* Custom Table */}
+            <CustomTableCopy
+                columns={columns}
+                data={tasks}
+                onSort={handleSort}
+                sort={sort}
+            />
 
-
-            <div className="flex justify-end items-center gap-4 mt-4">
-                <button
-                    className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                    onClick={() => setPage((prev) => Math.max(1, prev - 1))}
-                    disabled={page <= 1}
-                >
-                    Previous
-                </button>
-                <span>Page {page}</span>
-                <button
-                    className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                    onClick={() => setPage((prev) => prev + 1)}
-                    disabled={tasks.length < limit}
-                >
-                    Next
-                </button>
+            {/* Total items and Pagination */}
+            <div>
+                <p>
+                    Showing 1 to {limit} of {tasks.length} entries
+                </p>
+                <div className="flex justify-end items-center gap-4 mt-4">
+                    <button
+                        className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                        onClick={() => setPage((prev) => Math.max(1, prev - 1))}
+                        disabled={page <= 1}
+                    >
+                        Previous
+                    </button>
+                    <span>Page {page}</span>
+                    <button
+                        className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                        onClick={() => setPage((prev) => prev + 1)}
+                        disabled={tasks.length < limit}
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
         </>
     );
