@@ -25,8 +25,7 @@ const UserDashboard = () => {
     const { page, setPage } = usePage();
     const { sort, handleSort } = useSortFilter();
 
-    const debouncedValue = useDebounce(q, 400)
-
+    const debouncedValue = useDebounce(q, 400);
 
     useEffect(() => {
         setFilter((prev) => ({

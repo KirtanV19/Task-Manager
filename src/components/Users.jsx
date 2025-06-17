@@ -21,7 +21,7 @@ const Users = () => {
     const { page, setPage } = usePage();
     const { items } = useSelector((state) => state.users);
 
-    const debouncedValue = useDebounce(q, 400)
+    const debouncedValue = useDebounce(q, 400);
 
     useEffect(() => {
         setFilter((prev) => ({

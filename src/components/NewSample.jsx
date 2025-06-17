@@ -23,7 +23,7 @@ const NewSample = () => {
     const { page, setPage } = usePage();
     const { sort, handleSort } = useSortFilter();
 
-    const debouncedValue = useDebounce(q, 400)
+    const debouncedValue = useDebounce(q, 400);
 
     const tasks = useSelector((state) => state.tasks.items);
     const users = useSelector((state) => state.users.items);
@@ -164,7 +164,12 @@ const NewSample = () => {
                 <p className="text-sm">
                     Showing 1 to {limit} of {tasks.length} entries
                 </p>
-                <CustomPagination limit={limit} page={page} setPage={setPage} tasks={tasks} />
+                <CustomPagination
+                    limit={limit}
+                    page={page}
+                    setPage={setPage}
+                    tasks={tasks}
+                />
             </div>
         </div>
     );
