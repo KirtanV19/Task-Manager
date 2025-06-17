@@ -5,7 +5,7 @@ import AdminDashboard from "../components/AdminDashboard";
 import LoginScreen from "../screens/LoginScreen";
 import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import RegisterScreen from "../screens/RegisterScreen";
-import UserDashboard from "../components/UserDashboard";
+import UserDashboardScreen from "../screens/UserDashboardScreen";
 import Users from "../components/Users";
 
 const useRoutes = () => {
@@ -50,7 +50,7 @@ const useRoutes = () => {
       {
         id: "userDashboard",
         path: URLS.USERDASHBOARD,
-        element: UserDashboard,
+        element: UserDashboardScreen,
         isPrivate: true,
       },
     ],

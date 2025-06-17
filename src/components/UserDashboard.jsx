@@ -87,7 +87,6 @@ const UserDashboard = () => {
 
     return (
         <>
-            <Navbar />
             <Container>
                 {/* Table */}
                 <div className="flex items-center justify-between">
