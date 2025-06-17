@@ -107,9 +107,9 @@ const NewSample = () => {
         },
     ];
     return (
-        <div className="flex flex-col space-y-3">
+        <div className="flex flex-col space-y-6">
             {/* Statistics */}
-            <div className="flex flex-wrap gap-6">
+            <div className="flex flex-wrap gap-6 mb-4">
                 <div className="flex-1 min-w-[220px] bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col items-center">
                     <p className="text-black text-lg font-medium mb-1">Total Tasks</p>
                     <p className="text-3xl font-light text-black">{tasks.length}</p>
@@ -121,7 +121,7 @@ const NewSample = () => {
             </div>
 
             {/* Limit & Search */}
-            <div className="flex justify-between">
+            <div className="flex justify-between mb-2">
                 <div className="flex items-center">
                     <select
                         value={limit}
@@ -162,7 +162,7 @@ const NewSample = () => {
             />
 
             {/* Total items and Pagination */}
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mt-4">
                 <p>
                     Showing 1 to {limit} of {tasks.length} entries
                 </p>
