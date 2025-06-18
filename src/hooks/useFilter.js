@@ -1,7 +1,7 @@
-import React from "react";
+import { useState } from "react";
 
 const useFilter = () => {
-  const [filter, setFilter] = React.useState({});
+  const [filter, setFilter] = useState({});
   return { filter, setFilter };
 };
 
