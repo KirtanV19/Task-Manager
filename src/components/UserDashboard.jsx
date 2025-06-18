@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Create from "../utils/PopupComp/Create";
 import Edit from "../utils/PopupComp/Edit";
@@ -48,46 +48,52 @@ const UserDashboard = () => {
         );
     }, [dispatch, filter]);
 
-    const handleDateRangeChange = ({ start, end }) => {
-        setFilter((prev) => ({
-            ...prev,
-            dueDate_gte: start || undefined,
-            dueDate_lte: end || undefined,
-        }));
-    };
+    const handleDateRangeChange = useCallback(
+        ({ start, end }) => {
+            setFilter((prev) => ({
+                ...prev,
+                dueDate_gte: start || undefined,
+                dueDate_lte: end || undefined,
+            }));
+        },
+        [setFilter]
+    );
 
-    const columns = [
-        {
-            id: "task",
-            label: "Task",
-            field_name: "task",
-            render: ({ row }) => row.title,
-        },
-        {
-            id: "description",
-            label: "Description",
-            field_name: "description",
-            render: ({ row }) => row.description,
-        },
-        {
-            id: "status",
-            label: "Status",
-            field_name: "status",
-            render: ({ row }) => row.status,
-        },
-        {
-            id: "dueDate",
-            label: "Due Date",
-            field_name: "dueDate",
-            render: ({ row }) => row.dueDate,
-        },
-        {
-            id: "action",
-            label: "Action",
-            field_name: "action",
-            render: ({ row }) => <Edit task={row} />,
-        },
-    ];
+    const columns = useCallback(
+        () => [
+            {
+                id: "task",
+                label: "Task",
+                field_name: "task",
+                render: ({ row }) => row.title,
+            },
+            {
+                id: "description",
+                label: "Description",
+                field_name: "description",
+                render: ({ row }) => row.description,
+            },
+            {
+                id: "status",
+                label: "Status",
+                field_name: "status",
+                render: ({ row }) => row.status,
+            },
+            {
+                id: "dueDate",
+                label: "Due Date",
+                field_name: "dueDate",
+                render: ({ row }) => row.dueDate,
+            },
+            {
+                id: "action",
+                label: "Action",
+                field_name: "action",
+                render: ({ row }) => <Edit task={row} />,
+            },
+        ],
+        []
+    );
 
     return (
         <>
