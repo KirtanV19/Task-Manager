@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Create from "../utils/PopupComp/Create";
 import Edit from "../utils/PopupComp/Edit";
@@ -59,7 +59,7 @@ const UserDashboard = () => {
         [setFilter]
     );
 
-    const columns = useCallback(
+    const columns = useMemo(
         () => [
             {
                 id: "task",
