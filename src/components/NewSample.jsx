@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTasks } from "../redux/slices/task.slice";
 import { fetchUsers } from "../redux/slices/user.slice";
@@ -71,7 +71,7 @@ const NewSample = () => {
         }));
     }, [setFilter])
 
-    const columns = [
+    const columns = useMemo(() => [
         {
             id: "title",
             label: "Title",
@@ -120,7 +120,7 @@ const NewSample = () => {
                 </div>
             ),
         },
-    ];
+    ], [handleAccept, handleReject])
 
     return (
         <div className="flex flex-col space-y-6">
