@@ -32,14 +32,14 @@ const AdminDashboard = () => {
         <div className="flex min-h-screen bg-gray-50">
             {/* Sidebar Toggle Button */}
             {!open && (
-                <aside>
-                    <TextAlignJustifyIcon onClick={openSide} className="w-5 h-5 cursor-pointer text-gray-400 transition-colors hover:text-black" />
+                <aside >
+                    <TextAlignJustifyIcon onClick={openSide} className="w-7 h-7 cursor-pointer text-black transition-colors hover:bg-gray-50" />
                 </aside>
             )}
 
             {/* Sidebar Navigation */}
             {open && (
-                <aside className="w-64 bg-white shadow-lg border-r border-gray-200">
+                <aside className="w-64 bg-white shadow-lg border-r  border-gray-200">
                     <NavigationMenu.Root orientation="vertical" className="p-4">
                         <NavigationMenu.List className="space-y-2 flex flex-col">
                             <div>
@@ -47,7 +47,7 @@ const AdminDashboard = () => {
                                     <h2 className="w-full text-2xl font-bold text-gray-700 rounded-lg px-4 py-2 transition-all">
                                         TaskMaster
                                     </h2>
-                                    <ChevronLeftIcon onClick={openSide} className="w-5 h-5 cursor-pointer text-gray-400 transition-colors hover:text-black" />
+                                    <ChevronLeftIcon onClick={openSide} className="w-6 h-6 cursor-pointer text-black transition-colors hover:bg-gray-50 rounded-3xl" />
                                 </NavigationMenu.Item>
                                 <NavigationMenu.Item>
                                     <NavigationMenu.Trigger
@@ -91,7 +91,7 @@ const AdminDashboard = () => {
             )}
 
             {/* Main Content */}
-            <main className="flex-1 p-8">
+            <main className="flex-1 p-4 md:p-8">
                 {activeTab === "tasks" && <NewSample />}
                 {activeTab === "users" && <Users />}
             </main>
