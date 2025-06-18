@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTasks } from "../redux/slices/task.slice";
 import { fetchUsers } from "../redux/slices/user.slice";
@@ -55,21 +55,21 @@ const NewSample = () => {
 
     // console.log("tasks", tasks);
 
-    const handleAccept = (id) => {
+    const handleAccept = useCallback((id) => {
         dispatch(updateTaskStatus({ id, status: "accepted" }));
-    };
+    }, [dispatch]);
 
-    const handleReject = (id) => {
+    const handleReject = useCallback((id) => {
         dispatch(updateTaskStatus({ id, status: "rejected" }));
-    };
+    }, [dispatch]);
 
-    const handleDateRangeChange = ({ start, end }) => {
+    const handleDateRangeChange = useCallback(({ start, end }) => {
         setFilter((prev) => ({
             ...prev,
             dueDate_gte: start || undefined,
             dueDate_lte: end || undefined,
         }));
-    };
+    }, [setFilter])
 
     const columns = [
         {

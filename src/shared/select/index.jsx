@@ -23,4 +23,4 @@ const CustomSelect = ({ limit, setLimit, setPage }) => {
     )
 }
 
-export default CustomSelect;
+export default React.memo(CustomSelect);

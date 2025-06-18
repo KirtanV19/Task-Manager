@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 const CustomDateRangePicker = ({ value, onChange }) => {
   const [start, setStart] = useState(value?.start || "");
@@ -35,4 +35,4 @@ const CustomDateRangePicker = ({ value, onChange }) => {
   );
 };
 
-export default CustomDateRangePicker;
+export default React.memo(CustomDateRangePicker);

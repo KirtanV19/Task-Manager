@@ -1,3 +1,5 @@
+import React from 'react'
+
 const CustomSearch = ({ q, setQ }) => {
     return (
         <div className="flex items-center">
@@ -14,4 +16,4 @@ const CustomSearch = ({ q, setQ }) => {
     );
 };
 
-export default CustomSearch;
+export default React.memo(CustomSearch);

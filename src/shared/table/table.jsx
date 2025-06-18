@@ -1,4 +1,5 @@
 import { ArrowUpIcon, ArrowDownIcon } from "@radix-ui/react-icons";
+import React from "react";
 
 const CustomTableCopy = ({ data = [], columns = [], onSort, sort }) => {
     const getSortIcon = (field) => {
@@ -60,4 +61,4 @@ const CustomTableCopy = ({ data = [], columns = [], onSort, sort }) => {
     );
 };
 
-export default CustomTableCopy;
+export default React.memo(CustomTableCopy);

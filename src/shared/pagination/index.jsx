@@ -1,3 +1,5 @@
+import React from "react";
+
 const CustomPagination = ({ limit, page, setPage, tasks }) => {
     return (
         <div className="flex items-center gap-4 mt-2 md:mt-0">
@@ -20,4 +22,4 @@ const CustomPagination = ({ limit, page, setPage, tasks }) => {
     );
 };
 
-export default CustomPagination;
+export default React.memo(CustomPagination);
