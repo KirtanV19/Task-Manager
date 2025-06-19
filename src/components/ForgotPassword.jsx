@@ -7,22 +7,10 @@ import {
 } from "@radix-ui/react-icons";
 import { Link } from "react-router-dom";
 import { api } from "../api/client";
-import * as yup from "yup";
+import { forgotSchema } from "../utils/helper";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
-
-const schema = yup.object({
-    email: yup.string().email("Invalid email").required("Email is required"),
-    new: yup
-        .string()
-        .min(6, "Password must be at least 6 characters")
-        .required("New password is required"),
-    confirm: yup
-        .string()
-        .oneOf([yup.ref("new"), null], "Password must be same as new password")
-        .required("Confirm password is required"),
-});
 
 const ForgotPassword = () => {
     const [showPasswordNew, setShowPasswordNew] = useState(false);
@@ -35,7 +23,7 @@ const ForgotPassword = () => {
         setError,
         reset,
     } = useForm({
-        resolver: yupResolver(schema),
+        resolver: yupResolver(forgotSchema),
         mode: "onTouched",
         defaultValues: {
             email: "",
@@ -60,7 +48,6 @@ const ForgotPassword = () => {
                 return;
             }
 
-
             // 4. Update password
             await api.USERS.patch({
                 id: user.id,
@@ -83,7 +70,9 @@ const ForgotPassword = () => {
                 <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                     {/* Email Field */}
                     <div>
-                        <label className="block mb-1 font-medium text-gray-700">Email</label>
+                        <label className="block mb-1 font-medium text-gray-700">
+                            Email
+                        </label>
                         <div className="relative">
                             <EnvelopeClosedIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
                             <input
@@ -91,19 +80,23 @@ const ForgotPassword = () => {
                                 placeholder="Enter your email"
                                 {...register("email")}
                                 className={`w-full pl-10 pr-4 py-2 border rounded focus:outline-none focus:ring-2 transition ${errors.email
-                                    ? "border-red-400 focus:ring-red-200 bg-red-50"
-                                    : "border-gray-300 focus:ring-blue-400"
+                                        ? "border-red-400 focus:ring-red-200 bg-red-50"
+                                        : "border-gray-300 focus:ring-blue-400"
                                     }`}
                             />
                         </div>
                         {errors.email && (
-                            <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
+                            <p className="text-red-500 text-xs mt-1">
+                                {errors.email.message}
+                            </p>
                         )}
                     </div>
 
                     {/* New Password Field */}
                     <div>
-                        <label className="block mb-1 font-medium text-gray-700">New Password</label>
+                        <label className="block mb-1 font-medium text-gray-700">
+                            New Password
+                        </label>
                         <div className="relative">
                             <LockOpen1Icon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
                             <input
@@ -111,8 +104,8 @@ const ForgotPassword = () => {
                                 placeholder="Enter new password"
                                 {...register("new")}
                                 className={`w-full pl-10 pr-10 py-2 border rounded focus:outline-none focus:ring-2 transition ${errors.new
-                                    ? "border-red-400 focus:ring-red-200 bg-red-50"
-                                    : "border-gray-300 focus:ring-blue-400"
+                                        ? "border-red-400 focus:ring-red-200 bg-red-50"
+                                        : "border-gray-300 focus:ring-blue-400"
                                     }`}
                             />
                             <button
@@ -131,7 +124,9 @@ const ForgotPassword = () => {
 
                     {/* Confirm Password Field */}
                     <div>
-                        <label className="block mb-1 font-medium text-gray-700">Confirm Password</label>
+                        <label className="block mb-1 font-medium text-gray-700">
+                            Confirm Password
+                        </label>
                         <div className="relative">
                             <LockClosedIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
                             <input
@@ -139,8 +134,8 @@ const ForgotPassword = () => {
                                 placeholder="Confirm new password"
                                 {...register("confirm")}
                                 className={`w-full pl-10 pr-10 py-2 border rounded focus:outline-none focus:ring-2 transition ${errors.confirm
-                                    ? "border-red-400 focus:ring-red-200 bg-red-50"
-                                    : "border-gray-300 focus:ring-blue-400"
+                                        ? "border-red-400 focus:ring-red-200 bg-red-50"
+                                        : "border-gray-300 focus:ring-blue-400"
                                     }`}
                             />
                             <button
@@ -153,7 +148,9 @@ const ForgotPassword = () => {
                             </button>
                         </div>
                         {errors.confirm && (
-                            <p className="text-red-500 text-xs mt-1">{errors.confirm.message}</p>
+                            <p className="text-red-500 text-xs mt-1">
+                                {errors.confirm.message}
+                            </p>
                         )}
                     </div>
 

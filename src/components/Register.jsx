@@ -1,29 +1,12 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { EyeNoneIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import { registerUser } from "../redux/slices/user.slice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { api } from "../api/client";
-
-const schema = yup.object({
-    name: yup.string().required("Name is required"),
-    email: yup.string().email().required("Email is required"),
-    password: yup
-        .string()
-        .required("Password is required")
-        .min(8, "Password should be at least 8 characters.")
-        .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-        .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-        .matches(/\d/, "Password must contain at least one number")
-        .matches(
-            /[@$!%*?&#^()\-_=+{};:,<.>]/,
-            "Password must contain at least one special character"
-        ),
-    role: yup.string().required("Role is required"),
-});
+import { registerSchema } from "../utils/helper";
 
 const getPasswordStrength = (password) => {
     return [
@@ -61,7 +44,7 @@ const Register = () => {
         handleSubmit,
         formState: { errors },
     } = useForm({
-        resolver: yupResolver(schema),
+        resolver: yupResolver(registerSchema),
         mode: "onTouched",
         defaultValues: {
             name: "",
@@ -104,8 +87,8 @@ const Register = () => {
                             placeholder="Name"
                             {...register("name")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.name
-                                ? "border-red-400 focus:ring-red-200 bg-red-50"
-                                : "border-gray-300 focus:ring-blue-400"
+                                    ? "border-red-400 focus:ring-red-200 bg-red-50"
+                                    : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
                         {errors.name && (
@@ -119,8 +102,8 @@ const Register = () => {
                             placeholder="Email"
                             {...register("email")}
                             className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 ${errors.email
-                                ? "border-red-400 focus:ring-red-200 bg-red-50"
-                                : "border-gray-300 focus:ring-blue-400"
+                                    ? "border-red-400 focus:ring-red-200 bg-red-50"
+                                    : "border-gray-300 focus:ring-blue-400"
                                 }`}
                         />
                         {errors.email && (
@@ -133,8 +116,8 @@ const Register = () => {
                     <div>
                         <div
                             className={`w-full px-4 py-2 border rounded focus-within:ring-2 flex justify-between items-center transition-colors ${errors.password
-                                ? "border-red-400 focus-within:ring-red-200 bg-red-50"
-                                : "border-gray-300 focus-within:ring-blue-400"
+                                    ? "border-red-400 focus-within:ring-red-200 bg-red-50"
+                                    : "border-gray-300 focus-within:ring-blue-400"
                                 }`}
                         >
                             <input
@@ -166,8 +149,8 @@ const Register = () => {
                             <p
                                 key={index}
                                 className={`flex items-center gap-2 text-sm transform transition-all duration-300 ease-in-out ${check.passed
-                                    ? "text-green-600 opacity-100 translate-y-0"
-                                    : "text-gray-400 opacity-60 -translate-y-1"
+                                        ? "text-green-600 opacity-100 translate-y-0"
+                                        : "text-gray-400 opacity-60 -translate-y-1"
                                     }`}
                             >
                                 <span>{check.passed ? "✓" : "✗"}</span>
